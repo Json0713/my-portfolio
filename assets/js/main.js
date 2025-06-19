@@ -27,8 +27,8 @@ function updateAccent(theme) {
 
 function updateProfileImage(theme, profilePic, profilePicTest) {
   const newSrc = theme === "light"
-    ? "assets/images/received_674375172104708.jpeg"
-    : "assets/images/May01-Portrait1-FINAL-100517.jpg";
+    ? "assets/images/light-1x1-profile.jpg"
+    : "assets/images/dark-1x1-profile.jpg";
 
   console.log("Switching theme to:", theme);
   console.log("New image path:", newSrc);
