@@ -3,8 +3,10 @@
 const rootElement = document.documentElement;
 const themeToggle = document.getElementById("theme-toggle");
 
-function getCurrentTheme() {
-  return rootElement.getAttribute("data-theme") || "dark";
+function getPreferredTheme() {
+  const stored = localStorage.getItem("theme");
+  if (stored) return stored;
+  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 }
 
 function saveTheme(theme) {
@@ -24,73 +26,58 @@ function updateAccent(theme) {
   rootElement.style.setProperty("--accent", accent);
 }
 
-function updateProfileImage(theme, ...images) {
-  const newSrc = theme === "light"
-    ? "assets/images/light-1x1-profile.jpg"
-    : "assets/images/dark-1x1-profile.jpg";
-
-  images.forEach((img) => {
-    if (!img) return;
-
-    if (!img.src || img.src === window.location.href) {
-      img.src = newSrc;
-      return;
-    }
-
-    if (img.src.includes(newSrc)) return;
-
-    img.classList.add("fade-out");
-    setTimeout(() => {
-      img.src = newSrc;
-      img.onload = () => {
-        img.classList.remove("fade-out");
-        img.classList.add("fade-in");
-        setTimeout(() => img.classList.remove("fade-in"), 300);
-      };
-    }, 200);
-  });
-}
-
-function applyTheme(theme, ...images) {
+function applyTheme(theme) {
   saveTheme(theme);
   setThemeIcon(theme);
   updateAccent(theme);
-  updateProfileImage(theme, ...images);
   highlightActiveLink();
+  announceTheme(theme);
 }
 
-function toggleTheme(...images) {
-  const current = getCurrentTheme();
+function toggleTheme() {
+  const current = rootElement.getAttribute("data-theme") || getPreferredTheme();
   const next = current === "dark" ? "light" : "dark";
-  applyTheme(next, ...images);
+  applyTheme(next);
 }
 
-function initTheme(...images) {
-  const savedTheme = localStorage.getItem("theme") || "dark";
-  applyTheme(savedTheme, ...images);
+function initTheme() {
+  const preferred = getPreferredTheme();
+  applyTheme(preferred);
 }
 
 function highlightActiveLink() {
   document.querySelectorAll(".main-nav a").forEach(link => {
-    link.classList.toggle("active-link", link.getAttribute("href") === location.hash);
+    const isActive = link.getAttribute("href") === location.hash;
+    link.classList.toggle("active-link", isActive);
+  });
+}
+
+function announceTheme(theme) {
+  const existing = document.getElementById("theme-announcer");
+  if (existing) existing.remove();
+
+  const liveRegion = document.createElement("div");
+  liveRegion.id = "theme-announcer";
+  liveRegion.setAttribute("aria-live", "polite");
+  liveRegion.setAttribute("role", "status");
+  liveRegion.className = "visually-hidden";
+  liveRegion.textContent = `Theme changed to ${theme}`;
+  document.body.appendChild(liveRegion);
+}
+
+function setupThemeToggle() {
+  themeToggle?.addEventListener("click", toggleTheme);
+
+  window.addEventListener("hashchange", () => {
+    requestAnimationFrame(highlightActiveLink);
   });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
   initTheme();
-
-  themeToggle?.addEventListener("click", () => {
-    const pic1 = document.getElementById("profile-pic");
-    const pic2 = document.getElementById("profile-pic-test");
-    toggleTheme(pic1, pic2);
-  });
-
-  window.addEventListener("hashchange", highlightActiveLink);
+  setupThemeToggle();
 });
 
 document.addEventListener("componentsLoaded", () => {
-  const pic1 = document.getElementById("profile-pic");
-  const pic2 = document.getElementById("profile-pic-test");
-  const theme = getCurrentTheme();
-  updateProfileImage(theme, pic1, pic2);
+  // No profile image logic needed anymore
 });

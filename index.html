@@ -4,6 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="Jason B. - Full-stack developer portfolio showcasing projects, skills, and contact info">
+  <meta name="keywords" content="developer, portfolio, JavaScript, HTML, CSS, React, Node.js">
+  <meta property="og:title" content="Jason B. | Developer Portfolio">
+  <meta property="og:description" content="Explore the portfolio of Jason B., a passionate developer building web solutions.">
+  <meta property="og:image" content="assets/images/placeholder.jpg">
+  <meta property="og:type" content="website">
   <title>Jason B. | Developer Portfolio</title>
   <link rel="icon" href="assets/images/placeholder.jpg" type="image/jpg">
 
@@ -26,20 +32,22 @@
   <script defer src="assets/js/component-loader.js"></script>
   <script defer src="assets/js/main.js"></script>
   <script defer src="assets/js/hero.js"></script>
-
 </head>
 <body>
+  <noscript><div class="alert alert-danger text-center">This site requires JavaScript to function properly.</div></noscript>
+
   <header class="site-header py-2 border-bottom sticky-top">
     <div class="container d-flex justify-content-between align-items-center">
       <a class="navbar-brand text-accent fw-bold fs-4" href="#hero">Jason</a>
-      <button id="theme-toggle" class="btn btn-outline-light" aria-label="Toggle Theme">
-        <i class="bi bi-brightness-high"></i>
-      </button>
+      <nav aria-label="Theme toggle navigation">
+        <button id="theme-toggle" class="btn btn-outline-light" aria-label="Toggle Theme">
+          <i class="bi bi-brightness-high"></i>
+        </button>
+      </nav>
     </div>
   </header>
 
-  <!-- Navigation inside main content -->
-  <nav class="main-nav py-2 border-bottom rounded-5">
+  <nav class="main-nav py-2 border-bottom rounded-5" aria-label="Main site navigation">
     <div class="container d-flex justify-content-center flex-wrap gap-3">
       <a class="btn btn-outline-light" href="#hero">Home</a>
       <a class="btn btn-outline-light" href="#about">About</a>
@@ -48,7 +56,7 @@
     </div>
   </nav>
 
-  <main id="app" class="container my-2"></main>
+  <main id="app" class="container my-2" role="main"></main>
 
   <footer class="site-footer text-center py-4 border-top">
     <div class="container">
