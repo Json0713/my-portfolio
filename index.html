@@ -39,20 +39,26 @@
   <header class="site-header py-2 border-bottom sticky-top">
     <div class="container d-flex justify-content-between align-items-center">
       <a class="navbar-brand text-accent fw-bold fs-4" href="#hero">Jason</a>
-      <nav aria-label="Theme toggle navigation">
-        <button id="theme-toggle" class="btn btn-outline-light" aria-label="Toggle Theme">
-          <i class="bi bi-brightness-high"></i>
-        </button>
-      </nav>
+
+      <!-- Theme Toggle Switch -->
+      <div class="theme-switch d-flex align-items-center gap-2">
+        <i class="bi bi-brightness-high theme-label"></i>
+        <label class="switch">
+          <input type="checkbox" id="theme-toggle">
+          <span class="slider round"></span>
+        </label>
+        <i class="bi bi-moon theme-label"></i>
+      </div>
     </div>
   </header>
 
-  <nav class="main-nav py-2 border-bottom rounded-5" aria-label="Main site navigation">
-    <div class="container d-flex justify-content-center flex-wrap gap-3">
-      <a class="btn btn-outline-light" href="#hero">Home</a>
-      <a class="btn btn-outline-light" href="#about">About</a>
-      <a class="btn btn-outline-light" href="#projects">Projects</a> 
-      <a class="btn btn-outline-light" href="#contact">Contact</a>
+  <!-- Navigation inside main content -->
+  <nav class="main-nav py-2 border-bottom rounded-5 overflow-auto">
+    <div class="container d-flex justify-content-start justify-content-md-center flex-nowrap gap-3">
+      <a class="btn btn-outline-light flex-shrink-0" href="#hero">Home</a>
+      <a class="btn btn-outline-light flex-shrink-0" href="#about">About</a>
+      <a class="btn btn-outline-light flex-shrink-0" href="#projects">Projects</a>
+      <a class="btn btn-outline-light flex-shrink-0" href="#contact">Contact</a>
     </div>
   </nav>
 
@@ -60,7 +66,7 @@
 
   <footer class="site-footer text-center py-4 border-top">
     <div class="container">
-      <p class="mb-1">&copy; 2025 Jason B. My Portfolio </p>
+      <p class="mb-1">&copy; 2025 Jason B. My Portfolio</p>
       <small class="d-block">All rights reserved.</small>
     </div>
   </footer>

@@ -1,7 +1,7 @@
 // assets/js/main.js
 
 const rootElement = document.documentElement;
-const themeToggle = document.getElementById("theme-toggle");
+const themeToggleInput = document.getElementById("theme-toggle");
 
 function getPreferredTheme() {
   const stored = localStorage.getItem("theme");
@@ -14,23 +14,22 @@ function saveTheme(theme) {
   localStorage.setItem("theme", theme);
 }
 
-function setThemeIcon(theme) {
-  const icon = themeToggle?.querySelector("i");
-  if (!icon) return;
-  icon.classList.toggle("bi-brightness-high", theme === "dark");
-  icon.classList.toggle("bi-moon", theme === "light");
-}
-
 function updateAccent(theme) {
   const accent = theme === "light" ? "#e91e63" : "#00ffc3";
   rootElement.style.setProperty("--accent", accent);
 }
 
+function flashThemeEffect() {
+  rootElement.classList.add("theme-flash");
+  setTimeout(() => rootElement.classList.remove("theme-flash"), 400);
+}
+
 function applyTheme(theme) {
   saveTheme(theme);
-  setThemeIcon(theme);
   updateAccent(theme);
   highlightActiveLink();
+  updateThemeToggleUI(theme);
+  flashThemeEffect();
   announceTheme(theme);
 }
 
@@ -65,8 +64,17 @@ function announceTheme(theme) {
   document.body.appendChild(liveRegion);
 }
 
+function updateThemeToggleUI(theme) {
+  if (!themeToggleInput) return;
+  themeToggleInput.checked = theme === "light";
+}
+
 function setupThemeToggle() {
-  themeToggle?.addEventListener("click", toggleTheme);
+  if (!themeToggleInput) return;
+
+  themeToggleInput.addEventListener("change", () => {
+    toggleTheme();
+  });
 
   window.addEventListener("hashchange", () => {
     requestAnimationFrame(highlightActiveLink);
@@ -79,5 +87,5 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 document.addEventListener("componentsLoaded", () => {
-  // No profile image logic needed anymore
+  // No dynamic profile image logic needed anymore
 });

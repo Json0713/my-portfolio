@@ -43,6 +43,78 @@ html, body {
   transition: background-color var(--transition), color var(--transition);
 }
 
+/* Theme Toggle Switch UI */
+.theme-switch {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.theme-label {
+  font-size: 1rem;
+  color: var(--text-light);
+  transition: color var(--transition);
+}
+
+[data-theme="light"] .theme-label {
+  color: var(--text-dark);
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 46px;
+  height: 24px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #999;
+  transition: background-color var(--transition);
+  border-radius: 34px;
+}
+
+.slider::before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: transform var(--transition);
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: var(--accent);
+}
+
+input:checked + .slider::before {
+  transform: translateX(22px);
+}
+
+.theme-flash {
+  animation: flashTheme 0.35s ease-in-out;
+}
+
+@keyframes flashTheme {
+  0% { filter: brightness(1.2); }
+  50% { filter: brightness(0.9); }
+  100% { filter: brightness(1); }
+}
+
 /* Buttons */
 .btn {
   border-radius: var(--radius);
@@ -98,11 +170,28 @@ html, body {
 }
 
 /* Nav */
+.main-nav {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+.main-nav::-webkit-scrollbar {
+  display: none;
+}
+
+.main-nav .container {
+  flex-wrap: nowrap;
+}
+
 .main-nav a {
   border-radius: var(--radius);
   text-decoration: none;
   color: inherit;
   transition: background-color var(--transition), color var(--transition);
+  white-space: nowrap;
+  padding: 0.5rem 1rem;
 }
 
 .main-nav a.active-link {
@@ -121,13 +210,6 @@ html, body {
   height: 2px;
   background-color: var(--accent);
   border-radius: 2px;
-}
-
-/* Theme Toggle */
-#theme-toggle {
-  border-radius: var(--radius);
-  font-size: 1.2rem;
-  transition: background-color var(--transition);
 }
 
 /* Page Wrapper */
