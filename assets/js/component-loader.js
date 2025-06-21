@@ -22,7 +22,7 @@ function loadComponent(name) {
     })
     .catch(err => {
       console.error(err);
-      app.innerHTML = `<div class="alert alert-danger">Component "${name}" not found.</div>`;
+      app.innerHTML = `<div class="alert alert-warning rounded-4">Component "${name}" not found.</div>`;
     });
 }
 
