@@ -23,6 +23,16 @@
   }
 }
 
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0s !important;
+    transition-duration: 0s !important;
+  }
+}
+
 [data-theme="dark"] {
   background-color: var(--bg-dark);
   color: var(--text-light);
@@ -197,6 +207,7 @@ input:checked + .slider::before {
 .main-nav a.active-link {
   background-color: var(--accent) !important;
   color: var(--text-dark) !important;
+  outline: 2px solid transparent;
   font-weight: 600;
   position: relative;
 }
@@ -243,7 +254,7 @@ button:focus-visible {
 
 .fade-out {
   opacity: 0;
-  transition: opacity 0.2s ease-out;
+  transition: opacity 0.3s ease-out;
 }
 
 @keyframes fadeIn {

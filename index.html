@@ -11,7 +11,7 @@
   <meta property="og:image" content="assets/images/dark-1x1-profile.jpg">
   <meta property="og:type" content="website">
   <title>Jason B. | Developer Portfolio</title>
-  <link rel="icon" href="assets/images/dark-1x1-profile.jpg">
+  <link rel="icon" href="assets/images/dark-1x1-profile.jpg" type="image/jpeg">
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -29,7 +29,7 @@
   <link rel="stylesheet" href="assets/css/hero.css">
 
   <!-- JavaScript Files -->
-  <script defer src="assets/js/component-loader.js"></script>
+  <script type="module" src="assets/js/component-loader.js"></script>
   <script defer src="assets/js/main.js"></script>
   <script defer src="assets/js/hero.js"></script>
 </head>
@@ -52,7 +52,7 @@
   </header>
 
   <!-- Navigation inside main content -->
-  <nav class="main-nav py-2 border-bottom rounded-5 overflow-auto">
+  <nav class="main-nav py-2 border-bottom rounded-5 overflow-auto" role="navigation">
     <div class="container d-flex justify-content-start justify-content-md-center flex-nowrap gap-3">
       <a class="btn btn-outline-light flex-shrink-0" href="#hero">Home</a>
       <a class="btn btn-outline-light flex-shrink-0" href="#about">About</a>
@@ -61,7 +61,7 @@
     </div>
   </nav>
 
-  <main id="app" class="container my-2" role="main"></main>
+  <main id="app" class="container" role="main"></main>
 
   <footer class="site-footer text-center py-4 border-top">
     <div class="container">

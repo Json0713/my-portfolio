@@ -1,9 +1,12 @@
 // assets/js/component-loader.js
 
-function loadComponent(name) {
-  const app = document.getElementById("app");
-  const cached = sessionStorage.getItem(`component:${name}`);
+import { sanitizeHTML } from "./security/sanitizer.js";
 
+const app = document.getElementById("app");
+let componentRenderTimeout = null;
+
+function loadComponent(name) {
+  const cached = sessionStorage.getItem(`component:${name}`);
   showSkeleton();
 
   if (cached) {
@@ -17,42 +20,49 @@ function loadComponent(name) {
       return res.text();
     })
     .then(html => {
-      sessionStorage.setItem(`component:${name}`, html);
-      renderComponent(html, name);
+      const cleanHTML = sanitizeHTML(html);
+      sessionStorage.setItem(`component:${name}`, cleanHTML);
+      renderComponent(cleanHTML, name);
     })
     .catch(err => {
       console.error(err);
-      app.innerHTML = `<div class="alert alert-warning rounded-4">Component "${name}" not found.</div>`;
+      show404(name);
     });
 }
 
 function renderComponent(html, name) {
-  const app = document.getElementById("app");
+  clearTimeout(componentRenderTimeout);
 
   app.classList.remove("fade-in");
   app.classList.add("fade-out");
 
-  setTimeout(() => {
+  componentRenderTimeout = setTimeout(() => {
     app.innerHTML = html;
     app.classList.remove("fade-out");
     app.classList.add("fade-in");
-    loadScript(`assets/js/${name}.js`);
+    app.setAttribute("aria-label", `${capitalize(name)} Page`);
+    loadComponentScript(name);
   }, 200);
 }
 
-function loadScript(src) {
-  // Remove previous component script if exists
-  const existing = document.querySelector(`script[src="${src}"]`);
-  if (existing) existing.remove();
+function loadComponentScript(name) {
+  const src = `assets/js/${name}.js`;
 
-  const script = document.createElement("script");
-  script.src = src;
-  script.defer = true;
-  document.body.appendChild(script);
+  fetch(src, { method: "HEAD" })
+    .then(res => {
+      if (!res.ok) return;
+      const existing = document.querySelector(`script[src="${src}"]`);
+      if (existing) existing.remove();
+
+      const script = document.createElement("script");
+      script.src = src;
+      script.defer = true;
+      document.body.appendChild(script);
+    })
+    .catch(console.warn);
 }
 
 function showSkeleton() {
-  const app = document.getElementById("app");
   app.innerHTML = `
     <div class="text-center py-5">
       <div class="spinner-border text-accent" role="status"></div>
@@ -61,9 +71,22 @@ function showSkeleton() {
   `;
 }
 
+function show404(name) {
+  app.innerHTML = `
+    <div class="alert alert-warning rounded-4 text-center">
+      Component "${name}" not found.<br>
+      <a class="btn btn-outline-light mt-3" href="#hero">Go Home</a>
+    </div>
+  `;
+}
+
 function getCurrentHashRoute() {
   const raw = window.location.hash.slice(1).trim().toLowerCase();
   return raw || "hero";
+}
+
+function capitalize(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
 function initRouter() {
