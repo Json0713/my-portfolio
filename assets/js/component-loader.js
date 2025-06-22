@@ -74,14 +74,14 @@ function showSkeleton() {
 function show404(name) {
   app.innerHTML = `
     <div class="coming-soon text-center d-flex flex-column justify-content-center align-items-center p-4" style="min-height: 70vh;">
-      <i class="bi bi-cone-striped" style="font-size: 4rem; color: var(--text-light);"></i>
+      <i class="bi bi-cone-striped" style="font-size: 4rem; color: var(--text-accent);"></i>
       <h1 class="display-6 fw-bold mt-3">Coming Soon</h1>
       <p class="lead">This page is under development. Stay tuned!</p>
       <div class="d-flex justify-content-center gap-3 mt-4">
         <a href="https://my-portfolio-fawn-six-spddunmlyp.vercel.app/#hero" target="_blank" aria-label="Coffee">
           <i class="bi bi-cup-hot-fill" style="font-size: 1.75rem; color: var(--accent);"></i>
         </a>
-        <a href="https://github.com/Json0713/QuizBreaker" target="_blank" aria-label="GitHub">
+        <a href="https:https://github.com/Json0713/my-portfolio" target="_blank" aria-label="GitHub">
           <i class="bi bi-github" style="font-size: 1.75rem; color: var(--accent);"></i>
         </a>
       </div>
