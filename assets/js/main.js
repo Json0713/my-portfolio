@@ -85,7 +85,3 @@ document.addEventListener("DOMContentLoaded", () => {
   initTheme();
   setupThemeToggle();
 });
-
-document.addEventListener("componentsLoaded", () => {
-  // No dynamic profile image logic needed anymore
-});
