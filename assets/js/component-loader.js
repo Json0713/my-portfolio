@@ -41,6 +41,7 @@ function renderComponent(html, name) {
     app.classList.remove("fade-out");
     app.classList.add("fade-in");
     app.setAttribute("aria-label", `${capitalize(name)} Page`);
+    updatePageTitle(name);
     loadComponentScript(name);
   }, 200);
 }
@@ -72,6 +73,7 @@ function showSkeleton() {
 }
 
 function show404(name) {
+  document.title = `Page Not Found | Jason B.`;
   app.innerHTML = `
     <div class="coming-soon text-center d-flex flex-column justify-content-center align-items-center p-4" style="min-height: 70vh;">
       <i class="bi bi-cone-striped" style="font-size: 4rem; color: var(--text-accent);"></i>
@@ -87,6 +89,17 @@ function show404(name) {
       </div>
     </div>
   `;
+}
+
+function updatePageTitle(name) {
+  const titleMap = {
+    hero: "Home",
+    about: "About",
+    projects: "Projects",
+    contact: "Contact"
+  };
+  const title = titleMap[name] || capitalize(name);
+  document.title = `${title} | Jason B.`;
 }
 
 function getCurrentHashRoute() {
