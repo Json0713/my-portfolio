@@ -7,6 +7,16 @@
   --radius: 1rem;
   --transition: 0.3s ease-in-out;
   --font-family: 'Poppins', sans-serif;
+  
+  /* Custom semantic colors */
+  /* Neon-style semantic colors */
+  --success: #39ff14; /* Neon green */
+  --danger: #ff073a;  /* Neon red */
+  --warning: #ffcc00; /* Neon yellow */
+  --info: #00bfff;    /* Neon sky blue */
+  --primary: #3f8efc; /* Neon primary blue */
+  --gray: #6c757d;
+  --silver: #c0c0c0;
 }
 
 @media (prefers-color-scheme: dark) {

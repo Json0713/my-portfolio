@@ -43,6 +43,7 @@ function renderComponent(html, name) {
     app.classList.add("fade-in");
     app.setAttribute("aria-label", `${capitalize(name)} Page`);
     updatePageTitle(name);
+    sessionStorage.removeItem("toast:404");
     loadComponentScript(name);
   }, 200);
 }
