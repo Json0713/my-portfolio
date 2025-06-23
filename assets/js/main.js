@@ -20,6 +20,13 @@ function updateAccent(theme) {
   rootElement.style.setProperty("--accent", accent);
 }
 
+function flashThemeEffect() {
+  rootElement.classList.add("theme-flash");
+  setTimeout(() => {
+    rootElement.classList.remove("theme-flash");
+  }, 400);
+}
+
 function applyTheme(theme, { flash = true } = {}) {
   if (!rootElement.hasAttribute("data-theme")) {
     rootElement.setAttribute("data-theme", theme);
