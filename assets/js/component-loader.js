@@ -2,13 +2,14 @@
 
 import { sanitizeHTML } from "./security/sanitizer.js";
 import { show404 } from "./response/error.js";
+import { showSpinner, hideSpinner } from "./common/loader.js";
 
 const app = document.getElementById("app");
 let componentRenderTimeout = null;
 
 function loadComponent(name) {
   const cached = sessionStorage.getItem(`component:${name}`);
-  showSkeleton();
+  showSpinner(app);
 
   if (cached) {
     renderComponent(cached, name);
@@ -45,6 +46,7 @@ function renderComponent(html, name) {
     updatePageTitle(name);
     sessionStorage.removeItem("toast:404");
     loadComponentScript(name);
+    hideSpinner();
   }, 200);
 }
 
@@ -63,15 +65,6 @@ function loadComponentScript(name) {
       document.body.appendChild(script);
     })
     .catch(console.warn);
-}
-
-function showSkeleton() {
-  app.innerHTML = `
-    <div class="text-center py-5">
-      <div class="spinner-border text-accent" role="status"></div>
-      <p class="mt-3">Loading content...</p>
-    </div>
-  `;
 }
 
 function updatePageTitle(name) {

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Component Loader Unit Tests</title>
+  <style>
+    body {
+      font-family: monospace;
+      background: #111;
+      color: #0f0;
+      padding: 1rem;
+    }
+    .fail { color: #f00; }
+    .pass { color: #0f0; }
+  </style>
+</head>
+<body>
+  <h1>Component Loader Unit Tests</h1>
+  <pre id="test-output">Running tests...</pre>
+
+  <script type="module">
+    import { sanitizeHTML } from "../assets/js/security/sanitizer.js";
+    import { show404 } from "../assets/js/response/error.js";
+    import { showSpinner, hideSpinner } from "../assets/js/common/loader.js";
+    import { group, test, assert, runTests } from "./unit-test-runner.js";
+
+    const app = document.createElement("div");
+    app.id = "app";
+    document.body.appendChild(app);
+
+    function capitalize(str) {
+      return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+
+    function getCurrentHashRoute() {
+      const raw = window.location.hash.slice(1).trim().toLowerCase();
+      return raw || "hero";
+    }
+
+    function updatePageTitle(name) {
+      const titleMap = {
+        hero: "Home",
+        about: "About",
+        projects: "Projects",
+        contact: "Contact"
+      };
+      const title = titleMap[name] || capitalize(name);
+      return `${title} | Jason B.`;
+    }
+
+    function isValidRoute(name) {
+      return ["hero", "about", "projects", "contact"].includes(name);
+    }
+
+    function waitFor(conditionFn, timeout = 500, interval = 20) {
+      return new Promise((resolve, reject) => {
+        const start = Date.now();
+        (function check() {
+          if (conditionFn()) return resolve();
+          if (Date.now() - start > timeout) return reject("Timeout");
+          setTimeout(check, interval);
+        })();
+      });
+    }
+
+    window.addEventListener("DOMContentLoaded", async () => {
+      group("Capitalize Utils", () => {
+        test("capitalize('home') === 'Home'", () => {
+          assert.equal(capitalize("home"), "Home");
+        });
+      });
+
+      group("Hash Route Parsing", () => {
+        test("Empty hash returns 'hero'", () => {
+          history.replaceState(null, "", "#");
+          assert.equal(getCurrentHashRoute(), "hero");
+        });
+
+        test("#About -> 'about'", () => {
+          history.replaceState(null, "", "#About");
+          assert.equal(getCurrentHashRoute(), "about");
+        });
+      });
+
+      group("Route Validation", () => {
+        test("isValidRoute('contact') => true", () => {
+          assert.truthy(isValidRoute("contact"));
+        });
+
+        test("isValidRoute('404') => false", () => {
+          assert.falsy(isValidRoute("404"));
+        });
+      });
+
+      group("Sanitizer", () => {
+        test("Removes <script> tags", () => {
+          const html = '<div>Hi</div><script>alert(1)</script>';
+          const result = sanitizeHTML(html);
+          assert.falsy(result.includes("<script>"));
+        });
+      });
+
+      group("404 Handler", () => {
+        test("Inserts 404 content", () => {
+          sessionStorage.removeItem("toast:404");
+          show404("fake-page");
+          assert.truthy(app.innerHTML.includes("404 Page Not Found"));
+        });
+      });
+
+      group("Spinner", () => {
+        test("showSpinner adds loader", async () => {
+          showSpinner(0);
+          await waitFor(() => document.getElementById("page-loader"));
+          assert.truthy(document.getElementById("page-loader"));
+        });
+
+        test("hideSpinner removes loader", async () => {
+          hideSpinner();
+          await waitFor(() => !document.getElementById("page-loader"));
+          assert.falsy(document.getElementById("page-loader"));
+        });
+      });
+
+      runTests();
+    });
+  </script>
+</body>
+</html>
