@@ -1,6 +1,10 @@
 :root {
   --bg-dark: #1e1e1e;
   --bg-light: #f5f5f5;
+  
+  --bg-gray: #444;
+  --bg-silver: #c0c0c0;
+  
   --text-dark: #121212;
   --text-light: #ffffff;
   --accent: #00ffc3;
@@ -170,7 +174,7 @@ input:checked + .slider::before {
 /* Header/Footer */
 .site-header,
 .site-footer {
-  background-color: var(--bg-dark);
+  background-color: var(--bg-gray);
   color: var(--text-light);
   border-color: #333;
   transition: background-color var(--transition), color var(--transition);
@@ -178,9 +182,9 @@ input:checked + .slider::before {
 
 [data-theme="light"] .site-header,
 [data-theme="light"] .site-footer {
-  background-color: var(--bg-light);
+  background-color: var(--bg-silver);
   color: var(--text-dark);
-  border-color: #ccc;
+  border-color: #111;
 }
 
 .site-header .navbar-brand {

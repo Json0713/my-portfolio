@@ -30,8 +30,8 @@ function showToast(message) {
   const toast = document.createElement("div");
   toast.className = "custom-toast";
   toast.style.cssText = `
-    position: fixed;
-    top: 1.25rem;
+    position: absolute;
+    top: 150px;
     left: 50%;
     transform: translateX(-50%);
     background: var(--bg-dark);
@@ -41,7 +41,7 @@ function showToast(message) {
     padding: 0.75rem 1.25rem;
     border-radius: 8px;
     z-index: 2000;
-    width: 345px;
+    width: 85vw;
     font-weight: 600;
     display: flex;
     gap: 0.5rem;
