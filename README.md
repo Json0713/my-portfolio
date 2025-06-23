@@ -1,7 +1,4 @@
-# my-portfolio
-My Portfolio Website
-
-## My Portfolio Website!🎉# Hi there, I'm a Frontend Developer!
+## Hi there, I'm a Frontend Developer!
 
 A passionate solo developer crafting fast, accessible, and responsive web experiences. Specializing in modular UI, component-based architecture.
 
