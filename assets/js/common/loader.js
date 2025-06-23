@@ -16,7 +16,7 @@ export function showSpinner(delay = 100) {
     <div class="bouncing-dots">
       <span></span><span></span><span></span><span></span><span></span>
     </div>
-    <p class="mt-3 mb-0 fw-semibold" style="color: var(--text-light);">Loading content...</p>
+    <p class="mt-3 mb-0 fw-semibold" style="color: var(--text-accent);">Loading content...</p>
   `;
 
   setTimeout(() => {
