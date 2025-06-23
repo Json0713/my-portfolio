@@ -10,6 +10,7 @@ function getPreferredTheme() {
 }
 
 function saveTheme(theme) {
+  if (!rootElement) return;
   rootElement.setAttribute("data-theme", theme);
   localStorage.setItem("theme", theme);
 }
@@ -19,17 +20,15 @@ function updateAccent(theme) {
   rootElement.style.setProperty("--accent", accent);
 }
 
-function flashThemeEffect() {
-  rootElement.classList.add("theme-flash");
-  setTimeout(() => rootElement.classList.remove("theme-flash"), 400);
-}
-
-function applyTheme(theme) {
+function applyTheme(theme, { flash = true } = {}) {
+  if (!rootElement.hasAttribute("data-theme")) {
+    rootElement.setAttribute("data-theme", theme);
+  }
   saveTheme(theme);
   updateAccent(theme);
   highlightActiveLink();
   updateThemeToggleUI(theme);
-  flashThemeEffect();
+  if (flash) flashThemeEffect();
   announceTheme(theme);
 }
 
@@ -41,7 +40,8 @@ function toggleTheme() {
 
 function initTheme() {
   const preferred = getPreferredTheme();
-  applyTheme(preferred);
+  applyTheme(preferred, { flash: false });
+  rootElement.classList.remove("js-loading");
 }
 
 function highlightActiveLink() {
@@ -62,6 +62,8 @@ function announceTheme(theme) {
   liveRegion.className = "visually-hidden";
   liveRegion.textContent = `Theme changed to ${theme}`;
   document.body.appendChild(liveRegion);
+
+  setTimeout(() => liveRegion.remove(), 1500);
 }
 
 function updateThemeToggleUI(theme) {
@@ -76,8 +78,10 @@ function setupThemeToggle() {
     toggleTheme();
   });
 
+  let highlightTimeout;
   window.addEventListener("hashchange", () => {
-    requestAnimationFrame(highlightActiveLink);
+    clearTimeout(highlightTimeout);
+    highlightTimeout = setTimeout(highlightActiveLink, 50);
   });
 }
 

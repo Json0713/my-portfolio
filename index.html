@@ -1,7 +1,16 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" class="js-loading">
 <head>
   <meta charset="UTF-8">
+  <script>
+    (function () {
+      const savedTheme = localStorage.getItem("theme");
+      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      const theme = savedTheme || (prefersDark ? "dark" : "light");
+      document.documentElement.setAttribute("data-theme", theme);
+    })();
+  </script>
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="description" content="Jason B. - Frontend developer portfolio showcasing projects, skills, and contact info">
@@ -51,7 +60,6 @@
     </div>
   </header>
 
-  <!-- Navigation inside main content -->
   <nav class="main-nav py-2 border-bottom overflow-auto" role="navigation">
     <div class="container d-flex justify-content-start justify-content-md-center flex-nowrap gap-3">
       <a class="btn btn-outline-light flex-shrink-0" href="#hero">Home</a>
