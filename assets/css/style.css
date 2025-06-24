@@ -4,8 +4,11 @@
 :root {
   --bg-dark: #10262b;
   --bg-light: #e8f5f6;
-  --bg-gray: #444;
-  --bg-silver: #c0c0c0;
+  
+/* Costum bg */
+  --bg-dark-zone: #0a1a1f;
+  --bg-light-zone: #c1d5d9;
+  --bg-slate-zone: #90b0b6;
 
   --text-dark: #10262b;
   --text-light: #e8f5f6;
@@ -172,7 +175,7 @@ input:checked + .slider::before {
 /* Header / Footer */
 .site-header,
 .site-footer {
-  background-color: var(--bg-gray);
+  background-color: var(--bg-dark-zone);
   color: var(--text-light);
   border-color: #333;
   transition: background-color var(--transition), color var(--transition);
@@ -180,7 +183,7 @@ input:checked + .slider::before {
 
 [data-theme="light"] .site-header,
 [data-theme="light"] .site-footer {
-  background-color: var(--bg-silver);
+  background-color: var(--bg-light-zone);
   color: var(--text-dark);
   border-color: #111;
 }
