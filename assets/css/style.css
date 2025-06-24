@@ -2,13 +2,13 @@
 
 /* Theme Variables & Semantics */
 :root {
-  --bg-dark: #1e1e1e;
-  --bg-light: #f5f5f5;
+  --bg-dark: #10262b;
+  --bg-light: #e8f5f6;
   --bg-gray: #444;
   --bg-silver: #c0c0c0;
 
-  --text-dark: #121212;
-  --text-light: #ffffff;
+  --text-dark: #10262b;
+  --text-light: #e8f5f6;
   --accent: #00ffc3;
 
   --radius: 1rem;
