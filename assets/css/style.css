@@ -1,5 +1,5 @@
 /* assets/css/style.css */
-/* Recommit check changes*/
+
 /* Theme Variables & Semantics */
 :root {
   --bg-dark: #10262b;
@@ -7,8 +7,10 @@
   
 /* Costum bg */
   --bg-dark-zone: #0a1a1f;
-  --bg-light-zone: #c1d5d9;
-  --bg-slate-zone: #90b0b6;
+  --bg-light-zone: #cdd8dc;
+  --bg-slate-zone: #cdd8dc;
+  --bg-abyss-zone: #1a3a3f;
+
 
   --text-dark: #10262b;
   --text-light: #e8f5f6;
@@ -105,7 +107,7 @@ html, body {
   position: absolute;
   cursor: pointer;
   top: 0; left: 0; right: 0; bottom: 0;
-  background-color: #999;
+  background-color: var(--bg-abyss-zone);
   transition: background-color var(--transition);
   border-radius: 34px;
 }
@@ -117,13 +119,13 @@ html, body {
   width: 18px;
   left: 3px;
   bottom: 3px;
-  background-color: white;
+  background-color: var(--accent);
   transition: transform var(--transition);
   border-radius: 50%;
 }
 
 input:checked + .slider {
-  background-color: var(--accent);
+  background-color: var(--bg-slate-zone);
 }
 
 input:checked + .slider::before {
