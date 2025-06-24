@@ -1,7 +1,7 @@
 // assets/js/public/theme.js
 
 import { announceTheme } from '../utils/accessibility.js';
-import { highlightActiveLink } from '../routes/router.js';
+import { highlightActiveLink } from '../routes/routerLink.js';
 
 const rootElement = document.documentElement;
 const themeToggleInput = document.getElementById("theme-toggle");
