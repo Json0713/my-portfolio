@@ -67,6 +67,7 @@ html, body {
   transition: background-color var(--transition), color var(--transition);
 }
 
+
 /* Theme Toggle */
 .theme-switch {
   display: flex;
@@ -234,6 +235,11 @@ input:checked + .slider::before {
   border-radius: 2px;
 }
 
+.main-nav a:hover {
+  background-color: var(--accent);
+  color: var(--accent);
+}
+
 /* Main Content */
 #app {
   padding: 2rem 1rem;
@@ -264,6 +270,15 @@ button:focus-visible {
 .fade-out {
   opacity: 0;
   transition: opacity 0.3s ease-out;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  height: 1px; width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+  white-space: nowrap;
+  border: 0;
 }
 
 @keyframes fadeIn {
