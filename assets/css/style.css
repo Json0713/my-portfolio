@@ -190,6 +190,7 @@ input:checked + .slider::before {
   color: var(--text-light);
   border-color: #333;
   transition: background-color var(--transition), color var(--transition);
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
 }
 
 [data-theme="light"] .site-header,
