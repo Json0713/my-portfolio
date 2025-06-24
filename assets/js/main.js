@@ -10,7 +10,6 @@ function getPreferredTheme() {
 }
 
 function saveTheme(theme) {
-  if (!rootElement) return;
   rootElement.setAttribute("data-theme", theme);
   localStorage.setItem("theme", theme);
 }
@@ -52,8 +51,10 @@ function initTheme() {
 }
 
 function highlightActiveLink() {
+  const currentPath = location.hash || location.pathname;
   document.querySelectorAll(".main-nav a").forEach(link => {
-    const isActive = link.getAttribute("href") === location.hash;
+    const linkHref = link.getAttribute("href");
+    const isActive = linkHref === currentPath;
     link.classList.toggle("active-link", isActive);
   });
 }
@@ -87,6 +88,11 @@ function setupThemeToggle() {
 
   let highlightTimeout;
   window.addEventListener("hashchange", () => {
+    clearTimeout(highlightTimeout);
+    highlightTimeout = setTimeout(highlightActiveLink, 50);
+  });
+
+  window.addEventListener("popstate", () => {
     clearTimeout(highlightTimeout);
     highlightTimeout = setTimeout(highlightActiveLink, 50);
   });

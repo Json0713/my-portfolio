@@ -11,10 +11,8 @@
   --bg-slate-zone: #cdd8dc;
   --bg-abyss-zone: #1a3a3f;
 
-
   --text-dark: #10262b;
   --text-light: #e8f5f6;
-  --accent: #00ffc3;
 
   --radius: 1rem;
   --transition: 0.3s ease-in-out;
@@ -72,18 +70,11 @@ html, body {
   transition: background-color var(--transition), color var(--transition);
 }
 
-
 /* Theme Toggle */
 .theme-switch {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-}
-
-.theme-label {
-  font-size: 1rem;
-  color: var(--text-light);
-  transition: color var(--transition);
 }
 
 [data-theme="light"] .theme-label {
@@ -148,41 +139,46 @@ input:checked + .slider::before {
   transition: all var(--transition);
 }
 
-[data-theme="dark"] .btn-outline-dark,
-[data-theme="light"] .btn-outline-light {
+/* Light Theme - Outline Buttons */
+[data-theme="light"] .btn-outline-light,
+[data-theme="light"] .btn-outline-dark {
   color: var(--text-dark) !important;
   border-color: var(--text-dark) !important;
 }
 
-[data-theme="dark"] .btn-outline-dark:hover,
-[data-theme="light"] .btn-outline-light:hover {
+[data-theme="light"] .btn-outline-light:hover,
+[data-theme="light"] .btn-outline-dark:hover,
+[data-theme="light"] .btn-outline-dark:active,
+[data-theme="light"] .btn-outline-dark.active {
   background-color: var(--accent) !important;
   color: var(--text-dark) !important;
   border-color: var(--accent) !important;
 }
 
-[data-theme="light"] .btn-outline-dark,
+/* Special Case: Keep light-on-light readable */
+[data-theme="light"] .btn-outline-light:hover,
+[data-theme="light"] .btn-outline-light:active,
+[data-theme="light"] .btn-outline-light.active {
+  color: var(--text-light) !important;
+}
+
+/* Dark Theme - Outline Buttons */
+[data-theme="dark"] .btn-outline-dark,
 [data-theme="dark"] .btn-outline-light {
   color: var(--text-light) !important;
   border-color: var(--text-light) !important;
 }
 
-[data-theme="light"] .btn-outline-dark:hover,
-[data-theme="dark"] .btn-outline-light:hover {
+[data-theme="dark"] .btn-outline-dark:hover,
+[data-theme="dark"] .btn-outline-light:hover,
+[data-theme="dark"] .btn-outline-dark:active,
+[data-theme="dark"] .btn-outline-dark.active {
   background-color: var(--accent) !important;
   color: var(--text-dark) !important;
   border-color: var(--accent) !important;
 }
 
-/* Separate styling for Light Mode Button */
-[data-theme="light"] .btn-outline-light:hover,
-[data-theme="light"] .btn-outline-light:active,
-[data-theme="light"] .btn-outline-light.active {
-  color: var(--text-light) !important;
-  background-color: var(--accent) !important;
-  border-color: var(--accent) !important;
-}
-
+/* Nav Button Special Style */
 [data-theme="light"] .main-nav a.btn.active-link {
   color: var(--text-light) !important;
 }
