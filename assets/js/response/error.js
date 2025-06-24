@@ -30,14 +30,14 @@ function showToast(message) {
   const toast = document.createElement("div");
   toast.className = "custom-toast";
   toast.style.cssText = `
-    position: absolute;
+    position: fixed;
     top: 150px;
     left: 50%;
     transform: translateX(-50%);
     background: var(--bg-dark);
     color: var(--silver);
     border-left: 4px solid var(--accent);
-    box-shadow: 0 0 12px rgba(0, 0, 0, 1);
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
     padding: 0.75rem 1.25rem;
     border-radius: 8px;
     z-index: 2000;

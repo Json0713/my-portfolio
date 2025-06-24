@@ -16,7 +16,7 @@ function saveTheme(theme) {
 }
 
 function updateAccent(theme) {
-  const accent = theme === "light" ? "#e91e63" : "#00ffc3";
+  const accent = theme === "light" ? "#004d40" : "#00ffc3";
   rootElement.style.setProperty("--accent", accent);
 }
 
