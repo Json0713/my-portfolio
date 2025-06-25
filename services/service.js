@@ -3,16 +3,25 @@
 const CACHE_NAME = 'jason-portfolio-v1';
 const FILES_TO_CACHE = [
   '/',
+  // pages
   '/index.html',
+  '/src/pages/hero.html',
+  // css
   '/assets/css/style.css',
+  // js
+  '/assets/js/main.js',
+  // bootstrap
   '/assets/css/bootstrap.min.css',
   '/assets/css/bootstrap-icons.css',
-  '/assets/js/main.js',
   '/assets/js/bootstrap.bundle.min.js',
-  '/assets/js/response/offline.js',
+  // fonts
   '/assets/fonts/bootstrap-icons.woff2',
   '/assets/fonts/bootstrap-icons.woff',
+  // js modules
+  '/assets/js/response/offline.js',
+  // assets 
   '/assets/images/dark-portfolio-profile-picture.jpeg',
+  
 ];
 
 self.addEventListener('install', event => {
