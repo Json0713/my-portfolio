@@ -10,4 +10,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Initial nav highlight
   highlightActiveLink();
+
+  // Register Service Worker (services/service.js)
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('services/service.js')
+        .then(() => console.log('Service Worker registered'))
+        .catch(err => console.error('Service Worker error:', err)
+        );
+    });
+  }
 });

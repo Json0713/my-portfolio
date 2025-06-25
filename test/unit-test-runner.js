@@ -1,51 +1,39 @@
 // test/unit-test-runner.js
 
-const output = document.getElementById("test-output") || document.body.appendChild(document.createElement("pre"));
+console.log("✅ Unit Test Runner Started");
 
-let testGroups = [];
-let currentGroup = null;
-
-function log(message, status = "info") {
-  const line = document.createElement("div");
-  line.className = status;
-  line.textContent = message;
-  output.appendChild(line);
-}
-
-export function group(name, callback) {
-  currentGroup = { name, tests: [] };
-  testGroups.push(currentGroup);
-  log(`\n[${name}]`, "info");
-  callback();
-}
-
-export function test(name, fn) {
+function test(description, callback) {
   try {
-    const result = fn();
-    if (result instanceof Promise) {
-      result
-        .then(() => log(`✔ ${name}`, "pass"))
-        .catch((e) => log(`✖ ${name}: ${e}`, "fail"));
-    } else {
-      log(`✔ ${name}`, "pass");
-    }
-  } catch (err) {
-    log(`✖ ${name}: ${err}`, "fail");
+    callback();
+    console.log(`✅ PASS: ${description}`);
+  } catch (error) {
+    console.error(`❌ FAIL: ${description}`);
+    console.error(error);
   }
 }
 
-export const assert = {
-  equal(actual, expected) {
-    if (actual !== expected) throw new Error(`Expected '${actual}' to equal '${expected}'`);
-  },
-  truthy(value) {
-    if (!value) throw new Error(`Expected value to be truthy, got '${value}'`);
-  },
-  falsy(value) {
-    if (value) throw new Error(`Expected value to be falsy, got '${value}'`);
-  },
-};
-
-export function runTests() {
-  log("\nAll tests completed. Check above for results.\n");
+function logResult(message, isPass) {
+  const div = document.createElement("div");
+  div.textContent = message;
+  div.className = isPass ? "pass" : "fail";
+  document.getElementById("test-output")?.appendChild(div);
 }
+
+// Delay service worker test until after page load
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.getRegistration()
+      .then(reg => {
+        if (!reg) throw new Error("Service Worker not found");
+        logResult("✅ PASS: Service Worker registration exists", true);
+      })
+      .catch(err => {
+        logResult("❌ FAIL: Service Worker registration", false);
+        console.error(err);
+      });
+  });
+} else {
+  console.warn("❌ Service Worker not supported in this environment");
+}
+
+logResult("ℹ️ Manually test offline fallback by visiting /fake-page.html while offline", true);
