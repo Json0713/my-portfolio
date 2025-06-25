@@ -54,12 +54,13 @@ This project is a manually built Single Page Application (SPA) with full PWA cap
 
 > You can use any static server (Live Server, http-server, etc.)
 
-```bash
+```
 npx http-server ./ -p 
 ```
-
-Visit: `https://my-portfolio-fawn-six-spddunmlyp.vercel.app/`
-
+Visit: 
+```bash
+https://my-portfolio-fawn-six-spddunmlyp.vercel.app/
+```
 ---
 
 ## PWA Installation (Mobile)
