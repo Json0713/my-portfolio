@@ -81,7 +81,6 @@ Once the site has been loaded at least once:
 ---
 
 ## Unit Testing
-```
 To verify:
 - Service Worker registration
 - Offline fallback instruction
