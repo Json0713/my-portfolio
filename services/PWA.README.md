@@ -1,4 +1,4 @@
-# Jason B. Portfolio | Progressive Web App (PWA)
+## Jason B. Portfolio | Progressive Web App (PWA)
 
 This project is a manually built Single Page Application (SPA) with full PWA capabilities, offline support, and installability
 ---
