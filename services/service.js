@@ -8,6 +8,7 @@ const FILES_TO_CACHE = [
   '/src/pages/hero.html',
   // css
   '/assets/css/style.css',
+  'assets/css/hero.css',
   // js
   '/assets/js/main.js',
   // bootstrap
