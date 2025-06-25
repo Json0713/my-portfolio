@@ -1,4 +1,4 @@
-# Jason B. Portfolio — Progressive Web App (PWA)
+# Jason B. Portfolio | Progressive Web App (PWA)
 
 This project is a manually built Single Page Application (SPA) with full PWA capabilities, offline support, and installability — built from scratch using only vanilla HTML, CSS, and JS.
 
@@ -7,7 +7,7 @@ This project is a manually built Single Page Application (SPA) with full PWA cap
 ## Features
 
 - Fully installable as a PWA (Add to Home Screen)
-- Works entirely offline via Service Worker
+- Works with offline via Service Worker
 - Custom `offline.html` fallback for cold requests
 - SPA routing using hash (`#`) based navigation
 - Theme toggle with persistent dark/light mode
@@ -104,7 +104,7 @@ Ensure the following are in place:
 
 ## Credits
 
-- Built manually using [SPCK Editor] on Android
+- Built with [SPCK] on Android 
 - Powered by Bootstrap 5.3.3 and Bootstrap Icons
 - Service Worker + Manifest: Manual vanilla setup
 
