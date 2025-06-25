@@ -12,7 +12,7 @@ const FILES_TO_CACHE = [
   '/assets/js/response/offline.js',
   '/assets/fonts/bootstrap-icons.woff2',
   '/assets/fonts/bootstrap-icons.woff',
-  '/assets/images/dark-1x1-profile.jpg',
+  '/assets/images/dark-portfolio-profile-picture.jpeg',
 ];
 
 self.addEventListener('install', event => {
