@@ -80,5 +80,29 @@
 
   <!-- Bootstrap Bundle JS-->
   <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const assets = [
+      "assets/css/bootstrap.min.css",
+      "assets/css/bootstrap-icons.css",
+      "assets/css/style.css",
+      "assets/js/main.js",
+      "assets/js/hero.js",
+      "assets/js/router.js"
+    ];
+    
+    assets.forEach(path => {
+      fetch(path, { method: "HEAD" })
+        .then(res => {
+          if (!res.ok) throw new Error(`${path} status ${res.status}`);
+          console.log(`[Asset OK] ${path}`);
+        })
+        .catch(err => {
+          console.error(`[Asset FAIL] ${path}`, err.message);
+          showToast(`<i class="bi bi-exclamation-circle"></i> Failed to load ${path}`, { type: "danger", duration: 5000 });
+        });
+    });
+  });
+</script>
 </body>
 </html>
