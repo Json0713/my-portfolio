@@ -1,6 +1,11 @@
 # Jason B. Portfolio | Progressive Web App (PWA)
 
-This project is a manually built Single Page Application (SPA) with full PWA capabilities, offline support, and installability — built from scratch using only vanilla HTML, CSS, and JS.
+This project is a manually built Single Page Application (SPA) with full PWA capabilities, offline support, and installability
+---
+
+- Project Portfolio Mobile based Version.
+- Built from scratch using vanilla HTML, CSS, and JS.
+- Full Frontend skills with Logics and Architectural workflow
 
 ---
 
@@ -12,7 +17,7 @@ This project is a manually built Single Page Application (SPA) with full PWA cap
 - SPA routing using hash (`#`) based navigation
 - Theme toggle with persistent dark/light mode
 - Bootstrap + Icons fully self-hosted (no CDN dependency)
-- Unit-tested via `unit-tester.html`
+- Unit-tested via `unit-tester`
 
 ---
 
@@ -37,7 +42,7 @@ This project is a manually built Single Page Application (SPA) with full PWA cap
 │   │   ├── bootstrap-icons.woff
 │   │   └── bootstrap-icons.woff2
 │   └── images/
-│       └── dark-1x1-profile.jpg
+│       └── ...
 ├── test/
 │   ├── unit-test-runner.js
 │   └── unit-tester.html
@@ -50,10 +55,10 @@ This project is a manually built Single Page Application (SPA) with full PWA cap
 > You can use any static server (Live Server, http-server, etc.)
 
 ```bash
-npx http-server ./ -p 7700
+npx http-server ./ -p 
 ```
 
-Visit: `http://localhost:7700/index.html#hero`
+Visit: `https://my-portfolio-fawn-six-spddunmlyp.vercel.app/`
 
 ---
 
@@ -76,23 +81,18 @@ Once the site has been loaded at least once:
 ---
 
 ## Unit Testing
-
-Visit:
-```
-/test/unit-tester.html
 ```
 To verify:
 - Service Worker registration
 - Offline fallback instruction
 - Additional test cases can be added
-
+- Routing SPA Capabilities 
 ---
 
 ## Deployment
 
 You can host on:
 - GitHub Pages
-- Firebase Hosting
 - Vercel
 
 Ensure the following are in place:
@@ -106,7 +106,7 @@ Ensure the following are in place:
 
 - Built with [SPCK] on Android 
 - Powered by Bootstrap 5.3.3 and Bootstrap Icons
-- Service Worker + Manifest: Manual vanilla setup
+- Service Worker + Manifest: vanilla setup
 
 ---
 
