@@ -1,11 +1,14 @@
 // assets/js/response/offline.js
+import { showToast } from "../common/toast.js";
 
 export function showOffline(name) {
   document.title = `Offline Mode | Jason B.`;
   const app = document.getElementById("app");
 
   if (!sessionStorage.getItem("toast:offline")) {
-    showToast("<i class='bi bi-wifi-off'></i> You are currently offline. Some features may be unavailable.");
+    showToast("<i class='bi bi-wifi-off'></i> You are currently offline. Some features may be unavailable.", {
+      type: "warning"
+    });
     sessionStorage.setItem("toast:offline", "shown");
   }
 
@@ -24,43 +27,4 @@ export function showOffline(name) {
       </div>
     </div>
   `;
-}
-
-function showToast(message) {
-  const toast = document.createElement("div");
-  toast.className = "custom-toast";
-  toast.style.cssText = `
-    position: fixed;
-    top: 120px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--bg-dark);
-    color: var(--silver);
-    border-left: 4px solid var(--accent);
-    box-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
-    padding: 0.75rem 1.25rem;
-    border-radius: 8px;
-    z-index: 2000;
-    width: 85vw;
-    font-weight: 600;
-    display: flex;
-    gap: 0.5rem;
-    align-items: center;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.4s ease, transform 0.3s ease;
-  `;
-  toast.innerHTML = message;
-  document.body.appendChild(toast);
-
-  requestAnimationFrame(() => {
-    toast.style.opacity = "1";
-    toast.style.pointerEvents = "auto";
-  });
-
-  setTimeout(() => {
-    toast.style.opacity = "0";
-    toast.style.pointerEvents = "none";
-    setTimeout(() => toast.remove(), 300);
-  }, 4000);
-}
+} 
