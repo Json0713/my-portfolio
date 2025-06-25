@@ -13,7 +13,7 @@ const FILES_TO_CACHE = [
   '/assets/css/bootstrap.min.css',
   '/assets/css/bootstrap-icons.css',
 
-  // js Sole
+  // js
   '/assets/js/main.js',
   '/assets/js/bootstrap.bundle.min.js',
   '/assets/js/security/sanitizer.js',
