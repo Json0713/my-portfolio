@@ -1,6 +1,6 @@
-## Jason B. Portfolio | Progressive Web App (PWA)
+## Jason B. Portfolio | Progressive Web App
 
-This project is a manually built Single Page Application (SPA) with full PWA capabilities, offline support, and installability
+### This project is a manually built Single Page Application (SPA) with full PWA capabilities, offline support, and installability
 ---
 
 - Project Portfolio Mobile based Version.
@@ -13,11 +13,11 @@ This project is a manually built Single Page Application (SPA) with full PWA cap
 
 - Fully installable as a PWA (Add to Home Screen)
 - Works with offline via Service Worker
-- Custom `offline.html` fallback for cold requests
+- Custom `offline` fallback for cold requests
 - SPA routing using hash (`#`) based navigation
 - Theme toggle with persistent dark/light mode
 - Bootstrap + Icons fully self-hosted (no CDN dependency)
-- Unit-tested via `unit-tester`
+- Unit-tested via custom `test/`
 
 ---
 
@@ -52,11 +52,8 @@ This project is a manually built Single Page Application (SPA) with full PWA cap
 
 ## Install & Serve
 
-> You can use any static server (Live Server, http-server, etc.)
+> You can use any static server (Live Server, http-server, etc.) npx http-server ./ -p 
 
-```
-npx http-server ./ -p 
-```
 Visit: 
 ```bash
 https://my-portfolio-fawn-six-spddunmlyp.vercel.app/
@@ -65,7 +62,7 @@ https://my-portfolio-fawn-six-spddunmlyp.vercel.app/
 
 ## PWA Installation (Mobile)
 
-1. Open in **Chrome Mobile**
+1. Open in **Browser**
 2. Wait for prompt or tap menu `⋮`
 3. Tap **"Add to Home Screen"**
 4. App will open in standalone mode
@@ -75,9 +72,7 @@ https://my-portfolio-fawn-six-spddunmlyp.vercel.app/
 ## Offline Support
 
 Once the site has been loaded at least once:
-- Turn on **Airplane Mode**
 - Reload any route → works offline
-- Visit non-existent route → `offline.html` is served
 
 ---
 
