@@ -4,12 +4,12 @@ const CACHE_NAME = 'jason-portfolio-v1';
 const FILES_TO_CACHE = [
   '/',
   '/index.html',
-  '/offline.html',
   '/assets/css/style.css',
   '/assets/css/bootstrap.min.css',
   '/assets/css/bootstrap-icons.css',
   '/assets/js/main.js',
   '/assets/js/bootstrap.bundle.min.js',
+  '/assets/js/response/offline.js',
   '/assets/fonts/bootstrap-icons.woff2',
   '/assets/fonts/bootstrap-icons.woff',
   '/assets/images/dark-1x1-profile.jpg',
@@ -23,11 +23,17 @@ self.addEventListener('install', event => {
 });
 
 self.addEventListener('fetch', event => {
+  // Only handle GET requests
+  if (event.request.method !== 'GET') return;
+
   event.respondWith(
-    caches.match(event.request).then(response => {
-      return response || fetch(event.request).catch(() => {
+    caches.match(event.request).then(cachedResponse => {
+      if (cachedResponse) return cachedResponse;
+
+      return fetch(event.request).catch(() => {
         if (event.request.destination === 'document') {
-          return caches.match('/offline.html');
+          // Serve index.html for SPA to allow JS fallback (offline.js will handle UI)
+          return caches.match('/index.html');
         }
       });
     })

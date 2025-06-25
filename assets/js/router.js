@@ -1,7 +1,8 @@
-// assets/js/component-loader.js
+// assets/js/router.js
 
 import { sanitizeHTML } from "./security/sanitizer.js";
 import { show404 } from "./response/error.js";
+import { showOffline } from "./response/offline.js";
 import { showSpinner, hideSpinner } from "./common/loader.js";
 
 const app = document.getElementById("app");
@@ -28,7 +29,11 @@ function loadComponent(name) {
     })
     .catch(err => {
       console.error(err);
-      show404(name);
+      if (!navigator.onLine) {
+        showOffline(name);
+      } else {
+        show404(name);
+      }
     });
 }
 
