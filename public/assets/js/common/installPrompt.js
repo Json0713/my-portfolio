@@ -1,46 +1,52 @@
 // assets/js/common/installPrompt.js
 
-import { showToast } from './toast.js';
-
 let deferredPrompt = null;
 
 export function setupInstallPrompt() {
   window.addEventListener('beforeinstallprompt', (e) => {
-    // Prevent default mini-infobar
     e.preventDefault();
     deferredPrompt = e;
-
-    showInstallBanner();
+    showInstallModal();
   });
 }
 
-function showInstallBanner() {
-  if (!deferredPrompt) return;
+function showInstallModal() {
+  if (document.getElementById('install-modal')) return;
 
-  showToast(`
-    <div>
-      <strong>Install This App</strong>
-      <button class="btn btn-success btn-sm ms-2" id="install-btn">
-        <i class="bi bi-download"></i> Install
-      </button>
+  const modal = document.createElement('div');
+  modal.id = 'install-modal';
+  modal.style.position = 'fixed';
+  modal.style.bottom = '1rem';
+  modal.style.left = '50%';
+  modal.style.transform = 'translateX(-50%)';
+  modal.style.background = 'var(--bs-dark)';
+  modal.style.color = 'white';
+  modal.style.padding = '1rem';
+  modal.style.borderRadius = '0.5rem';
+  modal.style.boxShadow = '0 0 10px rgba(0,0,0,0.3)';
+  modal.style.zIndex = 1000;
+  modal.innerHTML = `
+    <div style="display:flex;flex-direction:column;align-items:center;gap:0.75rem;">
+      <strong>Install this app?</strong>
+      <div style="display:flex;gap:0.5rem;">
+        <button id="install-now" class="btn btn-sm btn-success">Install</button>
+        <button id="dismiss-install" class="btn btn-sm btn-secondary">Later</button>
+      </div>
     </div>
-  `, { type: 'info', duration: 10000 });
+  `;
+  document.body.appendChild(modal);
 
-  setTimeout(() => {
-    const installBtn = document.getElementById('install-btn');
-    if (installBtn) {
-      installBtn.addEventListener('click', async () => {
-        if (!deferredPrompt) return;
-        deferredPrompt.prompt();
+  document.getElementById('install-now')?.addEventListener('click', async () => {
+    if (!deferredPrompt) return;
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+    console.log(`[PWA] User response to install: ${outcome}`);
+    deferredPrompt = null;
+    modal.remove();
+  });
 
-        const { outcome } = await deferredPrompt.userChoice;
-        if (outcome === 'accepted') {
-          console.log('✅ App installed');
-        } else {
-          console.log('❌ App install dismissed');
-        }
-        deferredPrompt = null;
-      });
-    }
-  }, 200);
+  document.getElementById('dismiss-install')?.addEventListener('click', () => {
+    modal.remove();
+    deferredPrompt = null;
+  });
 }
