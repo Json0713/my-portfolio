@@ -1,5 +1,5 @@
 // services/service.js
-// Development test commit
+// Development test commit succesfully merge to main
 const CACHE_NAME = 'jason-portfolio-v2';
 const FILES_TO_CACHE = [
   '/',
