@@ -6,7 +6,22 @@ export function setupInstallPrompt() {
   window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     deferredPrompt = e;
-    showInstallModal();
+    console.log('[PWA] beforeinstallprompt captured');
+
+    // Optional: automatically show
+    // showInstallModal();
+
+    // Bind test button if it exists
+    const btn = document.getElementById('trigger-install');
+    if (btn) {
+      btn.addEventListener('click', () => {
+        if (deferredPrompt) {
+          showInstallModal();
+        } else {
+          alert("Install not available yet. Try refreshing or using incognito.");
+        }
+      });
+    }
   });
 }
 
