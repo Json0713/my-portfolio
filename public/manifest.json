@@ -1,20 +1,20 @@
 {
   "name": "Jason B. Portfolio",
   "short_name": "JasonB",
-  "start_url": "/index.html",
+  "start_url": "/",
+  "scope": "/",
   "display": "standalone",
+  "orientation": "portrait",
   "background_color": "#10262b",
   "theme_color": "#00ffc3",
-  "orientation": "portrait",
-  "scope": "/",
   "icons": [
     {
-      "src": "assets/images/dark-1x1-profile.jpg",
+      "src": "/assets/images/dark-1x1-profile.jpg",
       "sizes": "192x192",
       "type": "image/jpeg"
     },
     {
-      "src": "assets/images/dark-1x1-profile.jpg",
+      "src": "/assets/images/dark-1x1-profile.jpg",
       "sizes": "512x512",
       "type": "image/jpeg"
     }

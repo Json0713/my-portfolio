@@ -37,7 +37,7 @@
   <!-- Custom CSS -->
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/hero.css">
-  <link rel="manifest" href="manifest.json">
+  <link rel="manifest" href="/manifest.json">
 
   <!-- JavaScript Files -->
   <script type="module" src="assets/js/router.js"></script>
@@ -80,6 +80,17 @@
 
   <!-- Bootstrap Bundle JS-->
   <script src="assets/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Register service worker -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js')
+          .then(reg => console.log('✅ Service Worker registered:', reg.scope))
+          .catch(err => console.error('❌ Service Worker registration failed:', err));
+      });
+    }
+  </script>
 
 </body>
 </html>

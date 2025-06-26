@@ -26,7 +26,6 @@
 ```
 / (root)
 ├── index.html
-├── offline.html
 ├── manifest.json
 ├── services/
 │   └── service.js
@@ -37,7 +36,11 @@
 │   │   └── bootstrap-icons.css
 │   ├── js/
 │   │   ├── main.js
-│   │   └── ...
+│   │   ├── router.js
+│   │   └── response/
+│   │       ├── error.js
+│   │       └── offline.js
+│   │   
 │   ├── fonts/
 │   │   ├── bootstrap-icons.woff
 │   │   └── bootstrap-icons.woff2
@@ -56,7 +59,7 @@
 
 Visit: 
 ```bash
-https://my-portfolio-fawn-six-spddunmlyp.vercel.app/
+https://my-portfolio-web-j13.vercel.app/
 ```
 ---
 
