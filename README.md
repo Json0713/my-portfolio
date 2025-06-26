@@ -1,21 +1,21 @@
 ## Hi there, I'm a Frontend Developer!
 
-A passionate solo developer crafting fast, accessible, and responsive web experiences. Specializing in modular UI, component-based architecture.
+I am solo indi-web Developer, with software • web experiences. Specializing Frontend | UI/UX Architecture, Inspire with Angular Based Framework Architectures.
 
 ---
 
 ## About Me
 - Self-taught-Architectural Web and Software Development.
 
-- Working With Web applications both Mobile and Desktop Compatibility and Responsives.
+- Working With Web Applications both Mobile and Desktop Compatibility and Responsives.
 
 - Frontend Architecture with skilled across Full Stack Experiences.
 
-- Languages & Tools: HTML5, CSS3, JavaScript (ES6), PHP, Node.js, TypeScript, MySQL, NoSQL-json.
+- Languages & Tools: HTML5, CSS3, JavaScript (ES6), PHP, Git, TypeScript, MySQL, NoSQL-json.
 
-- Platforms & Tools: Angular, Git, GitHub, CLI, VS Code, XAMPP.
+- Platforms & Frameworks: Angular, Git, GitHub, CLI, VS Code, XAMPP.
 
-- Development with Dynamic Admin Systems and Database Managements Systems.
+- Development with Dynamic Admin Systems and Database Managements Systems • Dynamic | Static Websites.
 
 ---
 
@@ -45,7 +45,7 @@ A passionate solo developer crafting fast, accessible, and responsive web experi
 
 ## Featured Projects
 
-### [My Portfolio Website](https://my-portfolio-fawn-six-spddunmlyp.vercel.app/#hero)
+### [My Portfolio Website](https://my-portfolio-web-j13.vercel.app/#hero)
 > Built with JavaScript, HTML, CSS, and Bootstrap — A dynamic Single Page Application (SPA) that showcases my skills, projects, and contact info. Designed mobile-first using SPCK and GitHub integration.
 
 ---
