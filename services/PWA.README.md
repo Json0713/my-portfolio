@@ -25,30 +25,45 @@
 
 ```
 / (root)
-├── index.html
-├── manifest.json
-├── services/
-│   └── service.js
+├── vercel.json                      # Vercel config (rewrites, headers)
+/public
+├── index.html                       # SPA entry point
+├── manifest.json                    # PWA metadata
+├── service-worker.js               # Service Worker (must be here!)
+├── src/
+│   └── pages/                       # HTML fragments for SPA routes
+│       ├── hero.html
+│       ├── about.html
+│       └── ...
 ├── assets/
 │   ├── css/
 │   │   ├── style.css
+│   │   ├── hero.css
 │   │   ├── bootstrap.min.css
 │   │   └── bootstrap-icons.css
-│   ├── js/
-│   │   ├── main.js
-│   │   ├── router.js
-│   │   └── response/
-│   │       ├── error.js
-│   │       └── offline.js
-│   │   
 │   ├── fonts/
 │   │   ├── bootstrap-icons.woff
 │   │   └── bootstrap-icons.woff2
-│   └── images/
-│       └── ...
+│   ├── images/
+│   │   └── dark-portfolio-profile-picture.jpeg
+│   ├── js/
+│   │   ├── main.js                  # Entry point: theme, SW, install logic
+│   │   ├── router.js                # SPA router logic
+│   │   ├── security/
+│   │   │   └── sanitizer.js
+│   │   ├── common/
+│   │   │   ├── toast.js
+│   │   │   ├── loader.js
+│   │   │   └── installPrompt.js
+│   │   ├── response/
+│   │   │   ├── offline.js
+│   │   │   └── error.js
+│   │   └── routes/
+│   │       └── routerLink.js
 ├── test/
 │   ├── unit-test-runner.js
 │   └── unit-tester.html
+
 ```
 
 ---
