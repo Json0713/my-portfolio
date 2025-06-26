@@ -1,3 +1,5 @@
+// public/service-worker.js
+
 const CACHE_NAME = 'jason-portfolio-v2';
 const FILES_TO_CACHE = [
   '/',
