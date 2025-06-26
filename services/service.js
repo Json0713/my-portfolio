@@ -1,5 +1,5 @@
 // services/service.js
-
+// Development
 const CACHE_NAME = 'jason-portfolio-v2';
 const FILES_TO_CACHE = [
   '/',
