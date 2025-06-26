@@ -29,7 +29,8 @@ function loadComponent(name) {
       renderComponent(cleanHTML, name);
     })
     .catch(err => {
-      console.error(err);
+      console.error("Router fetch error:", err);
+
       if (!navigator.onLine) {
         showOffline(name);
       } else {
@@ -100,7 +101,6 @@ function initRouter() {
     loadComponent(getCurrentHashRoute());
   });
 
-  // Toast on network changes
   window.addEventListener("online", () => {
     showToast("<i class='bi bi-wifi'></i> You are back online.", {
       type: "info"

@@ -2,22 +2,21 @@
 
 import { initTheme, setupThemeToggle } from './public/theme.js';
 import { highlightActiveLink } from './routes/routerLink.js';
+import { setupInstallPrompt } from './common/installPrompt.js';
 
-// Initialize theme and setup listeners on load
 document.addEventListener("DOMContentLoaded", () => {
   initTheme();
   setupThemeToggle();
-
-  // Initial nav highlight
   highlightActiveLink();
+  
+  setupInstallPrompt();
 
-  // Register Service Worker (services/service.js)
+  // ✅ Correct Service Worker registration at root
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-      navigator.serviceWorker.register('services/service.js')
-        .then(() => console.log('Service Worker registered'))
-        .catch(err => console.error('Service Worker error:', err)
-        );
+      navigator.serviceWorker.register('/service-worker.js')
+        .then(() => console.log('✅ Service Worker registered'))
+        .catch(err => console.error('❌ Service Worker registration failed:', err));
     });
   }
 });
