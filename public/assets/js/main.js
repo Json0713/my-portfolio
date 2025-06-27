@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
   
   setupInstallPrompt();
 
-  // ✅ Correct Service Worker registration at root
+  // Service Worker registration at root
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
       navigator.serviceWorker.register('/service-worker.js')
