@@ -1,104 +1,100 @@
 <!DOCTYPE html>
 <html lang="en" class="js-loading">
-<head>
-  <meta charset="UTF-8">
-  
-  <script>
-    (function () {
-      const savedTheme = localStorage.getItem("theme");
-      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      const theme = savedTheme || (prefersDark ? "dark" : "light");
-      document.documentElement.setAttribute("data-theme", theme);
-    })();
-  </script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="Jason B. - Frontend developer portfolio showcasing projects, skills, and contact info" />
+    <meta name="keywords" content="developer, portfolio, JavaScript, HTML, CSS, GitHub" />
+    <meta name="theme-color" content="#00ffc3" />
+    <meta property="og:title" content="Jason B. | Developer Portfolio" />
+    <meta property="og:description" content="Explore the portfolio of Jason B., Software | Frontend Developer building web solutions." />
+    <meta property="og:image" content="https://my-portfolio-web-j13.vercel.app/assets/images/portfolio-landscape-link-meta-view.jpg" />
+    <meta property="og:type" content="website" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="description" content="Jason B. - Frontend developer portfolio showcasing projects, skills, and contact info">
-  <meta name="keywords" content="developer, portfolio, JavaScript, HTML, CSS, GitHub">
-  <meta property="og:title" content="Jason B. | Developer Portfolio">
-  <meta property="og:description" content="Explore the portfolio of Jason B., Software | Frontend Developer building web solutions.">
-  <meta property="og:image" content="https://my-portfolio-web-j13.vercel.app/assets/images/portfolio-landscape-link-meta-view.jpg">
-  <meta name="theme-color" content="#00ffc3">
-  <meta property="og:type" content="website">
+    <title>Jason B. | Developer Portfolio</title>
 
-  <!-- Favicon Icons -->
-  <link rel="icon" type="image/png" href="favicon/favicon-96x96.png" sizes="96x96" />
-  <link rel="icon" type="image/svg+xml" href="favicon/favicon.svg" />
-  <link rel="shortcut icon" href="favicon/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png" />
-  <meta name="apple-mobile-web-app-title" content="MyPortfolio" />
-  
-  <title>Jason B. | Developer Portfolio</title>
+    <!-- Theme Initialization Script -->
+    <script>
+      (function () {
+        const savedTheme = localStorage.getItem("theme");
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const theme = savedTheme || (prefersDark ? "dark" : "light");
+        document.documentElement.setAttribute("data-theme", theme);
+      })();
+    </script>
 
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Favicon Icons -->
+    <link rel="icon" type="image/png" href="favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="favicon/favicon.svg" />
+    <link rel="shortcut icon" href="favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="MyPortfolio" />
 
-  <!-- Bootstrap 5.3.3 CSS -->
-  <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
 
-  <!-- Bootstrap Icons -->
-  <link href="assets/css/bootstrap-icons.css" rel="stylesheet">
+    <!-- CSS Libraries -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/css/bootstrap-icons.css" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/hero.css" />
 
-  <!-- Custom CSS -->
-  <link rel="stylesheet" href="assets/css/style.css">
-  <link rel="stylesheet" href="assets/css/hero.css">
-  <link rel="manifest" href="/manifest.json">
+    <link rel="manifest" href="/manifest.json" />
 
-  <!-- JavaScript Files -->
-  <script type="module" src="assets/js/router.js"></script>
-  <script type="module" src="assets/js/main.js"></script>
-  <script defer src="assets/js/hero.js"></script>
-</head>
-<body>
+    <!-- JavaScript Modules -->
+    <script type="module" src="assets/js/router.js"></script>
+    <script type="module" src="assets/js/main.js"></script>
+    
+  </head>
+  <body>
+    
+    <header class="site-header py-2 border-bottom sticky-top">
+      <div class="container d-flex justify-content-between align-items-center">
+        <a class="navbar-brand text-accent fw-bold fs-4" href="#hero">Jason</a>
 
-  <header class="site-header py-2 border-bottom sticky-top">
-    <div class="container d-flex justify-content-between align-items-center">
-      <a class="navbar-brand text-accent fw-bold fs-4" href="#hero">Jason</a>
-
-      <!-- Theme Toggle Switch -->
-      <div class="theme-switch d-flex align-items-center gap-2">
-        <label class="switch">
-          <input type="checkbox" id="theme-toggle">
-          <span class="slider round"></span>
-        </label>
+        <div class="theme-switch d-flex align-items-center gap-2">
+          <label class="switch">
+            <input type="checkbox" id="theme-toggle" />
+            <span class="slider round"></span>
+          </label>
+        </div>
       </div>
-    </div>
-  </header>
+    </header>
 
-  <nav class="main-nav py-2 border-bottom overflow-auto" role="navigation">
-    <div class="container d-flex justify-content-start justify-content-md-center flex-nowrap gap-3">
-      <a class="btn btn-outline-light flex-shrink-0" href="#hero" aria-label="Navigate to Home section">Home</a>
-      <a class="btn btn-outline-light flex-shrink-0" href="#about" aria-label="Navigate to About section">About</a>
-      <a class="btn btn-outline-light flex-shrink-0" href="#projects" aria-label="Navigate to Project section">Projects</a>
-      <a class="btn btn-outline-light flex-shrink-0" href="#contact" aria-label="Navigate to Contact section">Contact</a>
-    </div>
-  </nav>
+    <nav class="main-nav py-2 border-bottom overflow-auto" role="navigation">
+      <div class="container d-flex justify-content-start justify-content-md-center flex-nowrap gap-3">
+        <a class="btn btn-outline-light flex-shrink-0" href="#hero" aria-label="Navigate to Home section">Home</a>
+        <a class="btn btn-outline-light flex-shrink-0" href="#about" aria-label="Navigate to About section">About</a>
+        <a class="btn btn-outline-light flex-shrink-0" href="#projects" aria-label="Navigate to Project section">Projects</a>
+        <a class="btn btn-outline-light flex-shrink-0" href="#contact" aria-label="Navigate to Contact section">Contact</a>
+      </div>
+    </nav>
 
-  <main id="app" class="container" role="main"></main>
+    <main id="app" class="container" role="main"></main>
 
-  <footer class="site-footer text-center py-4 border-top">
-    <div class="container">
-      <p class="mb-1">&copy; 2025 Jason B. My Portfolio</p>
-      <small class="d-block">All rights reserved.</small>
-    </div>
-  </footer>
+    <footer class="site-footer text-center py-4 border-top">
+      <div class="container">
+        <p class="mb-1">&copy; 2025 Jason B. My Portfolio</p>
+        <small class="d-block">All rights reserved.</small>
+      </div>
+    </footer>
 
-  <!-- Bootstrap Bundle JS-->
-  <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <!-- JS Bundle -->
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
 
-  <!-- Register service worker -->
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/service-worker.js')
-          .then(reg => console.log('Service Worker registered:', reg.scope))
-          .catch(err => console.error('Service Worker registration failed:', err));
-      });
-    }
-  </script>
-
-</body>
+    <!-- Service Worker Registration -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/service-worker.js')
+            .then(reg => console.log('Service Worker registered:', reg.scope))
+            .catch(err => console.error('Service Worker registration failed:', err));
+        });
+      }
+    </script>
+    
+  </body>
 </html>
