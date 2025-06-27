@@ -1,5 +1,5 @@
 // assets/js/main.js
-
+// test pwa-preview
 import { initTheme, setupThemeToggle } from './public/theme.js';
 import { highlightActiveLink } from './routes/routerLink.js';
 import { setupInstallPrompt } from './common/installPrompt.js';
