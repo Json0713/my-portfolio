@@ -1,12 +1,6 @@
 {
   "name": "MyPortfolio Website",
   "short_name": "Myportfolio",
-  "start_url": "/",
-  "scope": "/",
-  "display": "standalone",
-  "orientation": "portrait",
-  "background_color": "#10262b",
-  "theme_color": "#00ffc3",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",
@@ -20,5 +14,8 @@
       "type": "image/png",
       "purpose": "maskable"
     }
-  ]
+  ],
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff",
+  "display": "standalone"
 }
