@@ -29,7 +29,7 @@
 /public
 ├── index.html                       # SPA entry point
 ├── manifest.json                    # PWA metadata
-├── service-worker.js               # Service Worker (must be here!)
+├── service-worker.js               # Service Worker
 ├── src/
 │   └── pages/                       # HTML fragments for SPA routes
 │       ├── hero.html
@@ -111,7 +111,7 @@ You can host on:
 Ensure the following are in place:
 - `manifest.json` linked in `<head>`
 - `<script>` to register Service Worker with scope `/`
-- All local assets precached in `service.js`
+- All local assets precached in `service-worker.js`
 
 ---
 
