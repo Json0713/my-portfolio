@@ -1,12 +1,13 @@
 {
   "name": "MyPortfolio Website",
   "short_name": "Myportfolio",
+  "description": "Jason B., Software | Frontend Developer Web Architecture",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#10262b",
-  "theme_color": "#00ffc3",
+  "theme_color": "#1a3a3f",
   "icons": [
     {
       "src": "favicon/web-app-manifest-192x192.png",
@@ -20,5 +21,7 @@
       "type": "image/png",
       "purpose": "any maskable"
     }
-  ]
+  ],
+  
+  "lang": "en"
 }
