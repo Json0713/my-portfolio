@@ -29,9 +29,7 @@
 /public
 ├── index.html                       # SPA entry point
 ├── manifest.json                    # PWA metadata
-├── service-worker.js               # Service Worker
-├── favicon/  
-│   └── #icons are place here like png, svg, favico etc.
+├── service-worker.js               # Service Worker (must be here!)
 ├── src/
 │   └── pages/                       # HTML fragments for SPA routes
 │       ├── hero.html
@@ -56,7 +54,7 @@
 │   │   ├── common/
 │   │   │   ├── toast.js
 │   │   │   ├── loader.js
-│   │   │   └── installPrompt.js     # prompt shows to the page as install UI for users 
+│   │   │   └── installPrompt.js
 │   │   ├── response/
 │   │   │   ├── offline.js
 │   │   │   └── error.js
@@ -113,7 +111,7 @@ You can host on:
 Ensure the following are in place:
 - `manifest.json` linked in `<head>`
 - `<script>` to register Service Worker with scope `/`
-- All local assets precached in `service-worker.js`
+- All local assets precached in `service.js`
 
 ---
 

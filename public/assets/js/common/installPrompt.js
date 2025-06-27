@@ -1,24 +1,15 @@
 // assets/js/common/installPrompt.js
 
-import { showToast } from './toast.js';
-
 let deferredPrompt = null;
-let modalTimeout = null;
 
 export function setupInstallPrompt() {
   window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
-    if (deferredPrompt) return;
     deferredPrompt = e;
+    console.log('[PWA] beforeinstallprompt event captured');
 
-    const dismissedAt = sessionStorage.getItem('installDismissedAt');
-    const now = Date.now();
-
-    if (!dismissedAt || now - parseInt(dismissedAt) > 60000) {
-      showInstallModal();
-    } else {
-      scheduleToastFallback();
-    }
+    // Show install modal automatically on fresh prompt
+    showInstallModal();
   });
 }
 
@@ -46,7 +37,6 @@ function showInstallModal() {
       </div>
     </div>
   `;
-
   document.body.appendChild(modal);
 
   document.getElementById('install-now')?.addEventListener('click', async () => {
@@ -60,41 +50,6 @@ function showInstallModal() {
 
   document.getElementById('dismiss-install')?.addEventListener('click', () => {
     modal.remove();
-    sessionStorage.setItem('installDismissedAt', Date.now().toString());
-    scheduleToastFallback();
-  });
-}
-
-function scheduleToastFallback() {
-  if (modalTimeout) clearTimeout(modalTimeout);
-  modalTimeout = setTimeout(() => {
-    if (!deferredPrompt) return;
-    showToast(`<i class='bi bi-download'></i> <strong>Install this app?</strong>`, {
-      type: 'info',
-      actionText: 'Install',
-      onAction: async () => {
-        deferredPrompt.prompt();
-        const { outcome } = await deferredPrompt.userChoice;
-        console.log(`[PWA] User response to install (toast): ${outcome}`);
-        deferredPrompt = null;
-      }
-    });
-  }, 60000); // 60s delay
-}
-
-// NEW: Update Available Prompt
-export function setupUpdatePrompt(registration) {
-  if (!registration || !registration.waiting) return;
-
-  showToast(`<i class='bi bi-arrow-clockwise'></i> <strong>New update available</strong>`, {
-    type: 'info',
-    actionText: 'Refresh',
-    onAction: () => {
-      registration.waiting.postMessage({ type: 'SKIP_WAITING' });
-    }
-  });
-
-  navigator.serviceWorker.addEventListener('controllerchange', () => {
-    window.location.reload();
+    deferredPrompt = null;
   });
 }

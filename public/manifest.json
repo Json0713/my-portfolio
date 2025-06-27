@@ -1,27 +1,22 @@
 {
-  "name": "MyPortfolio Website",
-  "short_name": "Myportfolio",
-  "description": "Jason B., Software | Frontend Developer Web Architecture",
+  "name": "Jason B. Portfolio",
+  "short_name": "JasonB",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#10262b",
-  "theme_color": "#1a3a3f",
+  "theme_color": "#00ffc3",
   "icons": [
     {
-      "src": "favicon/web-app-manifest-192x192.png",
+      "src": "assets/images/dark-portfolio-profile-picture.jpeg",
       "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
+      "type": "image/jpeg"
     },
     {
-      "src": "favicon/web-app-manifest-512x512.png",
+      "src": "assets/images/dark-portfolio-profile-picture.jpeg",
       "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
+      "type": "image/jpeg"
     }
-  ],
-  
-  "lang": "en"
+  ]
 }
