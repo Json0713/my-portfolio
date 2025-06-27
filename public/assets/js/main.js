@@ -1,5 +1,5 @@
 // assets/js/main.js
-// test pwa-preview
+
 import { initTheme, setupThemeToggle } from './public/theme.js';
 import { highlightActiveLink } from './routes/routerLink.js';
 import { setupInstallPrompt } from './common/installPrompt.js';
@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
   
   setupInstallPrompt();
 
-  // ✅ Correct Service Worker registration at root
+  // Service Worker registration at root
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
       navigator.serviceWorker.register('/service-worker.js')
