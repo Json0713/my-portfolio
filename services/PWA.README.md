@@ -30,6 +30,8 @@
 ├── index.html                       # SPA entry point
 ├── manifest.json                    # PWA metadata
 ├── service-worker.js               # Service Worker
+├── favicon/  
+│   └── #icons are place here like png, svg, favico etc.
 ├── src/
 │   └── pages/                       # HTML fragments for SPA routes
 │       ├── hero.html
@@ -54,7 +56,7 @@
 │   │   ├── common/
 │   │   │   ├── toast.js
 │   │   │   ├── loader.js
-│   │   │   └── installPrompt.js
+│   │   │   └── installPrompt.js     # prompt shows to the page as install UI for users 
 │   │   ├── response/
 │   │   │   ├── offline.js
 │   │   │   └── error.js
