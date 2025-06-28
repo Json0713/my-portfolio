@@ -1,0 +1,122 @@
+/* /assets/css/smart-install.css */
+
+/* === Smart Install Panel === */
+.install-panel {
+  position: fixed;
+  top: 50%;
+  left: 0;
+  transform: translate(-100%, -50%);
+  background: var(--bg-dark, #1a1a1a);
+  color: var(--silver, #ccc);
+  border-right: 4px solid var(--accent, #0d6efd);
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.3);
+  padding: 1rem;
+  z-index: 9999;
+  max-width: 280px;
+  width: 85vw;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  border-radius: 0 8px 8px 0;
+  transition: transform 0.3s ease;
+}
+
+.install-panel.visible {
+  transform: translate(0, -50%);
+}
+
+.install-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.install-close {
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  color: var(--silver, #ccc);
+  cursor: pointer;
+}
+
+/* === Handle === */
+.install-handle {
+  position: fixed;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  background: var(--accent, #0d6efd);
+  border-radius: 0 6px 6px 0;
+  padding: 0.25rem 0.4rem;
+  z-index: 9998;
+  cursor: pointer;
+  color: white;
+  height: 60px;
+  display: flex;
+  align-items: center;
+}
+
+/* === Progress Bar === */
+.progress-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.progress {
+  width: 100%;
+  height: 6px;
+  background-color: #333;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0%;
+  background-color: var(--accent, #0d6efd);
+  transition: width 0.4s ease;
+}
+
+.progress-status {
+  font-size: 0.8rem;
+  color: var(--silver, #ccc);
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* === Retry Button === */
+#retry-btn {
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  padding: 0.4rem 0.75rem;
+  font-size: 0.9rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#retry-btn:hover {
+  background-color: #5a6268;
+}
+
+/* === Mobile Support === */
+@media (max-width: 480px) {
+  .install-panel {
+    top: auto;
+    bottom: 0;
+    transform: translateX(-100%);
+    border-radius: 0 6px 6px 0;
+  }
+
+  .install-panel.visible {
+    transform: translateX(0);
+  }
+
+  .install-handle {
+    top: auto;
+    bottom: 40px;
+  }
+}

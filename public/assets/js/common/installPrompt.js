@@ -1,7 +1,13 @@
 // assets/js/common/installPrompt.js
+// refined for deployment
 
-import { setupSmartInstallPanel } from './smartInstallPanel.js';
+import { setupSmartInstallUI } from './smartInstallPanel.js';
+import { setupInstallState } from './installState.js';
 
 export function setupInstallPrompt() {
-  setupSmartInstallPanel();
+  // Initialize shared state and install logic
+  setupInstallState();
+
+  // Initialize install UI panel
+  setupSmartInstallUI();
 }

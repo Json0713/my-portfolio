@@ -1,86 +1,58 @@
 // assets/js/common/smartInstallPanel.js
 
-let deferredPrompt = null;
-let panelVisible = false;
+import {
+  clearDeferredPrompt,
+  isStandaloneMode,
+  shouldShowPanel,
+  setPanelVisible,
+  isPanelVisible,
+  restorePanelState,
+  autoClosePanel,
+  cancelAutoClose,
+  setupInstallState,
+  isPromptAvailable,
+} from './installState.js';
+
 let dragStartX = 0;
 
-export function setupSmartInstallPanel() {
-  if (isStandaloneMode()) return;
+export function setupSmartInstallUI() {
+  if (isStandaloneMode() || !shouldShowPanel()) return;
 
-  window.addEventListener("beforeinstallprompt", (e) => {
-    e.preventDefault();
-    deferredPrompt = e;
-
-    if (!document.getElementById("smart-panel")) {
-      createInstallUI();
+  setupInstallState((deferredPrompt) => {
+    if (!document.getElementById('smart-panel')) {
+      createInstallUI(deferredPrompt);
     }
   });
 }
 
-function isStandaloneMode() {
-  return (
-    window.matchMedia("(display-mode: standalone)").matches ||
-    window.navigator.standalone === true
-  );
-}
-
-function createInstallUI() {
-  const container = document.createElement("div");
-  container.id = "smart-panel";
-  container.style.cssText = `
-    position: fixed;
-    top: 50%;
-    left: 0;
-    transform: translate(-100%, -50%);
-    background: var(--bg-dark);
-    color: var(--silver);
-    border-right: 4px solid var(--accent);
-    box-shadow: 2px 0 8px rgba(0,0,0,0.3);
-    padding: 1rem;
-    z-index: 9999;
-    max-width: 260px;
-    width: 85vw;
-    transition: transform 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    border-radius: 0 8px 8px 0;
-    pointer-events: auto;
-  `;
+function createInstallUI(deferredPrompt) {
+  const container = document.createElement('div');
+  container.id = 'smart-panel';
+  container.className = 'install-panel';
+  container.setAttribute('role', 'dialog');
+  container.setAttribute('aria-labelledby', 'panel-title');
+  container.setAttribute('aria-modal', 'true');
 
   container.innerHTML = `
-    <div id="panel-header" style="display:flex;justify-content:space-between;align-items:center;">
+    <div id="panel-header" class="install-header">
       <strong id="panel-title">Install this app</strong>
-      <button id="panel-close" style="background:none;border:none;font-size:1.25rem;color:var(--silver);">&times;</button>
+      <button id="panel-close" class="install-close" aria-label="Close">&times;</button>
     </div>
     <div id="panel-actions">
       <button id="install-btn" class="btn btn-sm btn-success">Install</button>
+      <button id="retry-btn" class="btn btn-sm btn-secondary hidden">Retry</button>
     </div>
-    <div id="progress-container" style="display:none;">
-      <div class="progress" style="height: 6px; background: #333;">
-        <div id="progress-bar" class="progress-bar" style="width: 0%; background: var(--accent);"></div>
+    <div id="progress-container" class="progress-wrapper hidden">
+      <div class="progress">
+        <div id="progress-bar" class="progress-bar"></div>
       </div>
-      <div id="progress-status" style="font-size: 0.8rem; color: var(--silver); margin-top: 0.25rem;"></div>
+      <div id="progress-status" class="progress-status"></div>
     </div>
   `;
 
-  const handle = document.createElement("div");
-  handle.id = "panel-handle";
-  handle.style.cssText = `
-    position: fixed;
-    top: 50%;
-    left: 0;
-    transform: translateY(-50%);
-    background: var(--accent);
-    border-radius: 0 6px 6px 0;
-    padding: 0.25rem 0.4rem;
-    z-index: 9998;
-    cursor: pointer;
-    color: white;
-    height: 60px;
-    display: flex;
-    align-items: center;
-  `;
+  const handle = document.createElement('div');
+  handle.id = 'panel-handle';
+  handle.className = 'install-handle';
   handle.innerHTML = `<i class="bi bi-chevron-double-right"></i>`;
 
   document.body.appendChild(container);
@@ -88,74 +60,85 @@ function createInstallUI() {
 
   restorePanelState(container);
 
-  handle.addEventListener("click", () => togglePanel(container));
-  handle.addEventListener("touchstart", e => dragStartX = e.touches[0].clientX);
-  handle.addEventListener("touchmove", e => {
+  handle.addEventListener('click', () => togglePanel(container));
+  handle.addEventListener('touchstart', (e) => (dragStartX = e.touches[0].clientX));
+  handle.addEventListener('touchmove', (e) => {
     const dx = e.touches[0].clientX - dragStartX;
     if (dx > 40) togglePanel(container);
   });
 
-  document.getElementById("panel-close")?.addEventListener("click", () => {
-    panelVisible = false;
-    container.style.transform = "translate(-100%, -50%)";
-    localStorage.setItem("smartPanel:visible", "false");
+  document.getElementById('panel-close')?.addEventListener('click', () => {
+    container.classList.remove('visible');
+    setPanelVisible(false);
   });
 
-  document.getElementById("install-btn")?.addEventListener("click", async () => {
-    if (!deferredPrompt) return;
+  const installBtn = document.getElementById('install-btn');
+  const retryBtn = document.getElementById('retry-btn');
+  const progressWrap = document.getElementById('progress-container');
+  const bar = document.getElementById('progress-bar');
+  const status = document.getElementById('progress-status');
 
-    const progressWrap = document.getElementById("progress-container");
-    const bar = document.getElementById("progress-bar");
-    const status = document.getElementById("progress-status");
-
-    progressWrap.style.display = "block";
-    status.textContent = "Installing...";
-
-    let progress = 0;
-    const interval = setInterval(() => {
-      progress = Math.min(progress + Math.random() * 8, 90);
-      bar.style.width = `${progress}%`;
-    }, 300);
+  async function triggerInstall() {
+    installBtn.disabled = true;
+    status.textContent = 'Waiting for confirmation...';
 
     deferredPrompt.prompt();
     const { outcome } = await deferredPrompt.userChoice;
-    clearInterval(interval);
-    deferredPrompt = null;
 
-    if (outcome === "accepted") {
-      bar.style.width = "100%";
-      status.textContent = "Installation was ready!";
+    if (outcome === 'accepted') {
+      progressWrap.classList.remove('hidden');
+      status.textContent = 'Installing...';
+      let progress = 0;
+      const interval = setInterval(() => {
+        progress = Math.min(progress + Math.random() * 4, 99);
+        bar.style.width = `${progress}%`;
+      }, 200);
+
       setTimeout(() => {
-        container.remove();
-        handle.remove();
-      }, 4000);
+        clearInterval(interval);
+        bar.style.width = '100%';
+        status.textContent = 'Installation successful!';
+        setTimeout(() => {
+          container.remove();
+          handle.remove();
+        }, 3000);
+      }, 3000);
+
+    } else {
+      installBtn.classList.add('hidden');
+      retryBtn.classList.remove('hidden');
+      progressWrap.classList.add('hidden');
+      bar.style.width = '0%';
+      status.textContent = 'Installation dismissed. Please refresh to retry.';
+    }
+
+    clearDeferredPrompt();
+  }
+
+  installBtn?.addEventListener('click', triggerInstall);
+
+  retryBtn?.addEventListener('click', () => {
+    window.location.reload();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      container.classList.remove('visible');
+      setPanelVisible(false);
     }
   });
 }
 
 function togglePanel(panel) {
-  if (panelVisible) {
-    panel.style.transform = "translate(-100%, -50%)";
-    panelVisible = false;
-    localStorage.setItem("smartPanel:visible", "false");
+  if (isPanelVisible()) {
+    panel.classList.remove('visible');
+    setPanelVisible(false);
+    cancelAutoClose();
   } else {
-    panel.style.transform = "translate(0, -50%)";
-    panelVisible = true;
-    localStorage.setItem("smartPanel:visible", "true");
-    setTimeout(() => {
-      if (panelVisible) {
-        panel.style.transform = "translate(-100%, -50%)";
-        panelVisible = false;
-        localStorage.setItem("smartPanel:visible", "false");
-      }
-    }, 45000);
-  }
-}
-
-function restorePanelState(panel) {
-  const state = localStorage.getItem("smartPanel:visible");
-  if (state === "true") {
-    panel.style.transform = "translate(0, -50%)";
-    panelVisible = true;
+    panel.classList.add('visible');
+    setPanelVisible(true);
+    autoClosePanel(() => {
+      panel.classList.remove('visible');
+    });
   }
 }
