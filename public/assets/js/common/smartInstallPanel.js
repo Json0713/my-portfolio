@@ -124,7 +124,7 @@ function createInstallUI() {
 
     if (outcome === "accepted") {
       bar.style.width = "100%";
-      status.textContent = "Installation App was ready!";
+      status.textContent = "Installation was ready!";
       setTimeout(() => {
         container.remove();
         handle.remove();
