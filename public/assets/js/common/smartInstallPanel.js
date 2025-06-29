@@ -117,8 +117,8 @@ function createInstallUI(deferredPrompt) {
         setTimeout(() => {
           container.remove();
           handle.remove();
-        }, 8000);
-      }, 5000);
+        }, 2000);
+      }, 4000);
 
     } else {
       container.classList.remove('visible');
