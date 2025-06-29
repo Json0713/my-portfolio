@@ -56,7 +56,7 @@ function createInstallUI(deferredPrompt) {
   const handle = document.createElement('div');
   handle.id = 'panel-handle';
   handle.className = 'install-handle';
-  handle.innerHTML = `<i class="bi bi-chevron-double-right h-50"></i>`;
+  handle.innerHTML = `<i class="bi bi-chevron-double-right"></i>`;
 
   document.body.appendChild(container);
   document.body.appendChild(handle);
@@ -98,7 +98,7 @@ function createInstallUI(deferredPrompt) {
 
     if (outcome === 'accepted') {
       progressWrap.classList.remove('hidden');
-      status.textContent = 'Installing... Please wait';
+      status.textContent = 'Please wait...';
       let progress = 0;
       const interval = setInterval(() => {
         progress = Math.min(progress + Math.random() * 4, 99);
@@ -117,8 +117,8 @@ function createInstallUI(deferredPrompt) {
         setTimeout(() => {
           container.remove();
           handle.remove();
-        }, 3000);
-      }, 9000);
+        }, 8000);
+      }, 5000);
 
     } else {
       container.classList.remove('visible');
