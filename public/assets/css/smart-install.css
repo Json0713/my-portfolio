@@ -59,17 +59,12 @@
   transform: translateY(-50%);
   background: var(--bg-abyss-zone, #0d6efd);
   border-radius: 0 6px 6px 0;
-/*   padding: 0.5rem 0.1rem; */
   z-index: 9998;
   cursor: pointer;
   color: white;
   height: 70px;
   display: flex;
   align-items: center;
-  
-  i {
-    height: 100px;
-  }
 }
 
 /* === Progress Bar === */
