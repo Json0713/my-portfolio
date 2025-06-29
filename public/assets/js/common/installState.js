@@ -81,3 +81,7 @@ export function autoClosePanel(callback, delay = 45000) {
 export function cancelAutoClose() {
   clearTimeout(autoCloseTimeout);
 }
+
+export function isOnline() {
+  return navigator.onLine;
+}

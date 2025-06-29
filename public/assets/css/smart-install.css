@@ -21,6 +21,18 @@
   transition: transform 0.3s ease;
 }
 
+.install-handle {
+  opacity: 0.3;
+  transition: opacity 0.3s ease;
+}
+
+.install-handle:hover,
+.install-handle:focus,
+.install-handle:active {
+  opacity: 1;
+}
+
+
 .install-panel.visible {
   transform: translate(0, -50%);
 }
@@ -34,7 +46,7 @@
 .install-close {
   background: none;
   border: none;
-  font-size: 1.45rem;
+  font-size: 1.25rem;
   color: var(--silver, #ccc);
   cursor: pointer;
 }
@@ -45,13 +57,13 @@
   top: 50%;
   left: 0;
   transform: translateY(-50%);
-  background: #1a3a3f;
+  background: var(--accent, #0d6efd);
   border-radius: 0 6px 6px 0;
   padding: 0.25rem 0.4rem;
   z-index: 9998;
   cursor: pointer;
   color: white;
-  height: 100px;
+  height: 60px;
   display: flex;
   align-items: center;
 }
@@ -94,7 +106,7 @@
   border: none;
   padding: 0.4rem 0.75rem;
   font-size: 0.9rem;
-  border-radius: 12px;
+  border-radius: 4px;
   cursor: pointer;
 }
 

@@ -11,7 +11,10 @@ import {
   cancelAutoClose,
   setupInstallState,
   isPromptAvailable,
+  isOnline,
 } from './installState.js';
+
+import { showToast } from './toast.js';
 
 let dragStartX = 0;
 
@@ -40,9 +43,9 @@ function createInstallUI(deferredPrompt) {
     </div>
     <div id="panel-actions">
       <button id="install-btn" class="btn btn-sm btn-success">Install</button>
-      <button id="retry-btn" class="btn btn-sm btn-secondary hidden">Retry</button>
+      <button id="retry-btn" class="btn btn-sm btn-secondary hidden">Try Again</button>
     </div>
-    <div id="progress-container" class="progress-wrapper hidden">
+    <div id="progress-container" class="progress-wrapper hidden" aria-live="polite">
       <div class="progress">
         <div id="progress-bar" class="progress-bar"></div>
       </div>
@@ -79,15 +82,22 @@ function createInstallUI(deferredPrompt) {
   const status = document.getElementById('progress-status');
 
   async function triggerInstall() {
+    if (!isOnline()) {
+      showToast("<i class='bi bi-wifi-off'></i> You are offline. Please connect to the internet and try again.", {
+        type: 'warning'
+      });
+      return;
+    }
+
     installBtn.disabled = true;
-    status.textContent = 'Waiting for confirmation...';
+    status.textContent = 'Confirm in the browser popup...';
 
     deferredPrompt.prompt();
     const { outcome } = await deferredPrompt.userChoice;
 
     if (outcome === 'accepted') {
       progressWrap.classList.remove('hidden');
-      status.textContent = 'Installing...';
+      status.textContent = 'Installing... Please wait';
       let progress = 0;
       const interval = setInterval(() => {
         progress = Math.min(progress + Math.random() * 4, 99);
@@ -103,13 +113,15 @@ function createInstallUI(deferredPrompt) {
           handle.remove();
         }, 3000);
       }, 3000);
-
     } else {
-      installBtn.classList.add('hidden');
+      container.classList.remove('visible');
+      setPanelVisible(false);
       retryBtn.classList.remove('hidden');
+      installBtn.classList.add('hidden');
+      installBtn.disabled = false;
       progressWrap.classList.add('hidden');
       bar.style.width = '0%';
-      status.textContent = 'Installation dismissed. Please refresh to retry.';
+      status.textContent = 'Installation dismissed. Please retry.';
     }
 
     clearDeferredPrompt();
