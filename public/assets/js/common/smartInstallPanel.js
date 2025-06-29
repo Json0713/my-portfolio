@@ -43,7 +43,7 @@ function createInstallUI(deferredPrompt) {
     </div>
     <div id="panel-actions">
       <button id="install-btn" class="btn btn-sm btn-success">Install</button>
-      <button id="retry-btn" class="btn btn-sm btn-secondary hidden">Try Again</button>
+      <button id="retry-btn" class="btn btn-sm btn-secondary hidden">Retry</button>
     </div>
     <div id="progress-container" class="progress-wrapper hidden" aria-live="polite">
       <div class="progress">
