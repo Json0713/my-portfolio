@@ -56,7 +56,7 @@ function createInstallUI(deferredPrompt) {
   const handle = document.createElement('div');
   handle.id = 'panel-handle';
   handle.className = 'install-handle';
-  handle.innerHTML = `<i class="bi bi-chevron-double-right"></i>`;
+  handle.innerHTML = `<i class="bi bi-chevron-double-right h-50"></i>`;
 
   document.body.appendChild(container);
   document.body.appendChild(handle);
@@ -108,17 +108,17 @@ function createInstallUI(deferredPrompt) {
       setTimeout(() => {
         clearInterval(interval);
         bar.style.width = '100%';
-        status.textContent = 'Installation successful!';
+        status.textContent = 'Installation is Ready!';
 
-        showToast("<i class='bi bi-check-circle'></i> Application is installed.", {
-          type: 'success'
+        showToast("<i class='bi bi-check-circle'></i> Downloading...", {
+          type: 'info'
         });
 
         setTimeout(() => {
           container.remove();
           handle.remove();
         }, 3000);
-      }, 3000);
+      }, 9000);
 
     } else {
       container.classList.remove('visible');
