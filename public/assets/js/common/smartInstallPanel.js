@@ -90,6 +90,7 @@ function createInstallUI(deferredPrompt) {
     }
 
     installBtn.disabled = true;
+    installBtn.classList.add('hidden');
     status.textContent = 'Confirm in the browser popup...';
 
     deferredPrompt.prompt();
@@ -108,11 +109,17 @@ function createInstallUI(deferredPrompt) {
         clearInterval(interval);
         bar.style.width = '100%';
         status.textContent = 'Installation successful!';
+
+        showToast("<i class='bi bi-check-circle'></i> Application is installed.", {
+          type: 'success'
+        });
+
         setTimeout(() => {
           container.remove();
           handle.remove();
         }, 3000);
       }, 3000);
+
     } else {
       container.classList.remove('visible');
       setPanelVisible(false);
