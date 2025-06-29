@@ -34,7 +34,7 @@
 .install-close {
   background: none;
   border: none;
-  font-size: 2.25rem;
+  font-size: 1.45rem;
   color: var(--silver, #ccc);
   cursor: pointer;
 }
@@ -45,7 +45,7 @@
   top: 50%;
   left: 0;
   transform: translateY(-50%);
-  background: var( #1a3a3f);
+  background: #1a3a3f;
   border-radius: 0 6px 6px 0;
   padding: 0.25rem 0.4rem;
   z-index: 9998;
