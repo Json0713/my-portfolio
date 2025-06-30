@@ -1,3 +1,5 @@
+/* hero.css */
+
 .hero-section {
   min-height: 100vh;
   display: flex;
@@ -5,25 +7,26 @@
   justify-content: center;
   position: relative;
   background-color: transparent;
-  overflow-x: hidden;
+  overflow: hidden;
+  padding-top: 4rem;
 }
 
 .hero-section .container {
-  z-index: 1;
   max-width: 960px;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  z-index: 1;
 }
 
 #hero-avatar {
   width: 140px;
   height: 140px;
-  margin-top: 60px;
   object-fit: cover;
   border-radius: 50%;
-  box-shadow: 0 0 0 4.5px var(--accent);
-  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  box-shadow: 0 0 0 4px var(--accent);
   opacity: 0;
-  animation: fadeIn 0.6s ease-out forwards;
+  animation: heroFadeIn 0.6s ease forwards;
+  transition: transform 0.3s ease;
+  margin-bottom: 1rem;
 }
 
 #hero-avatar:hover {
@@ -33,101 +36,81 @@
 .text-theme {
   color: var(--text-light);
 }
-
 [data-theme="light"] .text-theme {
   color: var(--text-dark);
 }
 
-.animate-slide-in {
+.hero-slide-in {
   opacity: 0;
-  transform: translateY(-30px);
-  animation: slideIn 0.7s ease-out forwards;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-.animate-fade-in {
+.hero-fade-in {
   opacity: 0;
-  animation: fadeIn 1s ease-out forwards;
-  animation-delay: 0.3s;
+  transition: opacity 0.8s ease;
 }
 
-.animate-zoom-in {
+.hero-zoom-in {
   opacity: 0;
-  transform: scale(0.8);
-  animation: zoomIn 0.5s ease-out forwards;
-  animation-delay: 0.5s;
+  transform: scale(0.9);
+  transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
-.animate-typing {
+.hero-typing {
   border-right: 2px solid var(--accent);
   white-space: nowrap;
   overflow: hidden;
   width: 0;
-  animation: typing 3s steps(30, end) forwards, blink 0.75s step-end infinite;
+  animation: heroTyping 2.5s steps(30, end) forwards;
 }
 
-.hero-extension-section {
-  background-color: transparent;
+.cursor {
+  color: var(--accent);
+  animation: heroBlink 0.7s step-end infinite;
 }
 
-.transition-fade {
-  opacity: 0;
-  animation: fadeIn 1.2s ease-in-out forwards;
+.accent-hover {
+  transition: all 0.3s ease-in-out;
+  border-radius: 8px;
 }
 
-.border-accent {
-  border-color: var(--accent) !important;
+.accent-hover:hover {
+  box-shadow: 0 0 0 2px var(--accent), 0 0 10px rgba(var(--accent-rgb), 0.5);
+  transform: scale(1.08);
+  z-index: 2;
 }
 
-.fade-out {
-  opacity: 0;
+.hero-marquee {
+  overflow: hidden;
+  margin-top: 2rem;
 }
 
-.fade-in {
-  opacity: 1;
-}
-
-.about-me-list li {
-  margin-bottom: 1rem;
+.marquee-track {
   display: flex;
+  gap: 1.5rem;
+  animation: heroMarqueeScroll 30s linear infinite;
   align-items: center;
-  font-size: 1.05rem;
+  will-change: transform;
 }
 
-@keyframes slideIn {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.tech-icon {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
 }
 
-@keyframes fadeIn {
-  to {
-    opacity: 1;
-  }
+.badge-stack {
+  padding-top: 3rem;
 }
 
-@keyframes zoomIn {
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+.badge-stack img {
+  margin: 0.5rem;
+  height: 28px;
 }
 
-@keyframes typing {
-  from { width: 0; }
-  to { width: 25ch; }
-}
-
-@keyframes blink {
-  0%, 100% { border-color: transparent; }
-  50% { border-color: var(--accent); }
-}
-
+/* Responsive */
 @media (max-width: 768px) {
-  .hero-section .container {
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-  }
   #hero-avatar {
     width: 100px;
     height: 100px;
@@ -138,13 +121,40 @@
   .lead {
     font-size: 1rem;
   }
-  .hero-bottom-content {
-    text-align: center;
+  .tech-icon {
+    width: 48px;
+    height: 48px;
   }
-  .hero-bottom-content .row > div {
-    margin-bottom: 2rem;
+  .badge-stack img {
+    height: 24px;
   }
-  .about-me-list li {
-    text-align: left;
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
+}
+
+/* Animations */
+@keyframes heroFadeIn {
+  to { opacity: 1; }
+}
+
+@keyframes heroTyping {
+  from { width: 0; }
+  to { width: 25ch; }
+}
+
+@keyframes heroBlink {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+
+@keyframes heroMarqueeScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
