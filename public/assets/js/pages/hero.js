@@ -1,30 +1,36 @@
-// assets/pages/hero.js – Refined, Lean, and Viewport-Aware
+// assets/pages/hero.js
 
 export function initHeroSection() {
-  // Trigger animations when elements enter viewport
+  // Animate elements on scroll
+  const animatedElements = document.querySelectorAll('[class*="hero-"]');
+
   const observer = new IntersectionObserver((entries, obs) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        entry.target.classList.add("fade-in");
-        entry.target.classList.remove(
-          ...Array.from(entry.target.classList).filter(cls => cls.startsWith("animate-"))
-        );
-        obs.unobserve(entry.target);
+        const el = entry.target;
+        el.classList.add("fade-in");
+        el.classList.remove(...[...el.classList].filter(cls => cls.startsWith("hero-")));
+        obs.unobserve(el);
       }
     });
-  }, { threshold: 0.15 });
+  }, { threshold: 0.1 });
 
-  document.querySelectorAll('[class*="animate-"]').forEach(el => observer.observe(el));
+  animatedElements.forEach(el => observer.observe(el));
 
-  // Typing animation for tagline
-  const typing = document.getElementById("typing-text");
-  if (typing) {
-    const fullText = typing.textContent.trim();
-    typing.textContent = "";
+  // Typing animation with blinking accent cursor
+  const typingText = document.getElementById("typing-text");
+  const cursor = typingText?.querySelector(".cursor");
+
+  if (typingText && cursor) {
+    const fullText = typingText.textContent.replace("|", "").trim();
+    typingText.textContent = "";
+    typingText.appendChild(cursor);
     let i = 0;
+
     const type = () => {
       if (i < fullText.length) {
-        typing.textContent += fullText[i++];
+        typingText.insertBefore(document.createTextNode(fullText.charAt(i)), cursor);
+        i++;
         setTimeout(type, 60);
       }
     };
