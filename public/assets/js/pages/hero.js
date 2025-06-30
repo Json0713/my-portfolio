@@ -1,4 +1,5 @@
 // assets/pages/hero.js
+// TESTING TO PRODUCTION
 
 export function initHeroSection() {
   const animatedEls = document.querySelectorAll('[class*="animate-"]');
