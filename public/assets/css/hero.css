@@ -1,4 +1,4 @@
-/* hero.css – Refined, Clean, and Modern Styles */
+/* hero.css */
 
 .hero-section {
   min-height: 100vh;
@@ -24,7 +24,7 @@
   border-radius: 50%;
   box-shadow: 0 0 0 4px var(--accent);
   opacity: 0;
-  animation: fadeIn 0.6s ease forwards;
+  animation: heroFadeIn 0.6s ease forwards;
   transition: transform 0.3s ease;
   margin-bottom: 1rem;
 }
@@ -40,35 +40,45 @@
   color: var(--text-dark);
 }
 
-/* Universal animation trigger */
-.fade-in {
-  opacity: 1 !important;
-  transform: none !important;
-}
-
-.animate-slide-in {
+.hero-slide-in {
   opacity: 0;
   transform: translateY(30px);
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-.animate-fade-in {
+.hero-fade-in {
   opacity: 0;
   transition: opacity 0.8s ease;
 }
 
-.animate-zoom-in {
+.hero-zoom-in {
   opacity: 0;
   transform: scale(0.9);
   transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
-.animate-typing {
+.hero-typing {
   border-right: 2px solid var(--accent);
   white-space: nowrap;
   overflow: hidden;
   width: 0;
-  animation: typing 2.5s steps(30, end) forwards, blink 0.7s step-end infinite;
+  animation: heroTyping 2.5s steps(30, end) forwards;
+}
+
+.cursor {
+  color: var(--accent);
+  animation: heroBlink 0.7s step-end infinite;
+}
+
+.accent-hover {
+  transition: all 0.3s ease-in-out;
+  border-radius: 8px;
+}
+
+.accent-hover:hover {
+  box-shadow: 0 0 0 2px var(--accent), 0 0 10px rgba(var(--accent-rgb), 0.5);
+  transform: scale(1.08);
+  z-index: 2;
 }
 
 .hero-marquee {
@@ -79,20 +89,15 @@
 .marquee-track {
   display: flex;
   gap: 1.5rem;
-  animation: marqueeScroll 30s linear infinite;
+  animation: heroMarqueeScroll 30s linear infinite;
   align-items: center;
+  will-change: transform;
 }
 
 .tech-icon {
   width: 60px;
   height: 60px;
-  border-radius: 10px;
   object-fit: cover;
-  transition: transform 0.3s ease;
-}
-
-.tech-icon:hover {
-  transform: scale(1.15);
 }
 
 .badge-stack {
@@ -104,7 +109,7 @@
   height: 28px;
 }
 
-/* Responsive Design */
+/* Responsive */
 @media (max-width: 768px) {
   #hero-avatar {
     width: 100px;
@@ -125,22 +130,31 @@
   }
 }
 
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 /* Animations */
-@keyframes fadeIn {
+@keyframes heroFadeIn {
   to { opacity: 1; }
 }
 
-@keyframes typing {
+@keyframes heroTyping {
   from { width: 0; }
   to { width: 25ch; }
 }
 
-@keyframes blink {
-  0%, 100% { border-color: transparent; }
-  50% { border-color: var(--accent); }
+@keyframes heroBlink {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
 }
 
-@keyframes marqueeScroll {
+@keyframes heroMarqueeScroll {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
