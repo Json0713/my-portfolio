@@ -5,6 +5,9 @@
   --bg-dark: #10262b;
   --bg-light: #e8f5f6;
   
+  --accent: #00ffc3;
+  --accent-rgb: 0, 255, 195;
+  
 /* Costum bg */
   --bg-dark-zone: #0a1a1f;
   --bg-light-zone: #cdd8dc;
