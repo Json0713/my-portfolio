@@ -5,6 +5,7 @@ import { show404 } from "./response/error.js";
 import { showOffline } from "./response/offline.js";
 import { showSpinner, hideSpinner } from "./common/loader.js";
 import { showToast } from "./common/toast.js";
+import { initHeroSection } from "./pages/hero.js";
 
 const app = document.getElementById("app");
 let componentRenderTimeout = null;
@@ -53,6 +54,12 @@ function renderComponent(html, name) {
     updatePageTitle(name);
     sessionStorage.removeItem("toast:404");
     loadComponentScript(name);
+
+    // 🧠 Custom logic after component renders
+    if (name === "hero") {
+      requestAnimationFrame(() => initHeroSection());
+    }
+
     hideSpinner();
   }, 200);
 }
