@@ -11,7 +11,7 @@ export function initHeroSection() {
         obs.unobserve(el);
       }
     });
-  }, { threshold: 0.1 });
+  }, { threshold: 0.15 });
 
   animatedEls.forEach(el => {
     if (!el.classList.contains("animate-in")) {
@@ -19,30 +19,45 @@ export function initHeroSection() {
     }
   });
 
-  // Typing animation with blinking cursor
+  // Typing animation with accent cursor + theme sync
   const typingText = document.getElementById("typing-text");
   const cursor = typingText?.querySelector(".cursor");
 
   if (typingText && cursor) {
-    const fullText = typingText.textContent.replace("|", "").trim();
+    const rawText = typingText.dataset.text?.trim() || "Software | Frontend Developer";
     typingText.textContent = "";
     typingText.appendChild(cursor);
     let i = 0;
 
-    const type = () => {
-      if (i < fullText.length) {
-        typingText.insertBefore(document.createTextNode(fullText.charAt(i)), cursor);
+    const typeChar = () => {
+      if (i < rawText.length) {
+        typingText.insertBefore(document.createTextNode(rawText.charAt(i)), cursor);
         i++;
-        setTimeout(type, 60);
+        setTimeout(typeChar, 70);
       }
     };
-    setTimeout(type, 300); // slight initial delay
+    setTimeout(typeChar, 300);
   }
 
-  // Marquee pause on hover
+  // Theme toggle fix for cursor visibility
+  const updateTypingTheme = () => {
+    const theme = document.documentElement.getAttribute("data-theme") || "dark";
+    const isLight = theme === "light";
+    if (cursor) {
+      cursor.style.color = getComputedStyle(document.documentElement)
+        .getPropertyValue("--accent").trim();
+    }
+  };
+
+  // Observe theme change for cursor
+  const themeObserver = new MutationObserver(updateTypingTheme);
+  themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+  updateTypingTheme();
+
+  // Marquee hover control
   const marquee = document.querySelector(".marquee-track");
   if (marquee) {
     marquee.addEventListener("mouseenter", () => marquee.style.animationPlayState = "paused");
     marquee.addEventListener("mouseleave", () => marquee.style.animationPlayState = "running");
   }
-} 
+}
