@@ -21,11 +21,6 @@
   --transition: 0.3s ease-in-out;
   --font-family: 'Poppins', sans-serif;
 
-  --success: #39ff14;
-  --danger: #ff073a;
-  --warning: #ffcc00;
-  --info: #00bfff;
-  --primary: #3f8efc;
   --gray: #6c757d;
   --silver: #c0c0c0;
 }

@@ -1,23 +1,25 @@
 // assets/pages/hero.js
 
 export function initHeroSection() {
-  // Animate elements on scroll
-  const animatedElements = document.querySelectorAll('[class*="hero-"]');
+  const animatedEls = document.querySelectorAll('[class*="animate-"]');
 
   const observer = new IntersectionObserver((entries, obs) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         const el = entry.target;
-        el.classList.add("fade-in");
-        el.classList.remove(...[...el.classList].filter(cls => cls.startsWith("hero-")));
+        el.classList.add("animate-in");
         obs.unobserve(el);
       }
     });
   }, { threshold: 0.1 });
 
-  animatedElements.forEach(el => observer.observe(el));
+  animatedEls.forEach(el => {
+    if (!el.classList.contains("animate-in")) {
+      observer.observe(el);
+    }
+  });
 
-  // Typing animation with blinking accent cursor
+  // Typing animation with blinking cursor
   const typingText = document.getElementById("typing-text");
   const cursor = typingText?.querySelector(".cursor");
 
@@ -34,7 +36,7 @@ export function initHeroSection() {
         setTimeout(type, 60);
       }
     };
-    type();
+    setTimeout(type, 300); // slight initial delay
   }
 
   // Marquee pause on hover
@@ -43,4 +45,4 @@ export function initHeroSection() {
     marquee.addEventListener("mouseenter", () => marquee.style.animationPlayState = "paused");
     marquee.addEventListener("mouseleave", () => marquee.style.animationPlayState = "running");
   }
-}
+} 
