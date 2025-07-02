@@ -1,4 +1,4 @@
-/* hero.css */
+/* assets/css/hero.css */
 
 .hero-section {
   min-height: 100vh;
@@ -87,6 +87,7 @@
 
 :root {
   --delay-step: 0.15s;
+  --badge-delay-step: 0.08s;
 }
 
 .delay-1 { transition-delay: calc(var(--delay-step) * 1); }
@@ -173,18 +174,28 @@
   opacity: 0;
   transform: rotateY(90deg);
   transform-origin: center;
-  transition: transform 0.6s cubic-bezier(0.5, 0.2, 0.2, 1), opacity 0.6s ease;
+  will-change: transform;
 }
 
 .badge-stack img.animate-in {
-  opacity: 1;
-  transform: rotateY(0deg);
+  animation: flipBadgeIn 0.6s ease forwards;
 }
 
 .badge-stack img:hover {
   transform: rotateY(0deg) scale(1.1);
   box-shadow: 0 0 10px rgba(var(--accent-rgb), 0.8);
   z-index: 2;
+}
+
+@keyframes flipBadgeIn {
+  0% {
+    opacity: 0;
+    transform: rotateY(90deg);
+  }
+  100% {
+    opacity: 1;
+    transform: rotateY(0deg);
+  }
 }
 
 @media (max-width: 768px) {
