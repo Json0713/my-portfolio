@@ -55,7 +55,7 @@ function renderComponent(html, name) {
     sessionStorage.removeItem("toast:404");
     loadComponentScript(name);
 
-    // 🧠 Custom logic after component renders
+    // Custom logic after component renders
     if (name === "hero") {
       requestAnimationFrame(() => initHeroSection());
     }
