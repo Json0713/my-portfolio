@@ -8,8 +8,10 @@ document.addEventListener("DOMContentLoaded", () => {
   initTheme();
   setupThemeToggle();
   highlightActiveLink();
+  
   setupInstallPrompt();
 
+  // Service Worker registration at root
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
       navigator.serviceWorker.register('/service-worker.js')
