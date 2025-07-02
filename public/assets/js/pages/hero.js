@@ -62,6 +62,26 @@ function initMarqueeHover() {
   marquee.addEventListener("mouseleave", () => marquee.style.animationPlayState = "running");
 }
 
+function initBadgeIdleHover() {
+  const badges = document.querySelectorAll(".badge-stack img");
+
+  function animateRandomBadge() {
+    const badge = badges[Math.floor(Math.random() * badges.length)];
+    badge.style.animation = "badgeIdleHover 1s ease-in-out";
+
+    // Remove animation after done
+    setTimeout(() => {
+      badge.style.animation = "";
+    }, 1000);
+  }
+
+  setInterval(() => {
+    if (document.visibilityState === "visible") {
+      animateRandomBadge();
+    }
+  }, 3000); // every 3s one badge animates
+}
+
 function initBadgeReveal() {
   const badgeStack = document.querySelector(".badge-stack");
   if (!badgeStack) return;
@@ -101,4 +121,5 @@ export function initHeroSection() {
   initThemeSync();
   initMarqueeHover();
   initBadgeReveal();
+  initBadgeIdleHover();
 }

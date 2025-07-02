@@ -1,18 +1,23 @@
 <section id="hero" class="hero-section py-3 position-relative overflow-hidden" aria-labelledby="hero-heading">
+  <!-- Particle background canvas -->
+  <canvas id="hero-particles" class="position-absolute top-0 start-0 w-100 h-100 z-0"></canvas>
+
   <div class="container position-relative z-1 p-1 d-flex flex-column align-items-center text-center text-theme">
-    <img id="hero-avatar" src="assets/images/dark-portfolio-profile-picture.jpeg" alt="Jason O. Bayaga" width="140" height="140" class="hero-avatar mb-4 animate-slide-down delay-1" loading="lazy">
+    <img id="hero-avatar" src="assets/images/dark-portfolio-profile-picture.jpeg" alt="Jason O. Bayaga"
+      width="140" height="140" class="hero-avatar mb-4 animate-slide-down delay-1" loading="lazy">
 
     <h1 id="hero-heading" class="display-4 fw-bold mb-2 text-accent animate-slide-up delay-2" style="line-height: 1.2;">
       Hi, I'm <span class="text-theme">Jason O. Bayaga</span>
     </h1>
 
-    <p class="lead fw-bold mb-4 animate-slide-up delay-3" id="typing-text" data-text="Software | Frontend Developer">
+    <p class="lead fw-bold mb-4 animate-slide-up delay-3" id="typing-text"
+      data-text="Software Engineer | Frontend Developer | UI/UX Specialist">
       <span class="cursor">|</span>
     </p>
 
     <div class="w-100 mb-3 d-flex justify-content-center gap-2">
-      <a href="#projects" class="btn btn-outline-light btn-lg animate-zoom-in delay-4">Projects</a>
-      <a href="#resume" class="btn btn-outline-light btn-lg animate-zoom-in delay-5">Resume</a>
+      <a href="#projects" class="btn btn-outline-light btn-lg animate-zoom-in delay-4 magnetic-hover">Projects</a>
+      <a href="#resume" class="btn btn-outline-light btn-lg animate-zoom-in delay-5 magnetic-hover">Resume</a>
     </div>
 
     <div class="hero-bottom-content mt-4 text-start w-100">
@@ -20,6 +25,7 @@
         <div class="col-md-6 animate-slide-left delay-6">
           <h2 class="h4 text-accent fw-bold">What I Build</h2>
           <p>I create feature-packed single-page apps, modular PHP systems, and responsive websites with clean UI using HTML, CSS, JS, PHP, and Bootstrap.</p>
+
           <div class="hero-marquee w-100 overflow-hidden animate-fade-in delay-7">
             <div class="marquee-track p-3 d-flex align-items-center">
               <img src="assets/images/icons/html5.svg" title="HTML5" alt="HTML5" class="tech-icon rounded accent-hover" loading="lazy">
@@ -51,28 +57,26 @@
       <div class="badge-stack mt-5 text-center animate-fade-in delay-13">
         <h3 class="text-accent fw-bold mb-3">My Tech Toolbox</h3>
         <div class="badge-group d-flex flex-wrap justify-content-center">
-          <img src="https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white" alt="HTML5" class="accent-hover animate-pop-in" loading="lazy">
-          <img src="https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white" alt="CSS3" class="accent-hover animate-pop-in" loading="lazy">
-          <img src="https://img.shields.io/badge/JavaScript-yellow?logo=javascript&logoColor=white" alt="JavaScript" class="accent-hover animate-pop-in" loading="lazy">
-          <img src="https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white" alt="TypeScript" class="accent-hover animate-pop-in" loading="lazy">
-          <img src="https://img.shields.io/badge/PHP-777BB4?logo=php&logoColor=white" alt="PHP" class="accent-hover animate-pop-in" loading="lazy">
-          <img src="https://img.shields.io/badge/MySQL-005C84?logo=mysql&logoColor=white" alt="MySQL" class="accent-hover animate-pop-in" loading="lazy">
+          <img src="https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white" alt="HTML5" class="accent-hover animate-pop-in badge-hover" data-focus="true" loading="lazy" data-bs-toggle="tooltip" title="HTML5">
+          <img src="https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white" alt="CSS3" class="accent-hover animate-pop-in badge-hover" loading="lazy" data-bs-toggle="tooltip" title="CSS3">
+          <img src="https://img.shields.io/badge/JavaScript-yellow?logo=javascript&logoColor=white" alt="JavaScript" class="accent-hover animate-pop-in badge-hover" loading="lazy" data-bs-toggle="tooltip" title="JavaScript">
+          <img src="https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white" alt="TypeScript" class="accent-hover animate-pop-in badge-hover" loading="lazy" data-bs-toggle="tooltip" title="TypeScript">
+          <img src="https://img.shields.io/badge/PHP-777BB4?logo=php&logoColor=white" alt="PHP" class="accent-hover animate-pop-in badge-hover" loading="lazy" data-bs-toggle="tooltip" title="PHP">
+          <img src="https://img.shields.io/badge/MySQL-005C84?logo=mysql&logoColor=white" alt="MySQL" class="accent-hover animate-pop-in badge-hover" loading="lazy" data-bs-toggle="tooltip" title="MySQL">
         </div>
-
         <h4 class="text-accent mt-4">Frameworks & Libraries</h4>
         <div class="badge-group d-flex flex-wrap justify-content-center">
-          <img src="https://img.shields.io/badge/Angular-DD0031?logo=angular&logoColor=white" alt="Angular" class="accent-hover animate-pop-in" loading="lazy">
-          <img src="https://img.shields.io/badge/Bootstrap-5.3-7952B3?logo=bootstrap&logoColor=white" alt="Bootstrap" class="accent-hover animate-pop-in" loading="lazy">
+          <img src="https://img.shields.io/badge/Angular-DD0031?logo=angular&logoColor=white" alt="Angular" class="accent-hover animate-pop-in badge-hover" loading="lazy" data-bs-toggle="tooltip" title="Angular">
+          <img src="https://img.shields.io/badge/Bootstrap-5.3-7952B3?logo=bootstrap&logoColor=white" alt="Bootstrap" class="accent-hover animate-pop-in badge-hover" loading="lazy" data-bs-toggle="tooltip" title="Bootstrap">
         </div>
-
         <h4 class="text-accent mt-4">Tools & Platforms</h4>
         <div class="badge-group d-flex flex-wrap justify-content-center">
-          <img src="https://img.shields.io/badge/Vercel-000000?logo=vercel&logoColor=white" alt="Vercel" class="accent-hover animate-pop-in" loading="lazy">
-          <img src="https://img.shields.io/badge/Git-F05032?logo=git&logoColor=white" alt="Git" class="accent-hover animate-pop-in" loading="lazy">
-          <img src="https://img.shields.io/badge/GitHub-181717?logo=github" alt="GitHub" class="accent-hover animate-pop-in" loading="lazy">
-          <img src="https://img.shields.io/badge/Node.js-339933?logo=node.js&logoColor=white" alt="Node.js" class="accent-hover animate-pop-in" loading="lazy">
-          <img src="https://img.shields.io/badge/XAMPP-FA7F24?logo=xampp&logoColor=white" alt="XAMPP" class="accent-hover animate-pop-in" loading="lazy">
-          <img src="https://img.shields.io/badge/VS%20Code-007ACC?logo=visualstudiocode&logoColor=white" alt="VS Code" class="accent-hover animate-pop-in" loading="lazy">
+          <img src="https://img.shields.io/badge/Vercel-000000?logo=vercel&logoColor=white" alt="Vercel" class="accent-hover animate-pop-in badge-hover" loading="lazy" data-bs-toggle="tooltip" title="Vercel">
+          <img src="https://img.shields.io/badge/Git-F05032?logo=git&logoColor=white" alt="Git" class="accent-hover animate-pop-in badge-hover" loading="lazy" data-bs-toggle="tooltip" title="Git">
+          <img src="https://img.shields.io/badge/GitHub-181717?logo=github" alt="GitHub" class="accent-hover animate-pop-in badge-hover" loading="lazy" data-bs-toggle="tooltip" title="GitHub">
+          <img src="https://img.shields.io/badge/Node.js-339933?logo=node.js&logoColor=white" alt="Node.js" class="accent-hover animate-pop-in badge-hover" loading="lazy" data-bs-toggle="tooltip" title="Node.js">
+          <img src="https://img.shields.io/badge/XAMPP-FA7F24?logo=xampp&logoColor=white" alt="XAMPP" class="accent-hover animate-pop-in badge-hover" loading="lazy" data-bs-toggle="tooltip" title="XAMPP">
+          <img src="https://img.shields.io/badge/VS%20Code-007ACC?logo=visualstudiocode&logoColor=white" alt="VS Code" class="accent-hover animate-pop-in badge-hover" loading="lazy" data-bs-toggle="tooltip" title="VS Code">
         </div>
       </div>
     </div>
