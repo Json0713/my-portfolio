@@ -229,3 +229,15 @@
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
+
+@keyframes badgeIdleHover {
+  0% {
+    box-shadow: none;
+  }
+  50% {
+    box-shadow: 0 0 18px rgba(var(--accent-rgb), 0.8);
+  }
+  100% {
+    box-shadow: none;
+  }
+}
