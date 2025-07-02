@@ -2,7 +2,6 @@
 
 export function initHeroSection() {
   const animatedEls = document.querySelectorAll('[class*="animate-"]');
-
   const observer = new IntersectionObserver((entries, obs) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -11,7 +10,7 @@ export function initHeroSection() {
         obs.unobserve(el);
       }
     });
-  }, { threshold: 0.1 });
+  }, { threshold: 0.15 });
 
   animatedEls.forEach(el => {
     if (!el.classList.contains("animate-in")) {
@@ -19,30 +18,65 @@ export function initHeroSection() {
     }
   });
 
-  // Typing animation with blinking cursor
   const typingText = document.getElementById("typing-text");
   const cursor = typingText?.querySelector(".cursor");
 
   if (typingText && cursor) {
-    const fullText = typingText.textContent.replace("|", "").trim();
+    const rawText = typingText.dataset.text?.trim() || "Software | Frontend Developer";
     typingText.textContent = "";
     typingText.appendChild(cursor);
     let i = 0;
-
-    const type = () => {
-      if (i < fullText.length) {
-        typingText.insertBefore(document.createTextNode(fullText.charAt(i)), cursor);
+    const typeChar = () => {
+      if (i < rawText.length) {
+        typingText.insertBefore(document.createTextNode(rawText.charAt(i)), cursor);
         i++;
-        setTimeout(type, 60);
+        setTimeout(typeChar, 70);
       }
     };
-    setTimeout(type, 300); // slight initial delay
+    setTimeout(typeChar, 300);
   }
 
-  // Marquee pause on hover
+  const updateTypingTheme = () => {
+    const theme = document.documentElement.getAttribute("data-theme") || "dark";
+    const isLight = theme === "light";
+    if (cursor) {
+      cursor.style.color = getComputedStyle(document.documentElement)
+        .getPropertyValue("--accent").trim();
+    }
+  };
+
+  const themeObserver = new MutationObserver(updateTypingTheme);
+  themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+  updateTypingTheme();
+
   const marquee = document.querySelector(".marquee-track");
   if (marquee) {
     marquee.addEventListener("mouseenter", () => marquee.style.animationPlayState = "paused");
     marquee.addEventListener("mouseleave", () => marquee.style.animationPlayState = "running");
   }
-} 
+
+  const badgeStack = document.querySelector(".badge-stack");
+  if (badgeStack) {
+    const badgeImgs = badgeStack.querySelectorAll("img");
+    badgeImgs.forEach(img => img.classList.remove("animate-in"));
+
+    const badgeObserver = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          let i = 0;
+          const animateNext = () => {
+            if (i < badgeImgs.length) {
+              badgeImgs[i].classList.add("animate-in");
+              i++;
+              requestAnimationFrame(() => setTimeout(animateNext, 100));
+            }
+          };
+          animateNext();
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 1.0 });
+
+    badgeObserver.observe(badgeStack);
+  }
+}
