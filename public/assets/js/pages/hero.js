@@ -16,7 +16,28 @@ export function initHeroSection() {
     if (!el.classList.contains("animate-in")) {
       observer.observe(el);
     }
+    initBadgeIdleHover();
   });
+  
+  function initBadgeIdleHover() {
+    const badges = document.querySelectorAll(".badge-stack img");
+  
+    function animateRandomBadge() {
+      const badge = badges[Math.floor(Math.random() * badges.length)];
+      badge.style.animation = "badgeIdleHover 1s ease-in-out";
+  
+      // Remove animation after done
+      setTimeout(() => {
+        badge.style.animation = "";
+      }, 1000);
+    }
+  
+    setInterval(() => {
+      if (document.visibilityState === "visible") {
+        animateRandomBadge();
+      }
+    }, 3000); // every 3s one badge animates
+  }
 
   const typingText = document.getElementById("typing-text");
   const cursor = typingText?.querySelector(".cursor");
