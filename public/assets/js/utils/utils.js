@@ -1,6 +1,5 @@
 // assets/js/utils/utils.js
 
-// Utility: Debounce function
 export function debounce(fn, delay = 50) {
   let timer;
   return (...args) => {
@@ -9,14 +8,20 @@ export function debounce(fn, delay = 50) {
   };
 }
 
-// Utility: Safely get element by selector
 export function $(selector, parent = document) {
   return parent.querySelector(selector);
 }
 
-// Utility: Safely get all elements by selector
 export function $all(selector, parent = document) {
   return Array.from(parent.querySelectorAll(selector));
 }
 
-// Future: Add more reusable DOM or formatting helpers here
+export function capitalize(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+export function htmlToElement(htmlString) {
+  const template = document.createElement('template');
+  template.innerHTML = htmlString.trim();
+  return template.content.firstChild;
+}
