@@ -1,4 +1,4 @@
-// assets/js/routes/router.js
+// assets/js/routes/routerLink.js
 
 export function highlightActiveLink() {
   const currentPath = location.hash || location.pathname;

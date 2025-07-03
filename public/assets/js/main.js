@@ -1,5 +1,8 @@
 // assets/js/main.js
 
+import { registerServiceWorker } from './common/swRegister.js';
+
+// existing imports
 import { initTheme, setupThemeToggle } from './public/theme.js';
 import { highlightActiveLink } from './routes/routerLink.js';
 import { setupInstallPrompt } from './common/installPrompt.js';
@@ -8,15 +11,6 @@ document.addEventListener("DOMContentLoaded", () => {
   initTheme();
   setupThemeToggle();
   highlightActiveLink();
-  
   setupInstallPrompt();
-
-  // Service Worker registration at root
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/service-worker.js')
-        .then(() => console.log('Service Worker registered'))
-        .catch(err => console.error('Service Worker registration failed:', err));
-    });
-  }
+  registerServiceWorker();
 });
