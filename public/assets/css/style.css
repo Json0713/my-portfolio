@@ -5,7 +5,6 @@
   --bg-dark: #10262b;
   --bg-light: #e8f5f6;
   
-  --accent: #00ffc3;
   --accent-rgb: 0, 255, 195;
   
 /* Costum bg */
@@ -21,11 +20,6 @@
   --transition: 0.3s ease-in-out;
   --font-family: 'Poppins', sans-serif;
 
-  --success: #39ff14;
-  --danger: #ff073a;
-  --warning: #ffcc00;
-  --info: #00bfff;
-  --primary: #3f8efc;
   --gray: #6c757d;
   --silver: #c0c0c0;
 }
