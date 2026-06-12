@@ -97,6 +97,8 @@
 .marquee-track {
   display: flex;
   gap: 1.0rem;
+  padding-right: 1.0rem; /* Balances the flex gaps so -50% translates exactly one full block */
+  width: max-content; /* Guarantees the track doesn't wrap or shrink */
   animation: heroMarqueeScroll 15s linear infinite;
   align-items: center;
   will-change: transform;
