@@ -4,14 +4,11 @@ let isSpinnerVisible = false;
 
 export function showSpinner(delay = 100) {
   if (isSpinnerVisible) return;
-  const app = document.getElementById('app');
-  if (!app) return;
 
   const loaderWrapper = document.createElement('div');
   loaderWrapper.id = 'page-loader';
   loaderWrapper.className =
-    'spinner-wrapper d-flex justify-content-center align-items-center flex-column py-5 fade-in-loader';
-  loaderWrapper.style.minHeight = '50vh';
+    'fixed-loader-overlay d-flex justify-content-center align-items-center flex-column fade-in-loader';
 
   loaderWrapper.innerHTML = `
     <div class="bouncing-dots">
@@ -20,9 +17,12 @@ export function showSpinner(delay = 100) {
     <p class="mt-3 mb-0 fw-semibold" style="color: var(--text-accent);">Loading content...</p>
   `;
 
+  // Use a timeout so fast network fetches don't flash the spinner
   setTimeout(() => {
-    app.innerHTML = '';
-    app.appendChild(loaderWrapper);
+    // If spinner was hidden before timeout fired, do nothing
+    if (document.getElementById('page-loader')) return;
+
+    document.body.appendChild(loaderWrapper);
     injectSpinnerStyles();
     isSpinnerVisible = true;
   }, delay);
@@ -40,6 +40,17 @@ function injectSpinnerStyles() {
   const style = document.createElement('style');
   style.id = 'spinner-style';
   style.textContent = `
+    .fixed-loader-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(128, 128, 128, 0.1);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 9999;
+    }
     .bouncing-dots {
       display: flex;
       gap: 0.5rem;
