@@ -32,7 +32,7 @@ function initTypingEffect() {
   const cursor = typingText?.querySelector('.cursor');
   if (!typingText || !cursor) return;
 
-  const baseText = 'Software | Frontend ';
+  const baseText = 'Web | Frontend ';
   const words = ['Developer', 'Architect'];
   let wordIndex = 0;
   let isDeleting = false;
