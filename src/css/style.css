@@ -9,6 +9,7 @@
 
   --accent: #00ffc3;
   --accent-rgb: 0, 255, 195;
+  --accent-contrast: #10262b;
 
   /* Custom backgrounds */
   --bg-dark-zone: #0a1a1f;
@@ -36,6 +37,7 @@
 [data-theme='light'] {
   --accent: #004d40;
   --accent-rgb: 0, 77, 64;
+  --accent-contrast: #ffffff;
   background-color: var(--bg-light);
   color: var(--text-dark);
 }
@@ -371,7 +373,11 @@ input:checked + .slider::before {
 
 .bg-accent {
   background-color: var(--accent) !important;
-  color: var(--text-dark);
+  color: var(--accent-contrast) !important;
+}
+
+.text-accent-contrast {
+  color: var(--accent-contrast) !important;
 }
 
 .text-theme {
