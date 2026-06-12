@@ -1,0 +1,190 @@
+/* src/css/pages.css — Styles for About, Projects, Contact, Resume pages */
+
+/* ============================================
+   Shared Page Styles
+   ============================================ */
+.page-section {
+  min-height: 70vh;
+}
+
+/* ============================================
+   About Page
+   ============================================ */
+.about-avatar {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  box-shadow: 0 0 0 4px var(--accent);
+  transition: transform 0.3s ease;
+}
+
+.about-avatar:hover {
+  transform: scale(1.05);
+}
+
+.timeline-card,
+.philosophy-card,
+.resume-entry {
+  background: rgba(var(--accent-rgb), 0.06);
+  border: 1px solid rgba(var(--accent-rgb), 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.timeline-card:hover,
+.philosophy-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(var(--accent-rgb), 0.15);
+}
+
+/* Skill Bars */
+.skill-item {
+  margin-bottom: 1rem;
+}
+
+.skill-bar {
+  height: 8px;
+  background: rgba(var(--accent-rgb), 0.15);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.skill-fill {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, var(--accent), rgba(var(--accent-rgb), 0.6));
+  border-radius: 4px;
+  transition: width 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* ============================================
+   Projects Page
+   ============================================ */
+.project-card {
+  background: rgba(var(--accent-rgb), 0.04);
+  border: 1px solid rgba(var(--accent-rgb), 0.12);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(var(--accent-rgb), 0.15);
+  border-color: var(--accent);
+}
+
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.project-tag {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  background: rgba(var(--accent-rgb), 0.12);
+  color: var(--accent);
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+/* ============================================
+   Contact Page
+   ============================================ */
+.contact-form .form-control {
+  background: rgba(var(--accent-rgb), 0.04);
+  border: 1px solid rgba(var(--accent-rgb), 0.2);
+  color: inherit;
+  border-radius: var(--radius);
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.contact-form .form-control:focus {
+  background: rgba(var(--accent-rgb), 0.06);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.15);
+  color: inherit;
+}
+
+.contact-form .form-control::placeholder {
+  color: var(--gray);
+}
+
+.contact-form .form-label {
+  color: inherit;
+}
+
+.btn-accent {
+  background: var(--accent);
+  color: var(--text-dark);
+  border: none;
+  border-radius: var(--radius);
+  padding: 0.75rem 1.5rem;
+  transition: all var(--transition);
+}
+
+.btn-accent:hover {
+  background: var(--accent);
+  opacity: 0.9;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(var(--accent-rgb), 0.3);
+  color: var(--text-dark);
+}
+
+.contact-link {
+  background: rgba(var(--accent-rgb), 0.04);
+  border: 1px solid rgba(var(--accent-rgb), 0.12);
+  color: inherit;
+  transition: all var(--transition);
+}
+
+.contact-link:hover {
+  background: rgba(var(--accent-rgb), 0.1);
+  border-color: var(--accent);
+  color: inherit;
+  transform: translateX(4px);
+}
+
+/* ============================================
+   Resume Page
+   ============================================ */
+.resume-content {
+  background: transparent;
+}
+
+.resume-section {
+  page-break-inside: avoid;
+}
+
+.resume-entry {
+  transition: transform 0.3s ease;
+}
+
+.resume-entry:hover {
+  transform: translateX(4px);
+}
+
+/* Print styles for resume download */
+@media print {
+  .site-header,
+  .main-nav,
+  .site-footer,
+  .install-panel,
+  .install-handle,
+  #resume-download {
+    display: none !important;
+  }
+
+  .resume-content {
+    padding: 0;
+  }
+
+  .page-section {
+    min-height: auto;
+    padding: 1rem 0 !important;
+  }
+
+  .resume-entry {
+    background: transparent !important;
+    border: 1px solid #ddd !important;
+  }
+}

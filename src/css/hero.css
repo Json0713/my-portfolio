@@ -1,0 +1,211 @@
+/* src/css/hero.css — Hero section specific styles */
+
+.hero-section {
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  position: relative;
+  background-color: transparent;
+  overflow: hidden;
+  padding-top: 4rem;
+}
+
+.hero-section .container {
+  max-width: 960px;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  z-index: 1;
+}
+
+/* Avatar */
+#hero-avatar {
+  width: 140px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px var(--accent);
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 1s ease;
+  margin-bottom: 1rem;
+}
+
+#hero-avatar:hover {
+  transform: scale(1.05);
+}
+
+/* Typing Cursor */
+:root {
+  --delay-step: 0.15s;
+}
+
+.hero-typing {
+  display: inline-block;
+  border-right: 2px solid var(--accent);
+  white-space: nowrap;
+  overflow: hidden;
+  animation: heroTyping 2.8s steps(30, end) forwards;
+  font-weight: bold;
+  color: inherit;
+}
+
+.cursor {
+  color: var(--accent);
+  display: inline-block;
+  margin-left: 2px;
+  animation: heroBlink 0.75s step-end infinite;
+  transition: color 0.3s ease;
+}
+
+/* Accent Hover Effect */
+.accent-hover {
+  transition: all 0.3s ease-in-out;
+  border-radius: 8px;
+}
+
+.accent-hover:hover {
+  box-shadow: 0 0 0 2px var(--accent), 0 0 10px rgba(var(--accent-rgb), 0.5);
+  transform: scale(1.08);
+  z-index: 2;
+}
+
+/* Tech Badge (replaces old SVG tech-icons) */
+.tech-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.4rem 0.85rem;
+  background: var(--badge-color, var(--accent));
+  color: var(--badge-text, #fff);
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tech-badge:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 12px rgba(var(--accent-rgb), 0.5);
+}
+
+/* Marquee */
+.hero-marquee {
+  overflow: hidden;
+}
+
+.marquee-track {
+  display: flex;
+  gap: 1.5rem;
+  animation: heroMarqueeScroll 30s linear infinite;
+  align-items: center;
+  will-change: transform;
+}
+
+/* Badge Stack */
+.badge-stack {
+  padding-top: 3rem;
+}
+
+.badge-stack img {
+  margin: 0.5rem;
+  height: 28px;
+  opacity: 0;
+  transform: rotateY(90deg);
+  transform-origin: center;
+  transition: transform 0.6s cubic-bezier(0.5, 0.2, 0.2, 1), opacity 0.6s ease;
+}
+
+.badge-stack img.animate-in {
+  opacity: 1;
+  transform: rotateY(0deg);
+}
+
+.badge-stack img:hover {
+  transform: rotateY(0deg) scale(1.1);
+  box-shadow: 0 0 10px rgba(var(--accent-rgb), 0.8);
+  z-index: 2;
+}
+
+/* About Me List */
+.about-me-list li {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 0;
+}
+
+/* ============================================
+   Responsive
+   ============================================ */
+@media (max-width: 768px) {
+  #hero-avatar {
+    width: 100px;
+    height: 100px;
+  }
+  .display-4 {
+    font-size: 2rem;
+  }
+  .lead {
+    font-size: 1rem;
+  }
+  .tech-badge {
+    font-size: 0.75rem;
+    padding: 0.3rem 0.65rem;
+  }
+  .badge-stack img {
+    height: 24px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ============================================
+   Keyframes
+   ============================================ */
+@keyframes heroTyping {
+  from {
+    width: 0;
+  }
+  to {
+    width: 25ch;
+  }
+}
+
+@keyframes heroBlink {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes heroMarqueeScroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes badgeIdleHover {
+  0% {
+    box-shadow: none;
+  }
+  50% {
+    box-shadow: 0 0 18px rgba(var(--accent-rgb), 1.6);
+  }
+  100% {
+    box-shadow: none;
+  }
+}

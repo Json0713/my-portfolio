@@ -1,87 +1,79 @@
 // public/service-worker.js
 
-const CACHE_NAME = 'jason-portfolio-v3';
-const FILES_TO_CACHE = [
-  '/',
-  '/index.html',
+const CACHE_NAME = 'jason-portfolio-v4';
 
-  // CSS
-  '/assets/css/style.css',
-  '/assets/css/hero.css',
-  '/assets/css/bootstrap.min.css',
-  '/assets/css/bootstrap-icons.css',
-
-  // JS
-  '/assets/js/main.js',
-  '/assets/js/bootstrap.bundle.min.js',
-  '/assets/js/security/sanitizer.js',
-  '/assets/js/response/offline.js',
-  '/assets/js/response/error.js',
-  '/assets/js/common/loader.js',
-  '/assets/js/common/toast.js',
-  '/assets/js/router.js',
-
-  // Fonts
-  '/assets/fonts/bootstrap-icons.woff2',
-  '/assets/fonts/bootstrap-icons.woff',
-
-  // Images
-  '/assets/images/dark-portfolio-profile-picture.jpeg'
-];
-
-// Install: cache all static assets
-self.addEventListener('install', event => {
+// Install: cache critical page fragments
+self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => cache.addAll(FILES_TO_CACHE))
+    caches.open(CACHE_NAME).then((cache) =>
+      cache.addAll([
+        '/',
+        '/index.html',
+        '/manifest.json',
+        '/pages/hero.html',
+        '/pages/about.html',
+        '/pages/projects.html',
+        '/pages/contact.html',
+        '/pages/resume.html',
+        '/assets/images/dark-portfolio-profile-picture.jpeg',
+      ])
+    )
   );
   self.skipWaiting();
 });
 
 // Activate: remove old caches
-self.addEventListener('activate', event => {
+self.addEventListener('activate', (event) => {
   event.waitUntil(
-    caches.keys().then(keys =>
-      Promise.all(
-        keys.map(key => {
-          if (key !== CACHE_NAME) return caches.delete(key);
-        })
-      )
+    caches.keys().then((keys) =>
+      Promise.all(keys.map((key) => (key !== CACHE_NAME ? caches.delete(key) : undefined)))
     )
   );
   self.clients.claim();
 });
 
-// Fetch: respond from cache, fallback to network, then fallback to offline
-self.addEventListener('fetch', event => {
+// Fetch: network-first for pages, stale-while-revalidate for assets
+self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
 
-  event.respondWith(
-    caches.match(event.request).then(cached => {
-      if (cached) return cached;
+  const url = new URL(event.request.url);
 
-      return fetch(event.request)
-        .then(response => {
-          const cloned = response.clone();
-          caches.open(CACHE_NAME).then(cache => cache.put(event.request, cloned));
+  // Network-first for HTML/navigation requests
+  if (event.request.destination === 'document' || url.pathname.endsWith('.html')) {
+    event.respondWith(
+      fetch(event.request)
+        .then((response) => {
+          const clone = response.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
+          return response;
+        })
+        .catch(() =>
+          caches
+            .match(event.request)
+            .then((cached) => cached || caches.match('/index.html'))
+        )
+    );
+    return;
+  }
+
+  // Stale-while-revalidate for all other assets (JS, CSS, images, fonts)
+  event.respondWith(
+    caches.match(event.request).then((cached) => {
+      const fetchPromise = fetch(event.request)
+        .then((response) => {
+          if (response.ok && url.origin === self.location.origin) {
+            const clone = response.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
+          }
           return response;
         })
         .catch(() => {
-          if (event.request.destination === 'document') {
-            return caches.match('/index.html');
-          }
           if (event.request.destination === 'image') {
             return new Response('', { status: 200 });
           }
-          if (event.request.destination === 'font') {
-            return caches.match('/assets/fonts/bootstrap-icons.woff2');
-          }
-          if (event.request.destination === 'style') {
-            return caches.match('/assets/css/style.css');
-          }
-          if (event.request.destination === 'script') {
-            return caches.match('/assets/js/main.js');
-          }
         });
+
+      return cached || fetchPromise;
     })
   );
 });
