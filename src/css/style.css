@@ -339,8 +339,6 @@ input:checked + .slider::before {
 .animate-zoom-in {
   transform: scale(0.9);
 }
-.animate-fade-in {
-}
 .animate-pop-in {
   transform: scale(0.7);
 }
