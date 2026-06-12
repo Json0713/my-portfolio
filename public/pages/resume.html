@@ -3,7 +3,7 @@
     <div class="text-center mb-5 animate-slide-down" style="transition-delay: 0.15s">
       <h1 class="display-5 fw-bold text-accent">Resume</h1>
       <p class="lead text-theme">My professional background and qualifications</p>
-      <button class="btn btn-outline-light mt-2" id="resume-download" data-bs-toggle="modal" data-bs-target="#printPreviewModal">
+      <button class="btn btn-outline-light mt-2" id="resume-download">
         <i class="bi bi-printer me-2"></i>Print / Save as PDF
       </button>
     </div>
@@ -138,51 +138,110 @@
     </div>
   </div>
 
-  <!-- Print Preview Modal -->
-  <div class="modal fade" id="printPreviewModal" tabindex="-1" aria-labelledby="printPreviewModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" style="max-width: 600px;">
-      <div class="modal-content print-modal-glass border-0 rounded-4 shadow-lg">
-        <div class="modal-header border-0 pb-0 pt-4 px-4">
-          <h5 class="modal-title fw-bold text-accent" id="printPreviewModalLabel">
-            <i class="bi bi-file-earmark-pdf-fill me-2 fs-4 align-middle"></i> Download Resume
-          </h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body p-1 p-md-1 text-center">
-          <p class="px-5 mb-4 text-theme fs-5">Choose how you would like to save or print a copy of my resume.</p>
-          
-          <div class="card border-0 rounded-4 mb-4 mx-auto text-start p-3 p-md-4" style="background: rgba(var(--accent-rgb), 0.05); max-width: 450px;">
-            <ul class="list-unstyled mb-0 text-theme fw-medium">
-              <li class="mb-3 d-flex align-items-center">
-                <i class="bi bi-check-circle-fill fs-5 text-accent me-3"></i> 
-                <span><strong>Always Up-to-Date:</strong> Guaranteed to include my most recent experience.</span>
-              </li>
-              <li class="mb-3 d-flex align-items-center">
-                <i class="bi bi-check-circle-fill fs-5 text-accent me-3"></i> 
-                <span><strong>Print-Optimized:</strong> Formatted cleanly for perfect readability on white paper.</span>
-              </li>
-              <li class="d-flex align-items-center">
-                <i class="bi bi-check-circle-fill fs-5 text-accent me-3"></i> 
-                <span><strong>Instant & Secure:</strong> Generates instantly right inside your browser.</span>
-              </li>
-            </ul>
-          </div>
+  <!-- Hidden ATS-Friendly PDF Template -->
+  <div id="resume-print-template" style="display: none; padding: 40px 50px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #111; background: #fff; width: 850px; margin: 0 auto; line-height: 1.6; box-sizing: border-box;">
+    <!-- Header -->
+    <div style="text-align: center; margin-bottom: 30px; border-bottom: 2px solid #222; padding-bottom: 20px;">
+      <h1 style="margin: 0; font-size: 32px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: #000;">Jason Bayaga</h1>
+      <p style="margin: 5px 0 10px; font-size: 16px; font-weight: 500; text-transform: uppercase; color: #444; letter-spacing: 0.5px;">Frontend Developer & Architect</p>
+      <div style="font-size: 13px; color: #333; display: flex; justify-content: center; gap: 15px;">
+        <span>Manila, Philippines</span>
+        <span>|</span>
+        <span>github.com/jasonbayaga</span>
+        <span>|</span>
+        <span>jason.bayaga@example.com</span>
+      </div>
+    </div>
 
-          <div id="pdf-progress-container" class="d-none mt-4">
-            <p class="small mb-2 fw-semibold text-accent animate-pulse" id="pdf-progress-text">Preparing your document...</p>
-            <div class="progress rounded-pill mb-3 mx-auto" style="height: 6px; max-width: 450px; background: rgba(var(--accent-rgb), 0.2);">
-              <div class="progress-bar progress-bar-striped progress-bar-animated bg-accent" role="progressbar" style="width: 100%"></div>
-            </div>
-          </div>
+    <!-- Summary -->
+    <div style="margin-bottom: 25px;">
+      <h2 style="margin: 0 0 10px; font-size: 15px; font-weight: 700; text-transform: uppercase; border-bottom: 1px solid #ddd; padding-bottom: 5px; color: #222; letter-spacing: 0.5px;">Professional Summary</h2>
+      <p style="margin: 0; font-size: 14px; text-align: justify;">Self-driven Frontend Developer with a B.S. in Information Systems and hands-on experience building single-page applications, content management systems, and responsive web solutions. Proficient in HTML5, CSS3, JavaScript, PHP, and Bootstrap with a focus on clean architecture, modular design, and mobile-first development. Adept at transforming complex UI requirements into robust, high-performance web applications.</p>
+    </div>
+
+    <!-- Skills -->
+    <div style="margin-bottom: 25px;">
+      <h2 style="margin: 0 0 10px; font-size: 15px; font-weight: 700; text-transform: uppercase; border-bottom: 1px solid #ddd; padding-bottom: 5px; color: #222; letter-spacing: 0.5px;">Technical Skills</h2>
+      <div style="font-size: 14px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+        <div><strong>Languages:</strong> HTML5, CSS3, JavaScript (ES6+), TypeScript, PHP, MySQL</div>
+        <div><strong>Frameworks/Libraries:</strong> Angular, Bootstrap 5.3, Vite</div>
+        <div><strong>Tools & Platforms:</strong> Git, GitHub, Node.js, Vercel, Playwright</div>
+        <div><strong>Specializations:</strong> SPA Architecture, PWA, Responsive UI/UX</div>
+      </div>
+    </div>
+
+    <!-- Experience / Projects -->
+    <div style="margin-bottom: 25px;">
+      <h2 style="margin: 0 0 15px; font-size: 15px; font-weight: 700; text-transform: uppercase; border-bottom: 1px solid #ddd; padding-bottom: 5px; color: #222; letter-spacing: 0.5px;">Professional & Project Experience</h2>
+      
+      <div style="margin-bottom: 18px;">
+        <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
+          <h3 style="margin: 0; font-size: 15px; font-weight: 700;">Quality Assurance & Automation Engineer</h3>
+          <span style="font-size: 13px; font-weight: 600;">Professional Experience</span>
         </div>
-        <div class="modal-footer border-0 pt-0 pb-4 px-4 d-flex justify-content-center gap-2">
-          <button type="button" class="btn btn-outline-secondary rounded-pill px-4 fw-medium" data-bs-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-outline-theme border-accent text-accent rounded-pill px-4 fw-medium" id="native-print-btn">
-            <i class="bi bi-printer-fill me-2"></i>Print
-          </button>
-          <button type="button" class="btn btn-accent rounded-pill px-4 fw-semibold shadow-sm" id="confirm-pdf-download">
-            <i class="bi bi-download me-2"></i>Save as PDF
-          </button>
+        <ul style="margin: 0; padding-left: 20px; font-size: 14px;">
+          <li style="margin-bottom: 4px;">Executed comprehensive manual and automated end-to-end testing utilizing Playwright.</li>
+          <li style="margin-bottom: 4px;">Documented extensive test findings and created precise defect reports for engineering teams.</li>
+          <li>Enforced rigorous QA best practices to ensure delivery of highly robust web applications.</li>
+        </ul>
+      </div>
+
+      <div style="margin-bottom: 18px;">
+        <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
+          <h3 style="margin: 0; font-size: 15px; font-weight: 700;">Quilix Core — Personal Web Framework</h3>
+          <span style="font-size: 13px; font-weight: 600;">Open Source Project</span>
+        </div>
+        <div style="font-size: 13px; font-style: italic; margin-bottom: 6px;">Technologies: Angular, PWA, TypeScript</div>
+        <ul style="margin: 0; padding-left: 20px; font-size: 14px;">
+          <li style="margin-bottom: 4px;">Engineered a highly scalable local workspace framework with an integrated file system engine.</li>
+          <li>Developed custom built-in capabilities including an interactive AI Chat module and dependency control mechanisms.</li>
+        </ul>
+      </div>
+
+      <div style="margin-bottom: 10px;">
+        <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
+          <h3 style="margin: 0; font-size: 15px; font-weight: 700;">LGU ESPERANZA — Dynamic Web Management System</h3>
+          <span style="font-size: 13px; font-weight: 600;">Capstone Project</span>
+        </div>
+        <div style="font-size: 13px; font-style: italic; margin-bottom: 6px;">Technologies: PHP, MySQL, HTML/CSS, JavaScript</div>
+        <ul style="margin: 0; padding-left: 20px; font-size: 14px;">
+          <li style="margin-bottom: 4px;">Built and deployed a full-stack CMS dashboard for municipal-level citizen tracking and content management.</li>
+          <li>Implemented secure administrative CRUD functionality and a modular content rendering architecture.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Education -->
+    <div style="margin-bottom: 25px;">
+      <h2 style="margin: 0 0 10px; font-size: 15px; font-weight: 700; text-transform: uppercase; border-bottom: 1px solid #ddd; padding-bottom: 5px; color: #222; letter-spacing: 0.5px;">Education</h2>
+      <div style="display: flex; justify-content: space-between; align-items: baseline;">
+        <div>
+          <h3 style="margin: 0; font-size: 15px; font-weight: 700;">Bachelor of Science in Information Systems</h3>
+          <p style="margin: 2px 0 0; font-size: 14px; font-style: italic;">Specialized in software development, database management, and architecture.</p>
+        </div>
+        <span style="font-size: 14px; font-weight: 600;">Graduated 2025</span>
+      </div>
+    </div>
+
+    <!-- Certifications -->
+    <div>
+      <h2 style="margin: 0 0 10px; font-size: 15px; font-weight: 700; text-transform: uppercase; border-bottom: 1px solid #ddd; padding-bottom: 5px; color: #222; letter-spacing: 0.5px;">Certifications & Training</h2>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; font-size: 14px;">
+        <div>
+          <strong style="display: block;">Cyber Threat Management</strong>
+          <span style="font-style: italic; color: #555;">DICT-ITU DTC Initiative</span> (In Progress)
+        </div>
+        <div>
+          <strong style="display: block;">Introduction to Data Science</strong>
+          <span style="font-style: italic; color: #555;">DICT-ITU DTC Initiative</span> (Apr 2026)
+        </div>
+        <div>
+          <strong style="display: block;">Data Science Essentials with Python</strong>
+          <span style="font-style: italic; color: #555;">DICT-ITU DTC Initiative</span> (Apr 2026)
+        </div>
+        <div>
+          <strong style="display: block;">Data Analytics Essentials</strong>
+          <span style="font-style: italic; color: #555;">DICT-ITU DTC Initiative</span> (Apr 2026)
         </div>
       </div>
     </div>
