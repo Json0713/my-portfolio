@@ -14,6 +14,18 @@ const pageModules = import.meta.glob('./pages/*.js');
 const app = $('#app');
 let componentRenderTimeout = null;
 
+// Cache version — increment on deploy to purge stale sessionStorage entries
+const CACHE_VERSION = '2.0.0';
+(function clearStaleCache() {
+  if (sessionStorage.getItem('cache:version') !== CACHE_VERSION) {
+    // Remove all cached page fragments from previous versions
+    Object.keys(sessionStorage).forEach((key) => {
+      if (key.startsWith('component:')) sessionStorage.removeItem(key);
+    });
+    sessionStorage.setItem('cache:version', CACHE_VERSION);
+  }
+})();
+
 function getCurrentRoute() {
   const hash = window.location.hash.slice(1).trim().toLowerCase();
   return hash || 'hero';
