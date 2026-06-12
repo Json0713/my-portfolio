@@ -41,6 +41,17 @@
 }
 
 /* ============================================
+   Theme Aware Elements
+   ============================================ */
+[data-theme='light'] .theme-img-dark {
+  display: none !important;
+}
+
+[data-theme='dark'] .theme-img-light {
+  display: none !important;
+}
+
+/* ============================================
    System Preference Fallbacks
    ============================================ */
 @media (prefers-color-scheme: dark) {
