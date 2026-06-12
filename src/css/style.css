@@ -420,3 +420,36 @@ button:focus-visible {
     opacity: 1;
   }
 }
+
+/* ============================================
+   Cyber Wave Background (Inline SVG)
+   ============================================ */
+.cyber-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+  /* Instead of background-image, the inline SVG handles shapes */
+  color: var(--accent); /* SVG 'currentColor' will inherit this perfectly! */
+  opacity: 0.8; /* Base opacity for the container */
+  overflow: hidden;
+}
+
+[data-theme='light'] .cyber-background {
+  opacity: 0.3; /* Less intense for light mode */
+}
+
+@keyframes cyberWave {
+  0% {
+    opacity: 0.05;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.05;
+  }
+}

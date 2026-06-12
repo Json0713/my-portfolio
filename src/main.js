@@ -18,11 +18,15 @@ import { initRouter } from './js/router.js';
 import { initTheme, setupThemeToggle } from './js/public/theme.js';
 import { registerServiceWorker } from './js/common/swRegister.js';
 import { setupInstallPrompt } from './js/common/installPrompt.js';
+import { initCyberBackground } from './js/public/cyberBg.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   // Theme first (prevents flash of wrong theme)
   initTheme();
   setupThemeToggle();
+
+  // Initialize Cyber Background
+  initCyberBackground();
 
   // SPA router
   initRouter();
