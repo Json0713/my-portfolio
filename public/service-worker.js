@@ -1,6 +1,6 @@
 // public/service-worker.js
 
-const CACHE_NAME = 'jason-portfolio-v8';
+const CACHE_NAME = 'jason-portfolio-v9';
 
 // Install: cache critical page fragments
 self.addEventListener('install', (event) => {
