@@ -96,8 +96,8 @@
 
 .marquee-track {
   display: flex;
-  gap: 1.5rem;
-  animation: heroMarqueeScroll 30s linear infinite;
+  gap: 1.0rem;
+  animation: heroMarqueeScroll 15s linear infinite;
   align-items: center;
   will-change: transform;
 }
