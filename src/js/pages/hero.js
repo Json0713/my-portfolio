@@ -30,21 +30,58 @@ function initTypingEffect() {
 
   const typingText = document.getElementById('typing-text');
   const cursor = typingText?.querySelector('.cursor');
-  const rawText = typingText?.dataset.text?.trim() || 'Software | Frontend Developer';
+  if (!typingText || !cursor) return;
 
-  if (typingText && cursor) {
-    typingText.textContent = '';
-    typingText.appendChild(cursor);
-    let i = 0;
-    const typeChar = () => {
-      if (i < rawText.length) {
-        typingText.insertBefore(document.createTextNode(rawText.charAt(i)), cursor);
-        i++;
-        setTimeout(typeChar, 70);
+  const baseText = 'Software | Frontend ';
+  const words = ['Developer', 'Architect'];
+  let wordIndex = 0;
+  let isDeleting = false;
+  let text = '';
+  let isTypingBase = true;
+
+  // Clear existing text nodes, keep cursor
+  Array.from(typingText.childNodes).forEach((node) => {
+    if (node !== cursor) node.remove();
+  });
+
+  const textNode = document.createTextNode('');
+  typingText.insertBefore(textNode, cursor);
+
+  function type() {
+    if (!document.body.contains(typingText)) return; // Stop animation if page changed
+
+    const currentWord = words[wordIndex];
+    let typeSpeed = 70;
+
+    if (isTypingBase) {
+      text = baseText.substring(0, text.length + 1);
+      if (text === baseText) {
+        isTypingBase = false;
+        typeSpeed = 200;
       }
-    };
-    setTimeout(typeChar, 300);
+    } else {
+      if (isDeleting) {
+        text = baseText + currentWord.substring(0, text.length - baseText.length - 1);
+        typeSpeed = 40;
+      } else {
+        text = baseText + currentWord.substring(0, text.length - baseText.length + 1);
+      }
+
+      if (!isDeleting && text === baseText + currentWord) {
+        isDeleting = true;
+        typeSpeed = 2500; // Pause longer when word is complete
+      } else if (isDeleting && text === baseText) {
+        isDeleting = false;
+        wordIndex = (wordIndex + 1) % words.length;
+        typeSpeed = 500; // Pause before typing next word
+      }
+    }
+
+    textNode.nodeValue = text;
+    setTimeout(type, typeSpeed);
   }
+
+  setTimeout(type, 300);
 }
 
 function initThemeColorUpdate() {
