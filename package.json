@@ -13,10 +13,11 @@
   "dependencies": {
     "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.11.3",
-    "dompurify": "^3.2.4"
+    "dompurify": "^3.2.4",
+    "html2pdf.js": "^0.14.0"
   },
   "devDependencies": {
-    "vite": "^6.3.5",
-    "prettier": "^3.5.3"
+    "prettier": "^3.5.3",
+    "vite": "^6.3.5"
   }
 }
