@@ -74,8 +74,9 @@
   align-items: center;
   gap: 0.35rem;
   padding: 0.4rem 0.85rem;
-  background: var(--badge-color, var(--accent));
-  color: var(--badge-text, #fff);
+  background: rgba(var(--accent-rgb), 0.15);
+  color: var(--accent);
+  border: 1px solid rgba(var(--accent-rgb), 0.3);
   border-radius: 6px;
   font-size: 0.85rem;
   font-weight: 600;
