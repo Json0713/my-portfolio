@@ -69,6 +69,9 @@ function renderComponent(html, name) {
     app.classList.add('fade-in');
     app.setAttribute('aria-label', `${capitalize(name)} Page`);
 
+    // Smoothly scroll to the top of the page on route change
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
     updatePageTitle(name);
     highlightActiveLink();
     sessionStorage.removeItem('toast:404');
