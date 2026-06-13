@@ -490,3 +490,43 @@ button:focus-visible {
     opacity: 0.05;
   }
 }
+
+/* ============================================
+   Education Profile Cards
+   ============================================ */
+.edu-profile-card {
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.edu-banner {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+}
+
+.edu-avatar-wrapper {
+  position: relative;
+  margin-top: -60px; /* Pull the avatar up into the banner */
+  margin-left: 2rem;
+}
+
+.edu-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 4px solid var(--bg-dark);
+  object-fit: cover;
+  background-color: var(--bg-dark);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme='light'] .edu-avatar {
+  border-color: #ffffff;
+  background-color: #ffffff;
+}
+
+.edu-content {
+  padding: 1.5rem 2rem 2rem;
+}
