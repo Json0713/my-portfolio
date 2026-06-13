@@ -19,6 +19,7 @@ import { initTheme, setupThemeToggle } from './js/public/theme.js';
 import { registerServiceWorker } from './js/common/swRegister.js';
 import { setupInstallPrompt } from './js/common/installPrompt.js';
 import { initCyberBackground } from './js/public/cyberBg.js';
+import { initHeaderBehavior } from './js/public/headerBehavior.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   // Theme first (prevents flash of wrong theme)
@@ -27,6 +28,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Initialize Cyber Background
   initCyberBackground();
+
+  // Initialize Header Behavior
+  initHeaderBehavior();
 
   // SPA router
   initRouter();

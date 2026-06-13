@@ -222,6 +222,13 @@ input:checked + .slider::before {
 /* ============================================
    Header / Footer — Glassmorphism
    ============================================ */
+.header-wrapper {
+  position: sticky;
+  top: 0;
+  z-index: 1030;
+  transition: top 0.3s ease-in-out;
+}
+
 .site-header,
 .site-footer {
   background-color: rgba(10, 26, 31, 0.85);
