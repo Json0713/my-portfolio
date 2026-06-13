@@ -87,7 +87,6 @@ body {
   margin: 0;
   padding: 0;
   width: 100%;
-  overflow-x: hidden;
   font-family: var(--font-family);
   scroll-behavior: smooth;
   background-color: inherit;
@@ -351,6 +350,7 @@ input:checked + .slider::before {
   padding: 2rem 1rem;
   transition: opacity var(--transition);
   min-height: 70vh;
+  overflow-x: hidden;
 }
 
 /* ============================================
