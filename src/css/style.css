@@ -532,3 +532,46 @@ button:focus-visible {
 .edu-content {
   padding: 1.5rem 2rem 2rem;
 }
+
+/* ============================================
+   Custom Scrollbar
+   ============================================ */
+/* Firefox */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent) rgba(10, 26, 31, 0.4);
+}
+
+[data-theme='light'] html {
+  scrollbar-color: var(--accent) rgba(205, 216, 220, 0.4);
+}
+
+/* WebKit (Chrome, Edge, Safari) */
+::-webkit-scrollbar {
+  width: 6px; /* Thin by default */
+  height: 6px;
+  background-color: transparent;
+}
+
+/* The scrollbar track (background) */
+::-webkit-scrollbar-track {
+  background: rgba(10, 26, 31, 0.4);
+  backdrop-filter: blur(8px);
+}
+
+[data-theme='light'] ::-webkit-scrollbar-track {
+  background: rgba(205, 216, 220, 0.4);
+}
+
+/* The scrollbar thumb */
+::-webkit-scrollbar-thumb {
+  background: rgba(var(--accent-rgb), 0.6);
+  border-radius: 10px;
+}
+
+/* Grow and brighten on hover */
+::-webkit-scrollbar:hover,
+::-webkit-scrollbar-thumb:hover {
+  width: 12px;
+  background: rgba(var(--accent-rgb), 1);
+}
