@@ -212,3 +212,108 @@
     box-shadow: none;
   }
 }
+
+/* ============================================
+   Orbiting Solar System (CTA Section)
+   ============================================ */
+.orbit-system {
+  position: relative;
+  width: 100%;
+  max-width: 300px;
+  aspect-ratio: 1 / 1;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.orbit-center {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, rgba(var(--accent-rgb), 0.8), rgba(var(--accent-rgb), 0.2));
+  border: 1px solid rgba(var(--accent-rgb), 0.5);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  box-shadow: 0 0 20px rgba(var(--accent-rgb), 0.6), inset 0 0 15px rgba(255,255,255,0.2);
+  color: var(--accent-contrast);
+  font-size: 1.5rem;
+}
+
+.orbit-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px dashed rgba(var(--accent-rgb), 0.25);
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.orbit-ring-1 {
+  width: 120px;
+  height: 120px;
+  animation: orbitSpin 12s linear infinite;
+}
+
+.orbit-ring-2 {
+  width: 180px;
+  height: 180px;
+  animation: orbitSpin 20s linear infinite reverse;
+}
+
+.orbit-ring-3 {
+  width: 240px;
+  height: 240px;
+  animation: orbitSpin 30s linear infinite;
+}
+
+.orbit-planet {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 30px;
+  height: 30px;
+  margin-top: -15px;
+  margin-left: -15px;
+  background-color: var(--bg-dark);
+  border: 1px solid rgba(var(--accent-rgb), 0.5);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  box-shadow: 0 0 10px rgba(var(--accent-rgb), 0.2);
+  font-size: 0.9rem;
+}
+
+[data-theme='light'] .orbit-planet {
+  background-color: var(--bg-light);
+}
+
+.orbit-ring-1 .orbit-planet { animation: orbitCounterSpin 12s linear infinite reverse; }
+.orbit-ring-2 .orbit-planet { animation: orbitCounterSpin 20s linear infinite; }
+.orbit-ring-3 .orbit-planet { animation: orbitCounterSpin 30s linear infinite reverse; }
+
+@keyframes orbitSpin {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes orbitCounterSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@media (max-width: 768px) {
+  .orbit-system { max-width: 200px; }
+  .orbit-center { width: 50px; height: 50px; font-size: 1.25rem; }
+  .orbit-ring-1 { width: 100px; height: 100px; }
+  .orbit-ring-2 { width: 150px; height: 150px; }
+  .orbit-ring-3 { width: 200px; height: 200px; }
+  .orbit-planet { width: 26px; height: 26px; margin-top: -13px; margin-left: -13px; font-size: 0.8rem; }
+}
+
+

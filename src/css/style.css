@@ -248,6 +248,36 @@ input:checked + .slider::before {
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
 
+/* ============================================
+   Glassmorphism Cards
+   ============================================ */
+.glass-card {
+  background-color: rgba(10, 26, 31, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  transition: transform var(--transition), box-shadow var(--transition), background-color var(--transition), border-color var(--transition);
+}
+
+.glass-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+  border-color: rgba(var(--accent-rgb), 0.3);
+}
+
+[data-theme='light'] .glass-card {
+  background-color: rgba(255, 255, 255, 0.6);
+  border-color: rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+}
+
+[data-theme='light'] .glass-card:hover {
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+  border-color: rgba(var(--accent-rgb), 0.3);
+}
+
 .site-header .navbar-brand {
   font-weight: 600;
   color: var(--accent);
