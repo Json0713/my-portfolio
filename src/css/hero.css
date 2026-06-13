@@ -316,4 +316,30 @@
   .orbit-planet { width: 26px; height: 26px; margin-top: -13px; margin-left: -13px; font-size: 0.8rem; }
 }
 
+/* ============================================
+   CTA Banner Section
+   ============================================ */
+.cta-banner-section {
+  position: relative;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+  max-width: 100vw;
+  border-top: 1px solid rgba(var(--accent-rgb), 0.15);
+  background: linear-gradient(to top, #10262b 0%, rgba(var(--accent-rgb), 0.05) 100%);
+  overflow: hidden;
+}
 
+[data-theme='light'] .cta-banner-section {
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  background: linear-gradient(to top, rgba(205, 216, 220, 0.8) 0%, rgba(var(--accent-rgb), 0.05) 100%);
+}
+
+.hover-lift {
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(var(--accent-rgb), 0.3) !important;
+}
