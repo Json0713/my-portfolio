@@ -18,7 +18,7 @@ import { initRouter } from './js/router.js';
 import { initTheme, setupThemeToggle } from './js/public/theme.js';
 import { registerServiceWorker } from './js/common/swRegister.js';
 import { setupInstallPrompt } from './js/common/installPrompt.js';
-import { initCyberBackground } from './js/public/cyberBg.js';
+import { initBackgroundRenderer } from './js/public/backgroundRenderer.js';
 import { initHeaderBehavior } from './js/public/headerBehavior.js';
 import { initCustomizer } from './js/public/customizer.js';
 
@@ -27,8 +27,9 @@ document.addEventListener('DOMContentLoaded', () => {
   initTheme();
   setupThemeToggle();
 
-  // Initialize Cyber Background
-  initCyberBackground();
+  // Initialize the correct background on load based on settings
+  const settings = JSON.parse(localStorage.getItem('siteCustomizerSettings') || '{}');
+  initBackgroundRenderer(settings.bgType || 'cyber');
 
   // Initialize Header Behavior
   initHeaderBehavior();

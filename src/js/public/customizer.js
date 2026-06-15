@@ -7,7 +7,7 @@ const customizerPanel = document.getElementById('customizerPanel');
 const darkSwatches = document.querySelectorAll('.color-swatch.color-dark');
 const lightSwatches = document.querySelectorAll('.color-swatch.color-light');
 const reduceMotionToggle = document.getElementById('reduceMotionToggle');
-const cyberBgToggle = document.getElementById('cyberBgToggle');
+const bgStyleSelect = document.getElementById('bgStyleSelect');
 const resetSettingsBtn = document.getElementById('resetSettingsBtn');
 const cyberBgEl = document.querySelector('.cyber-background');
 
@@ -57,9 +57,9 @@ function setupEventListeners() {
     });
   }
 
-  if (cyberBgToggle) {
-    cyberBgToggle.addEventListener('change', (e) => {
-      applyCyberBg(e.target.checked);
+  if (bgStyleSelect) {
+    bgStyleSelect.addEventListener('change', (e) => {
+      applyBackgroundStyle(e.target.value);
       saveSettings();
     });
   }
@@ -123,9 +123,16 @@ function applyReduceMotion(isReduced) {
   }
 }
 
-function applyCyberBg(isEnabled) {
-  if (!cyberBgEl) return;
-  cyberBgEl.style.display = isEnabled ? 'block' : 'none';
+function applyBackgroundStyle(bgType) {
+  const container = document.querySelector('.cyber-background');
+  if (container) {
+    container.dataset.bgType = bgType;
+  }
+  // We trigger a custom event so main.js or backgroundRenderer can re-render it
+  // But we can also just dynamically import the renderer here to avoid circular dependencies
+  import('./backgroundRenderer.js').then(module => {
+    module.initBackgroundRenderer(bgType);
+  });
 }
 
 function getSettings() {
@@ -136,7 +143,7 @@ function getSettings() {
     lightAccent: DEFAULT_LIGHT.hex,
     lightAccentRgb: DEFAULT_LIGHT.rgb,
     reduceMotion: false,
-    cyberBg: true
+    bgType: 'cyber'
   };
   
   if (saved) {
@@ -148,7 +155,7 @@ function getSettings() {
 function saveSettings() {
   const settings = getSettings();
   if (reduceMotionToggle) settings.reduceMotion = reduceMotionToggle.checked;
-  if (cyberBgToggle) settings.cyberBg = cyberBgToggle.checked;
+  if (bgStyleSelect) settings.bgType = bgStyleSelect.value;
   localStorage.setItem('siteCustomizerSettings', JSON.stringify(settings));
 }
 
@@ -161,9 +168,9 @@ function loadSettings() {
     reduceMotionToggle.checked = settings.reduceMotion;
     applyReduceMotion(settings.reduceMotion);
   }
-  if (cyberBgToggle) {
-    cyberBgToggle.checked = settings.cyberBg;
-    applyCyberBg(settings.cyberBg);
+  if (bgStyleSelect) {
+    bgStyleSelect.value = settings.bgType;
+    applyBackgroundStyle(settings.bgType);
   }
 }
 
@@ -178,9 +185,9 @@ function resetSettings() {
     applyReduceMotion(false);
   }
   
-  if (cyberBgToggle) {
-    cyberBgToggle.checked = true;
-    applyCyberBg(true);
+  if (bgStyleSelect) {
+    bgStyleSelect.value = 'cyber';
+    applyBackgroundStyle('cyber');
   }
   
   applyCurrentThemeAccent();

@@ -524,6 +524,18 @@ button:focus-visible {
   }
 }
 
+@keyframes auroraWave {
+  0% {
+    opacity: 0.15;
+  }
+  50% {
+    opacity: 0.25; /* Subdued peak opacity */
+  }
+  100% {
+    opacity: 0.35;
+  }
+}
+
 
 
 /* ============================================
