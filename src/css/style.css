@@ -142,6 +142,29 @@ body {
   background-color: var(--accent);
   transition: transform var(--transition);
   border-radius: 50%;
+  z-index: 2;
+}
+
+.icon-moon,
+.icon-sun {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 11px;
+  color: var(--accent);
+  transition: opacity var(--transition);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.icon-moon {
+  right: 5px;
+  opacity: 1;
+}
+
+.icon-sun {
+  left: 5px;
+  opacity: 0;
 }
 
 input:checked + .slider {
@@ -150,6 +173,14 @@ input:checked + .slider {
 
 input:checked + .slider::before {
   transform: translateX(22px);
+}
+
+input:checked + .slider .icon-moon {
+  opacity: 0;
+}
+
+input:checked + .slider .icon-sun {
+  opacity: 1;
 }
 
 .theme-flash {
