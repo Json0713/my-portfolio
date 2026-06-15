@@ -64,12 +64,20 @@
       <div class="container d-flex justify-content-between align-items-center">
         <a class="navbar-brand text-accent fw-bold fs-4" href="#hero">Jason</a>
 
-        <!-- Theme Toggle Switch -->
-        <div class="theme-switch d-flex align-items-center gap-2">
-          <label class="switch" aria-label="Toggle dark/light theme">
-            <input type="checkbox" id="theme-toggle">
-            <span class="slider round"></span>
-          </label>
+        <!-- Header Controls -->
+        <div class="d-flex align-items-center gap-3">
+          <!-- Theme Toggle Switch -->
+          <div class="theme-switch d-flex align-items-center gap-2">
+            <label class="switch" aria-label="Toggle dark/light theme">
+              <input type="checkbox" id="theme-toggle">
+              <span class="slider round"></span>
+            </label>
+          </div>
+
+          <!-- Customizer Trigger -->
+          <button class="btn btn-link text-theme p-0 customizer-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#customizerPanel" aria-controls="customizerPanel" aria-label="Customize Site">
+            <i class="bi bi-gear-fill fs-4 customizer-spin-hover"></i>
+          </button>
         </div>
       </div>
     </header>
@@ -93,6 +101,57 @@
       <small class="d-block">All rights reserved.</small>
     </div>
   </footer>
+
+  <!-- Site Customizer Offcanvas -->
+  <div class="offcanvas offcanvas-end customizer-panel" tabindex="-1" id="customizerPanel" aria-labelledby="customizerPanelLabel">
+    <div class="offcanvas-header border-bottom border-secondary border-opacity-25">
+      <h5 class="offcanvas-title text-accent fw-bold" id="customizerPanelLabel"><i class="bi bi-sliders me-2"></i>Site Customizer</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body d-flex flex-column">
+      <!-- Accent Colors -->
+      <div class="mb-4">
+        <h6 class="text-theme fw-bold mb-3">Accent Colors</h6>
+        
+        <p class="text-theme mb-2 small fw-semibold">Dark Mode</p>
+        <div class="d-flex flex-wrap gap-2 mb-3" id="colorPickerOptionsDark">
+          <button class="color-swatch color-dark active" data-color="#00ffc3" data-rgb="0, 255, 195" style="background-color: #00ffc3;" aria-label="Cyan"></button>
+          <button class="color-swatch color-dark" data-color="#b026ff" data-rgb="176, 38, 255" style="background-color: #b026ff;" aria-label="Purple"></button>
+          <button class="color-swatch color-dark" data-color="#26ff71" data-rgb="38, 255, 113" style="background-color: #26ff71;" aria-label="Emerald"></button>
+          <button class="color-swatch color-dark" data-color="#ff7f26" data-rgb="255, 127, 38" style="background-color: #ff7f26;" aria-label="Orange"></button>
+          <button class="color-swatch color-dark" data-color="#ff265c" data-rgb="255, 38, 92" style="background-color: #ff265c;" aria-label="Rose"></button>
+        </div>
+
+        <p class="text-theme mb-2 small fw-semibold">Light Mode</p>
+        <div class="d-flex flex-wrap gap-2" id="colorPickerOptionsLight">
+          <button class="color-swatch color-light active" data-color="#004d40" data-rgb="0, 77, 64" style="background-color: #004d40;" aria-label="Teal"></button>
+          <button class="color-swatch color-light" data-color="#6200ea" data-rgb="98, 0, 234" style="background-color: #6200ea;" aria-label="Deep Purple"></button>
+          <button class="color-swatch color-light" data-color="#00838f" data-rgb="0, 131, 143" style="background-color: #00838f;" aria-label="Blue"></button>
+          <button class="color-swatch color-light" data-color="#e65100" data-rgb="230, 81, 0" style="background-color: #e65100;" aria-label="Burnt Orange"></button>
+          <button class="color-swatch color-light" data-color="#b71c1c" data-rgb="183, 28, 28" style="background-color: #b71c1c;" aria-label="Dark Red"></button>
+        </div>
+      </div>
+
+      <hr class="border-secondary border-opacity-25 my-4">
+
+      <!-- Appearance -->
+      <div class="mb-4">
+        <h6 class="text-theme fw-bold mb-3">Appearance</h6>
+        <div class="form-check form-switch mb-3">
+          <input class="form-check-input" type="checkbox" role="switch" id="reduceMotionToggle">
+          <label class="form-check-label text-theme" for="reduceMotionToggle">Reduce Motion</label>
+        </div>
+        <div class="form-check form-switch">
+          <input class="form-check-input" type="checkbox" role="switch" id="cyberBgToggle" checked>
+          <label class="form-check-label text-theme" for="cyberBgToggle">Cyber Background</label>
+        </div>
+      </div>
+      
+      <div class="mt-auto pt-4 text-center">
+        <button class="btn btn-outline-light w-100" id="resetSettingsBtn"><i class="bi bi-arrow-counterclockwise me-2"></i>Reset to Default</button>
+      </div>
+    </div>
+  </div>
 
   <script type="module" src="/src/main.js"></script>
 </body>

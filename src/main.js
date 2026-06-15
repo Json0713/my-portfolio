@@ -20,6 +20,7 @@ import { registerServiceWorker } from './js/common/swRegister.js';
 import { setupInstallPrompt } from './js/common/installPrompt.js';
 import { initCyberBackground } from './js/public/cyberBg.js';
 import { initHeaderBehavior } from './js/public/headerBehavior.js';
+import { initCustomizer } from './js/public/customizer.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   // Theme first (prevents flash of wrong theme)
@@ -31,6 +32,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Initialize Header Behavior
   initHeaderBehavior();
+
+  // Initialize Site Customizer
+  initCustomizer();
 
   // SPA router
   initRouter();
