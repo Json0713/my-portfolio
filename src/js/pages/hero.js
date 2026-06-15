@@ -6,6 +6,7 @@ export function init() {
   initMarqueePause();
   initBadgeReveal();
   initBadgeIdleHover();
+  initSkillBars();
 }
 
 function initBadgeIdleHover() {
@@ -23,6 +24,26 @@ function initBadgeIdleHover() {
       animateRandomBadge();
     }
   }, 3000);
+}
+
+function initSkillBars() {
+  const skillBars = document.querySelectorAll('.skill-fill');
+  if (!skillBars.length) return;
+
+  const observer = new IntersectionObserver(
+    (entries, obs) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const level = getComputedStyle(entry.target).getPropertyValue('--skill-level').trim();
+          entry.target.style.width = level;
+          obs.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.3 }
+  );
+
+  skillBars.forEach((bar) => observer.observe(bar));
 }
 
 function initTypingEffect() {
