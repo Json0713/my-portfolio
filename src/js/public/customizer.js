@@ -1,4 +1,5 @@
 // src/js/public/customizer.js
+import { Offcanvas } from 'bootstrap';
 
 const rootElement = document.documentElement;
 
@@ -67,6 +68,21 @@ function setupEventListeners() {
   if (resetSettingsBtn) {
     resetSettingsBtn.addEventListener('click', resetSettings);
   }
+
+  // Auto-close when clicking outside
+  document.addEventListener('click', (event) => {
+    if (customizerPanel && customizerPanel.classList.contains('show')) {
+      const isClickInside = customizerPanel.contains(event.target);
+      const isClickOnToggle = event.target.closest('.customizer-btn');
+      
+      if (!isClickInside && !isClickOnToggle) {
+        const bsOffcanvas = Offcanvas.getInstance(customizerPanel);
+        if (bsOffcanvas) {
+          bsOffcanvas.hide();
+        }
+      }
+    }
+  });
 }
 
 function applyCurrentThemeAccent() {
