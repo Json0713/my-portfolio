@@ -1,5 +1,4 @@
 // src/js/common/installPrompt.js
-
 import { setupSmartInstallUI } from './smartInstallPanel.js';
 import { setupInstallState } from './installState.js';
 
