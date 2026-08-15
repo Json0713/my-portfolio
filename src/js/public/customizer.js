@@ -8,7 +8,7 @@ const customizerPanel = document.getElementById('customizerPanel');
 const darkSwatches = document.querySelectorAll('.color-swatch.color-dark');
 const lightSwatches = document.querySelectorAll('.color-swatch.color-light');
 const reduceMotionToggle = document.getElementById('reduceMotionToggle');
-const bgStyleSelect = document.getElementById('bgStyleSelect');
+const bgStyleBtns = document.querySelectorAll('.bg-style-btn');
 const resetSettingsBtn = document.getElementById('resetSettingsBtn');
 const cyberBgEl = document.querySelector('.cyber-background');
 
@@ -58,10 +58,14 @@ function setupEventListeners() {
     });
   }
 
-  if (bgStyleSelect) {
-    bgStyleSelect.addEventListener('change', (e) => {
-      applyBackgroundStyle(e.target.value);
-      saveSettings();
+  if (bgStyleBtns.length > 0) {
+    bgStyleBtns.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const bgType = e.currentTarget.dataset.bg;
+        applyBackgroundStyle(bgType);
+        updateActiveBgStyleBtn(bgType);
+        saveSettings();
+      });
     });
   }
 
@@ -151,6 +155,17 @@ function applyBackgroundStyle(bgType) {
   });
 }
 
+function updateActiveBgStyleBtn(bgType) {
+  if (bgStyleBtns.length === 0) return;
+  bgStyleBtns.forEach(btn => {
+    if (btn.dataset.bg === bgType) {
+      btn.classList.add('active');
+    } else {
+      btn.classList.remove('active');
+    }
+  });
+}
+
 function getSettings() {
   const saved = localStorage.getItem('siteCustomizerSettings');
   const defaults = {
@@ -171,7 +186,8 @@ function getSettings() {
 function saveSettings() {
   const settings = getSettings();
   if (reduceMotionToggle) settings.reduceMotion = reduceMotionToggle.checked;
-  if (bgStyleSelect) settings.bgType = bgStyleSelect.value;
+  const activeBgBtn = document.querySelector('.bg-style-btn.active');
+  if (activeBgBtn) settings.bgType = activeBgBtn.dataset.bg;
   localStorage.setItem('siteCustomizerSettings', JSON.stringify(settings));
 }
 
@@ -184,10 +200,8 @@ function loadSettings() {
     reduceMotionToggle.checked = settings.reduceMotion;
     applyReduceMotion(settings.reduceMotion);
   }
-  if (bgStyleSelect) {
-    bgStyleSelect.value = settings.bgType;
-    applyBackgroundStyle(settings.bgType);
-  }
+  updateActiveBgStyleBtn(settings.bgType);
+  applyBackgroundStyle(settings.bgType);
 }
 
 function resetSettings() {
@@ -201,10 +215,8 @@ function resetSettings() {
     applyReduceMotion(false);
   }
   
-  if (bgStyleSelect) {
-    bgStyleSelect.value = 'cyber';
-    applyBackgroundStyle('cyber');
-  }
+  updateActiveBgStyleBtn('cyber');
+  applyBackgroundStyle('cyber');
   
   applyCurrentThemeAccent();
   highlightActiveSwatches();

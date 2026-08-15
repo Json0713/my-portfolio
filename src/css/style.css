@@ -638,3 +638,40 @@ body.reduce-motion *::after {
   transition-duration: 0.01ms !important;
   scroll-behavior: auto !important;
 }
+
+/* ============================================
+   Background Style Buttons
+   ============================================ */
+.bg-style-btn {
+  border-color: rgba(var(--accent-rgb), 0.2) !important;
+  color: var(--text-light) !important;
+  transition: all var(--transition);
+  background-color: rgba(10, 26, 31, 0.4) !important;
+}
+
+[data-theme='light'] .bg-style-btn {
+  color: var(--text-dark) !important;
+  background-color: rgba(255, 255, 255, 0.4) !important;
+}
+
+.bg-style-btn:hover {
+  background-color: rgba(var(--accent-rgb), 0.1) !important;
+  border-color: rgba(var(--accent-rgb), 0.5) !important;
+  color: var(--accent) !important;
+}
+
+.bg-style-btn.active {
+  background-color: rgba(var(--accent-rgb), 0.15) !important;
+  border-color: var(--accent) !important;
+  color: var(--accent) !important;
+  box-shadow: 0 0 10px rgba(var(--accent-rgb), 0.2);
+}
+
+.bg-style-btn i {
+  transition: transform var(--transition);
+}
+
+.bg-style-btn:hover i,
+.bg-style-btn.active i {
+  transform: scale(1.2);
+}
