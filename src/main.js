@@ -9,6 +9,7 @@ import './css/style.css';
 import './css/hero.css';
 import './css/pages.css';
 import './css/smart-install.css';
+import './css/chatbot.css';
 
 // Bootstrap JS (needed for dropdowns, modals, etc.)
 import 'bootstrap';
@@ -21,6 +22,7 @@ import { setupInstallPrompt } from './js/common/installPrompt.js';
 import { initBackgroundRenderer } from './js/public/backgroundRenderer.js';
 import { initHeaderBehavior } from './js/public/headerBehavior.js';
 import { initCustomizer } from './js/public/customizer.js';
+import { initChatbot } from './js/chatbot/chatbot.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   // Theme first (prevents flash of wrong theme)
@@ -39,6 +41,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // SPA router
   initRouter();
+
+  // AI Chatbot
+  initChatbot();
 
   // PWA features
   setupInstallPrompt();
