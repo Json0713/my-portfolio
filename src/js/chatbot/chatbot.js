@@ -9,7 +9,7 @@ const API_ENDPOINT = '/api/chat';
 const MAX_MESSAGE_LENGTH = 2000;
 const MAX_HISTORY_TURNS = 20;
 
-/** Client-side rate limit mirroring the server */
+/** Client-side rate limit mirroring the server (for UX feedback only) */
 const CLIENT_RATE_LIMIT = 10;
 const CLIENT_RATE_WINDOW_MS = 60_000;
 
