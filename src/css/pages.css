@@ -294,12 +294,33 @@
 
 /* Print styles for resume download */
 @media print {
+  @page {
+    margin: 0;
+  }
+
+  html, body {
+    background: #fff !important;
+    background-color: #fff !important;
+    color: #000 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
   .site-header,
   .main-nav,
   .site-footer,
   .install-panel,
   .install-handle,
-  #resume-download {
+  #resume-download,
+  .chatbot-fab,
+  .chatbot-panel,
+  .customizer-panel,
+  .customizer-btn,
+  .theme-switch,
+  .cyber-background,
+  .header-wrapper {
     display: none !important;
   }
 
@@ -321,7 +342,8 @@
     visibility: visible !important;
     opacity: 1 !important;
     width: 100% !important;
-    padding: 0 !important;
+    padding: 1.5cm 2cm !important;
     margin: 0 !important;
+    box-sizing: border-box !important;
   }
 }
