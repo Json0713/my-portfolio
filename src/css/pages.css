@@ -295,6 +295,7 @@
 /* Print styles for resume download */
 @media print {
   @page {
+    size: A4;
     margin: 0;
   }
 
@@ -325,24 +326,25 @@
   }
 
   /* Hide the web UI elements */
-  .resume-content,
-  .text-center.mb-5 {
+  #resume .container {
     display: none !important;
   }
 
+  #app,
   .page-section {
-    min-height: auto;
+    min-height: 0 !important;
     padding: 0 !important;
+    margin: 0 !important;
   }
 
   /* Force display the hidden ATS template for native print */
   #resume-print-template {
-    display: block !important;
+    display: table !important;
     position: static !important;
     visibility: visible !important;
     opacity: 1 !important;
     width: 100% !important;
-    padding: 1.5cm 2cm !important;
+    padding: 0 !important;
     margin: 0 !important;
     box-sizing: border-box !important;
   }
