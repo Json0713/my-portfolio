@@ -295,8 +295,7 @@
 /* Print styles for resume download */
 @media print {
   @page {
-    size: A4;
-    margin: 0;
+    margin: 0.75in;
   }
 
   html, body {
@@ -339,7 +338,7 @@
 
   /* Force display the hidden ATS template for native print */
   #resume-print-template {
-    display: table !important;
+    display: block !important;
     position: static !important;
     visibility: visible !important;
     opacity: 1 !important;
