@@ -1,5 +1,6 @@
 // src/js/public/customizer.js
 import { Offcanvas } from 'bootstrap';
+import { initBackgroundRenderer } from './backgroundRenderer.js';
 
 const rootElement = document.documentElement;
 
@@ -148,11 +149,7 @@ function applyBackgroundStyle(bgType) {
   if (container) {
     container.dataset.bgType = bgType;
   }
-  // We trigger a custom event so main.js or backgroundRenderer can re-render it
-  // But we can also just dynamically import the renderer here to avoid circular dependencies
-  import('./backgroundRenderer.js').then(module => {
-    module.initBackgroundRenderer(bgType);
-  });
+  initBackgroundRenderer(bgType);
 }
 
 function updateActiveBgStyleBtn(bgType) {
