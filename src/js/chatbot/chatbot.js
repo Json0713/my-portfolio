@@ -406,6 +406,10 @@ function showTypingIndicator() {
 async function sendToAPI(message) {
   let response;
 
+  if (!navigator.onLine) {
+    throw new Error('You appear to be offline. Please check your internet connection and try again.');
+  }
+
   try {
     response = await fetch(API_ENDPOINT, {
       method: 'POST',
@@ -415,18 +419,21 @@ async function sendToAPI(message) {
         history: conversationHistory.slice(-MAX_HISTORY_TURNS * 2),
       }),
     });
-  } catch {
-    // Network-level failure (no server, offline, CORS block)
+  } catch (err) {
+    // Network-level failure (server down, offline, CORS block)
+    if (!navigator.onLine) {
+      throw new Error('Connection lost. Please check your internet connection and try again.');
+    }
     throw new Error(
-      'Unable to reach the AI service. Make sure you are running `npm run dev:api` (not `npm run dev`) to enable the API.'
+      'Unable to connect to the AI service at the moment. Please try again later.'
     );
   }
 
-  // 404 means the /api/chat serverless function is not running.
-  // This happens when using plain `npm run dev` (Vite only) instead of `npm run dev:api` (Vercel Dev).
+  // 404 means the /api/chat serverless function is not running or deployed.
   if (response.status === 404) {
+    // We remove the local dev instruction here to ensure it's user-friendly in production.
     throw new Error(
-      'API not found (404). Run `npm run dev:api` instead of `npm run dev` to enable the AI chatbot locally.'
+      'The AI service is currently unavailable. Please try again later.'
     );
   }
 
@@ -435,11 +442,11 @@ async function sendToAPI(message) {
   try {
     data = await response.json();
   } catch {
-    throw new Error('Received an unexpected response from the server. Please try again.');
+    throw new Error('Received an unexpected response from the server. Please try again later.');
   }
 
   if (!response.ok) {
-    throw new Error(data?.error || 'Something went wrong. Please try again.');
+    throw new Error(data?.error || 'Something went wrong while processing your request. Please try again.');
   }
 
   return data.reply;
@@ -691,6 +698,27 @@ function bindEvents() {
     }
   });
 
+  // Offline/Online fallback handling
+  window.addEventListener('offline', () => {
+    if (inputEl) {
+      inputEl.disabled = true;
+      inputEl.placeholder = "You are offline...";
+    }
+    if (sendBtnEl) sendBtnEl.disabled = true;
+    showRateMsg('You appear to be offline. Please check your internet connection.');
+  });
+
+  window.addEventListener('online', () => {
+    if (inputEl) {
+      inputEl.disabled = false;
+      inputEl.placeholder = "Ask about Jason's skills, projects…";
+    }
+    if (sendBtnEl && inputEl) {
+      sendBtnEl.disabled = inputEl.value.length === 0;
+    }
+    hideRateMsg();
+  });
+
   // Initial suggestion chips
   bindSuggestions();
 }
@@ -715,6 +743,16 @@ export function initChatbot() {
   charCountEl = document.getElementById('chatbot-char-count');
   rateMsgEl = document.getElementById('chatbot-rate-msg');
   bindEvents();
+
+  // Set initial network state
+  if (!navigator.onLine) {
+    if (inputEl) {
+      inputEl.disabled = true;
+      inputEl.placeholder = "You are offline...";
+    }
+    if (sendBtnEl) sendBtnEl.disabled = true;
+    showRateMsg('You appear to be offline. Please check your internet connection.');
+  }
 
   // Load cached history
   const savedHistory = sessionStorage.getItem('chatbotHistory');
