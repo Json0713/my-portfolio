@@ -320,7 +320,7 @@ body.chatbot-no-scroll {
   gap: 0.75rem;
   scroll-behavior: smooth;
 
-  /* Thin scrollbar matching portfolio style */
+  /* Thin scrollbar */
   scrollbar-width: thin;
   scrollbar-color: rgba(var(--accent-rgb), 0.4) transparent;
 }
