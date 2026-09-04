@@ -22,6 +22,13 @@ function updateAccent(theme) {
   rootElement.style.setProperty('--accent', accent);
 }
 
+function updateThemeColorMeta(theme) {
+  const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+  if (metaThemeColor) {
+    metaThemeColor.setAttribute('content', theme === 'light' ? '#e8f5f6' : '#10262b');
+  }
+}
+
 function flashThemeEffect() {
   rootElement.classList.add('theme-flash');
   setTimeout(() => {
@@ -40,6 +47,7 @@ function applyTheme(theme, { flash = true } = {}) {
   }
   saveTheme(theme);
   updateAccent(theme);
+  updateThemeColorMeta(theme);
   highlightActiveLink();
   updateThemeToggleUI(theme);
   if (flash) flashThemeEffect();
