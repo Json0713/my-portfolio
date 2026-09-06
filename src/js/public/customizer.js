@@ -122,14 +122,26 @@ function highlightActiveSwatches() {
   const settings = getSettings();
   
   // Highlight Dark
-  darkSwatches.forEach(s => s.classList.remove('active'));
+  darkSwatches.forEach(s => {
+    s.classList.remove('active');
+    s.setAttribute('aria-pressed', 'false');
+  });
   const activeDark = Array.from(darkSwatches).find(s => s.dataset.color === settings.darkAccent) || darkSwatches[0];
-  if (activeDark) activeDark.classList.add('active');
+  if (activeDark) {
+    activeDark.classList.add('active');
+    activeDark.setAttribute('aria-pressed', 'true');
+  }
 
   // Highlight Light
-  lightSwatches.forEach(s => s.classList.remove('active'));
+  lightSwatches.forEach(s => {
+    s.classList.remove('active');
+    s.setAttribute('aria-pressed', 'false');
+  });
   const activeLight = Array.from(lightSwatches).find(s => s.dataset.color === settings.lightAccent) || lightSwatches[0];
-  if (activeLight) activeLight.classList.add('active');
+  if (activeLight) {
+    activeLight.classList.add('active');
+    activeLight.setAttribute('aria-pressed', 'true');
+  }
 }
 
 function applyReduceMotion(isReduced) {
@@ -157,8 +169,10 @@ function updateActiveBgStyleBtn(bgType) {
   bgStyleBtns.forEach(btn => {
     if (btn.dataset.bg === bgType) {
       btn.classList.add('active');
+      btn.setAttribute('aria-pressed', 'true');
     } else {
       btn.classList.remove('active');
+      btn.setAttribute('aria-pressed', 'false');
     }
   });
 }
