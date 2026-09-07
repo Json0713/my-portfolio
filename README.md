@@ -1,6 +1,6 @@
 ## Hi there, I'm a Frontend Developer!
 
-I am solo indi-web Developer, with software • web experiences. Specializing Frontend | UI/UX Architecture, Inspire with Angular Based Framework Architectures.
+I am a solo indie web developer with software and web experience. I specialize in Frontend and UI/UX Architecture, and I'm highly inspired by Angular-based framework architectures.
 
 ---
 

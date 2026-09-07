@@ -5,6 +5,12 @@ export function highlightActiveLink() {
   const currentRoute = window.location.hash || '#hero';
   $all('.main-nav a').forEach((link) => {
     const href = link.getAttribute('href');
-    link.classList.toggle('active-link', href === currentRoute);
+    const isActive = href === currentRoute;
+    link.classList.toggle('active-link', isActive);
+    if (isActive) {
+      link.setAttribute('aria-current', 'page');
+    } else {
+      link.removeAttribute('aria-current');
+    }
   });
 }
