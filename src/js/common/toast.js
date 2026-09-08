@@ -33,6 +33,9 @@ export function showToast(message, options = {}) {
 
   const toast = document.createElement('div');
   toast.className = 'custom-toast';
+  toast.setAttribute('role', 'alert');
+  toast.setAttribute('aria-live', 'assertive');
+  toast.setAttribute('aria-atomic', 'true');
   toast.style.cssText = `
     background: var(--bg-dark);
     color: var(--silver);
